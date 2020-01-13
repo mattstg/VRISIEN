@@ -115,26 +115,30 @@ public class OVRCameraRig : MonoBehaviour
 	protected Camera _leftEyeCamera;
 	protected Camera _rightEyeCamera;
 
-#region Unity Messages
-	protected virtual void Awake()
+	#region Unity Messages
+	//protected virtual void Awake()
+	public virtual void Initialize()
 	{
 		_skipUpdate = true;
 		EnsureGameObjectIntegrity();
 	}
 
-	protected virtual void Start()
+	//protected virtual void Start()
+	public virtual void PostInitialize()
 	{
 		UpdateAnchors(true, true);
 		Application.onBeforeRender += OnBeforeRenderCallback;
 	}
 
-	protected virtual void FixedUpdate()
+	//protected virtual void FixedUpdate()
+	public virtual void PhysicsRefresh()
 	{
 		if (useFixedUpdateForTracking)
 			UpdateAnchors(true, true);
 	}
 
-	protected virtual void Update()
+	//protected virtual void Update()
+	public virtual void Refresh()
 	{
 		_skipUpdate = false;
 
