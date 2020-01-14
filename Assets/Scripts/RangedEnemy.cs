@@ -52,6 +52,7 @@ public class RangedEnemy : MonoBehaviour,IHittable
             {
                 nearestCoverLocation = coverObjects[i].transform.position;
                 nearestCoverDistance = Vector3.Distance(transform.position, coverObjects[i].transform.position);
+                coverObjects[i].GetComponent<CoverSpot>().isCoverSpotOccupied = true;
             }
             else
             {
@@ -59,6 +60,7 @@ public class RangedEnemy : MonoBehaviour,IHittable
                 {
                     nearestCoverLocation = coverObjects[i].transform.position;
                     nearestCoverDistance = Vector3.Distance(transform.position, coverObjects[i].transform.position);
+                    coverObjects[i].GetComponent<CoverSpot>().isCoverSpotOccupied = true;
                 }
             }
         }
