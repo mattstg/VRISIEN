@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour
+public class RangedEnemy : MonoBehaviour,IHittable
 {
     public Transform gunPoint;
 
@@ -83,5 +83,11 @@ public class RangedEnemy : MonoBehaviour
     void RotateTowardsPlayer()
     {
         transform.LookAt(player.transform);
+    }
+
+    public void Hit()
+    {
+        //throw new System.NotImplementedException();
+        print("DamageReceived");
     }
 }
