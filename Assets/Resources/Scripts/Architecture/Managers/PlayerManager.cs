@@ -14,7 +14,7 @@ public class PlayerManager : IManagable
 
     public void Initialize()
     {
-        GameObject newPlayer = GameObject.FindGameObjectWithTag("Player");
+        GameObject newPlayer = GameObject.FindGameObjectWithTag("Player");// Resources.Load<GameObject>("Prefabs/Chair");
             //Instantiate(Resources.Load<GameObject>(ResourceDirHelper.PLAYER_PREFAB_PATH), GameLinks.gl.playerStartPos.position + new Vector3(0, 2.3f, 0), Quaternion.identity);
         player = newPlayer.GetComponent<VRPlayer>();
         player.Initialize();
