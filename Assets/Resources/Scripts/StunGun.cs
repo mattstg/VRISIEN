@@ -8,6 +8,8 @@ public class StunGun : MonoBehaviour
     private Transform endPos; // can be the  player's location where the gun will lerp back and forth 
     private Transform startPos;
 
+    OVRGrabbable grabRef;
+
 
     public float smoothing = 1f;
 
@@ -21,21 +23,24 @@ public class StunGun : MonoBehaviour
     public void Initialize()
     {
 
-        endPos = GameObject.Find("endingPos").transform;
+        endPos = GameObject.Find("Player").transform;
         startPos = this.transform;
+        grabRef = gameObject.GetComponent<OVRGrabbable>();
 
     }
     public void Refresh()
     {
         cooldownTime += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Mouse1) && cooldownTime > timer)
+        if(grabRef.isGrabbed)
+        if (OVRInput.Get(OVRInput.Button.One)  && cooldownTime > timer)
         {
+            Debug.Log("Shot!!!");
             Shoot();
             cooldownTime = 0;
 
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (OVRInput.Get(OVRInput.Button.Two))
         {
             StartCoroutine(Lerp());
         }
