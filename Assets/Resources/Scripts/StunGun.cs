@@ -2,22 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//StunGun
 public class StunGun : MonoBehaviour
 {
-    public Transform endPos;
-    public Transform startPos;
+    private Transform endPos; // can be the  player's location where the gun will lerp back and forth 
+    private Transform startPos;
 
-    public float smoothing = .5f;
 
-    private float cooldownTime = 0;
+    public float smoothing = 1f;
+
+    private float cooldownTime = 0; // time difference between shooting of bullets
     private float timer = 0.5f;
-    private float speed = 10;
+
     public Vector3 angle;
 
     bool lerp = false;
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize()
+    {
+
+        endPos = GameObject.Find("endingPos").transform;
+        startPos = this.transform;
+
+    }
+    public void Refresh()
     {
         cooldownTime += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse1) && cooldownTime > timer)
@@ -32,6 +40,10 @@ public class StunGun : MonoBehaviour
             StartCoroutine(Lerp());
         }
     }
+    public void PhysicsRefresh()
+    {
+
+    }
     void Shoot()
     {
         RaycastHit hit;
@@ -42,15 +54,28 @@ public class StunGun : MonoBehaviour
     }
     IEnumerator Lerp()
     {
-
-        while (Vector3.Distance(transform.position, endPos.position) > 0.0001f)
+        // needs to be fixed.
+        if (this.transform.position == endPos.position)
         {
-            transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
-            transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
+            while (Vector3.Distance(transform.position, startPos.position) != startPos.position.sqrMagnitude)
+            {
+                transform.position = Vector3.Lerp(transform.position, startPos.transform.position, smoothing * Time.deltaTime);
+                transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
 
-            yield return null;
+                yield return null;
+            }
         }
-        yield return new WaitForSeconds(3f);
+        else
+        {
+            while (Vector3.Distance(transform.position, endPos.position) != endPos.position.sqrMagnitude)
+            {
+                transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
+                transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
+
+                yield return null;
+            }
+        }
+        yield return new WaitForSeconds(1f);
 
     }
 }
