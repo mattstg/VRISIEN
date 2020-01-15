@@ -141,6 +141,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7039798328201762476}
   - component: {fileID: 7039798328201762479}
+  - component: {fileID: 580507784}
+  - component: {fileID: 580507783}
   m_Layer: 0
   m_Name: StunGun
   m_TagString: Untagged
@@ -172,9 +174,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 7039798328201762478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 860315006190bfc47994f3085d2402d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 42abf28040c45df40b81eef39e380eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothing: 1
+  angle: {x: 0, y: 0, z: 0}
+--- !u!54 &580507784
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7039798328201762478}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &580507783
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7039798328201762478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.02
+  m_Height: 0.1
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.035, z: -0.11}
 --- !u!1 &7039798328245129675
 GameObject:
   m_ObjectHideFlags: 0
