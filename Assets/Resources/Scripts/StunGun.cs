@@ -54,8 +54,10 @@ public class StunGun : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity);
         Debug.DrawRay(transform.position, Vector3.forward, Color.white, .1f);
-        hit.collider.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-
+        if (hit.transform)
+        
+            hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        
     }
     IEnumerator Lerp()
     {
