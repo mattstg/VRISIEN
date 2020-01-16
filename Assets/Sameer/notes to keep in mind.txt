@@ -1,3 +1,0 @@
-get data from player: shooting,in shooting range/aiming to shoot
-
-check when to stop waves of enemy
