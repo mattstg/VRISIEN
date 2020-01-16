@@ -24,8 +24,8 @@ public class WeaponManager
     {
         go = Resources.Load<GameObject>("Prefabs/StunGun");
         guns = new List<StunGun>();
-        gunParent = GameObject.Find("Player");
-        spawnLoc = gunParent.transform.position + Vector3.right/1.5f;
+        gunParent = new GameObject("GunParent");
+        spawnLoc = GameObject.Find("Player").transform.position + Vector3.right/1.5f + Vector3.up * 2f;
         spawnGun(spawnLoc); // spawnGun(spawnLoc) must be called at the time of playerSpawning since gun needs to get attached to the player.
         Debug.Log("WeaponManager");
         stunGun.Initialize();

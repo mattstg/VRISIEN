@@ -23,7 +23,7 @@ public class StunGun : MonoBehaviour
     public void Initialize()
     {
 
-        endPos = GameObject.Find("Player").transform;
+        endPos = GameObject.Find("Right").transform;
         startPos = this.transform;
         grabRef = gameObject.GetComponent<OVRGrabbable>();
 
