@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Melee : MonoBehaviour
+public class Melee :Enemy
 {
     // Start is called before the first frame update
     public Transform player;
@@ -22,15 +22,16 @@ public class Melee : MonoBehaviour
 
 
 
-    void Start()
+    public override void Initialize()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         p = player.gameObject.GetComponent<Player>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Refresh()
     {
         dodge2();
         RaycastHit rayForward;
@@ -51,7 +52,8 @@ public class Melee : MonoBehaviour
         }
         if (Vector3.SqrMagnitude(player.position - transform.position) < enemyHittingRadious)
         {
-            doDamage();
+
+            //call player's HitByProjectile and do damage
         }
 
 
@@ -104,8 +106,5 @@ public class Melee : MonoBehaviour
         Debug.DrawRay(head.position, transform.TransformDirection(new Vector3(1, 0, -1f)) * playerDetactingRange);
         Debug.DrawRay(head.position, transform.TransformDirection(new Vector3(-1, 0, -1f)) * playerDetactingRange);
     }
-    void doDamage()
-    {
-        Debug.Log("Hitting Enemy");
-    }
+   
 }

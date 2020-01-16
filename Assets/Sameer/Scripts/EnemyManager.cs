@@ -13,8 +13,9 @@ public class EnemyManager
     #endregion
 
     Transform enemyParent;
-
-    public HashSet<Enemy> enemies;
+    Transform SpawnLocations;
+    public int enemyCountofCurrentWave = 0;
+    public HashSet<Enemy> enemies;//stacks to keep track of enemies
     public Stack<Enemy> toRemove;
     public Stack<Enemy> toAdd;
 
@@ -26,21 +27,75 @@ public class EnemyManager
         toAdd = new Stack<Enemy>();
         enemies = new HashSet<Enemy>();
         enemyParent = new GameObject("EnemyParent").transform;
-
+        SpawnLocations = GetSpawnLocations();
         foreach (EnemyType etype in System.Enum.GetValues(typeof(EnemyType))) //fill the resource dictionary with all the prefabs
         {
             enemyPrefabDict.Add(etype, Resources.Load<GameObject>("Prefabs/sameer prefabs/Enemy/" + etype.ToString())); //Each enum matches the name of the enemy perfectly
         }
+        //Initially spawning enemies
+        NumberOfEnemyToSpawn(3,5,2);
+    }
+    public void Refresh()
+    {
+        foreach (Enemy e in enemies)
+            if (e.isAlive)
+                e.Refresh();
+
+
+        while (toRemove.Count > 0) //remove all dead ones
+        {
+            Enemy e = toRemove.Pop();
+            enemies.Remove(e);
+            GameObject.Destroy(e.gameObject);
+        }
+
+        while (toAdd.Count > 0) //Add new ones
+            enemies.Add(toAdd.Pop());
+    }
+    public void SetSpawnLocations(Transform spawnLocation)
+    {
+        Debug.Log("spawnlocation");
+
+        SpawnLocations = spawnLocation;
+    }
+    public Transform GetSpawnLocations()
+    {
+        return SpawnLocations ;
+    }
+
+    
+    public void NumberOfEnemyToSpawn(int melee,int ranged,int drone)
+    {
+        SpawnEnemies(EnemyType.Melee, melee);
+        SpawnEnemies(EnemyType.Ranged, ranged);
+        SpawnEnemies(EnemyType.Drone, drone);
 
     }
 
-    public Enemy SpawnEnemies(EnemyType etype,int qty,Vector3 location)
+    public Enemy SpawnEnemies(EnemyType etype,int qty)
     {
-        GameObject newEnemy = GameObject.Instantiate(enemyPrefabDict[eType], enemyParent);       //create from prefab
-        newEnemy.transform.position = spawnLoc;     //set the position
-        Enemy e = newEnemy.GetComponent<Enemy>();   //get the enemy component on the newly created obj
-        e.Initialize(startingEnergy);               //initialize the enemy
-        toAdd.Push(e);                              //add to update list
+        Enemy e=null;
+        foreach (Transform spawnArea in SpawnLocations)  
+        {
+            for (int i = 0; i < qty; i++)
+            {
+                Vector3 spawnLocation = new Vector3(Random.Range(-spawnArea.localScale.x * 10 / 2, spawnArea.localScale.x * 10 / 2), 1, Random.Range(-spawnArea.localScale.z * 10 / 2, spawnArea.localScale.z * 10 / 2));
+                GameObject newEnemy = GameObject.Instantiate(enemyPrefabDict[etype], enemyParent);
+                
+                newEnemy.transform.position = spawnArea.position;
+                newEnemy.transform.position += spawnLocation;
+                e = newEnemy.GetComponent<Enemy>();
+                e.Initialize();
+                toAdd.Push(e);
+            }
+           
+        }
+        enemyCountofCurrentWave = toAdd.Count;
         return e;
+    }
+    public void EnemyDied(Enemy enemyDied)
+    {
+        toRemove.Push(enemyDied);
+
     }
 }
