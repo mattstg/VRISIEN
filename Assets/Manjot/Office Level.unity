@@ -6236,11 +6236,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2140488996957167901, guid: e64a337dda1f478408858be875cdcd9a,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5509360adc6b08d4c829f293f3fca7f9, type: 2}
     - target: {fileID: 2765001374999248836, guid: e64a337dda1f478408858be875cdcd9a,
         type: 3}
       propertyPath: m_Name
@@ -6300,11 +6295,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2765001374999248894, guid: e64a337dda1f478408858be875cdcd9a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e64a337dda1f478408858be875cdcd9a, type: 3}
