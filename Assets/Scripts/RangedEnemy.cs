@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour,IHittable
+public class RangedEnemy : MonoBehaviour
 {
     public Transform gunPoint;
 
