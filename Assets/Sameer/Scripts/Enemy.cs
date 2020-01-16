@@ -16,11 +16,16 @@ public class Enemy : MonoBehaviour
 
     public virtual void Initialize()
     {
+        
+        Debug.Log("Enemy Initialize()");
         TempNextWaveCounter = nextWaveCounter;
         isAlive = true;
-        meleeCountPerLocation = GetComponent<EnemyController>().CountOfMeleeEnemyAtOneSpawnLocation;
-        rangedCountPerLocation = GetComponent<EnemyController>().CountOfRangedEnemyAtOneSpawnLocation;
-        droneCountPerLocation = GetComponent<EnemyController>().CountOfDroneEnemyAtOneSpawnLocation;
+        meleeCountPerLocation = 3;
+        rangedCountPerLocation = 5;
+        droneCountPerLocation = 2;
+        //meleeCountPerLocation = GetComponent<EnemyController>().CountOfMeleeEnemyAtOneSpawnLocation;
+        //rangedCountPerLocation = GetComponent<EnemyController>().CountOfRangedEnemyAtOneSpawnLocation;
+        //droneCountPerLocation = GetComponent<EnemyController>().CountOfDroneEnemyAtOneSpawnLocation;
     }
   
     public virtual void HitByProjectile(float damage)
@@ -31,6 +36,8 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Refresh()
     {
+        
+        Debug.Log("Enemy Refresh()");
         if (EnemyManager.Instance.enemies.Count <= 0)
         {
             TempNextWaveCounter -= Time.deltaTime;

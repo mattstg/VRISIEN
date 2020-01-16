@@ -23,6 +23,7 @@ public class EnemyManager
 
     public void Initialize()
     {
+        Debug.Log("EnemyManager Initialize()");
         toRemove = new Stack<Enemy>();
         toAdd = new Stack<Enemy>();
         enemies = new HashSet<Enemy>();
@@ -33,10 +34,13 @@ public class EnemyManager
             enemyPrefabDict.Add(etype, Resources.Load<GameObject>("Prefabs/sameer prefabs/Enemy/" + etype.ToString())); //Each enum matches the name of the enemy perfectly
         }
         //Initially spawning enemies
-        NumberOfEnemyToSpawn(3,5,2);
+        // NumberOfEnemyToSpawn(3,5,2);
+        NumberOfEnemyToSpawn(3, 0, 0);
+
     }
     public void Refresh()
     {
+        Debug.Log("EnemyManager Refresh()");
         foreach (Enemy e in enemies)
             if (e.isAlive)
                 e.Refresh();
@@ -54,7 +58,7 @@ public class EnemyManager
     }
     public void SetSpawnLocations(Transform spawnLocation)
     {
-        Debug.Log("spawnlocation");
+        Debug.Log("Setspawnlocation in enemy mnger");
 
         SpawnLocations = spawnLocation;
     }
@@ -84,9 +88,10 @@ public class EnemyManager
                 
                 newEnemy.transform.position = spawnArea.position;
                 newEnemy.transform.position += spawnLocation;
+                Debug.Log("Enw Enemy Created");
                 e = newEnemy.GetComponent<Enemy>();
                 e.Initialize();
-                toAdd.Push(e);
+                toAdd.Push(e);  
             }
            
         }
