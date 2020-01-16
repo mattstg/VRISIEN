@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 580507783}
   - component: {fileID: 8872428236664416057}
   - component: {fileID: 190020316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StunGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
