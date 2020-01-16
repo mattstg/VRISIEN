@@ -1268,11 +1268,11 @@ public class OVRManager : MonoBehaviour
 			UnityEngine.Debug.LogError("Your current Unity Engine " + Application.unityVersion + " might have issues to support adaptive resolution, please disable it under OVRManager");
 		}
 #endif
-
 		Initialize();
 
-		if (resetTrackerOnLoad)
+		if(resetTrackerOnLoad)
 			display.RecenterPose();
+
 
 		if (Debug.isDebugBuild)
 		{

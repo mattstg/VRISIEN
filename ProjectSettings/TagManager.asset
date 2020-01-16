@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - CoverLocation
+  - OVRCamera
+  - SpawnPoints
+  - Enemy
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -14,10 +18,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Gun
+  - Blade
+  - Player
+  - Collectables
   - 
   - 
   - 
