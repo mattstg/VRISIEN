@@ -480,9 +480,9 @@ MonoBehaviour:
         length: 0
         sqrMag: 0
         axis: {x: 0, y: 0, z: 0}
-      target: {fileID: 0}
+      target: {fileID: 8858277322249483148}
       bendGoal: {fileID: 0}
-      positionWeight: 0
+      positionWeight: 0.08
       rotationWeight: 0
       bendGoalWeight: 0
       swivelOffset: 0
@@ -529,9 +529,9 @@ MonoBehaviour:
         length: 0
         sqrMag: 0
         axis: {x: 0, y: 0, z: 0}
-      target: {fileID: 0}
+      target: {fileID: 8858277322249483148}
       bendGoal: {fileID: 0}
-      positionWeight: 0
+      positionWeight: 0.08
       rotationWeight: 0
       bendGoalWeight: 0
       swivelOffset: 0
