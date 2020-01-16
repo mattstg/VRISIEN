@@ -33,7 +33,6 @@ public class StunGun : MonoBehaviour
         cooldownTime += Time.deltaTime;
         if (grabRef.isGrabbed)
         {
-            var collider = GameObject.FindGameObjectWithTag("Player").GetComponent<CapsuleCollider>();
             if (OVRInput.Get(OVRInput.Button.One) && cooldownTime > timer)
             {
                 Debug.Log("Shot!!!");
