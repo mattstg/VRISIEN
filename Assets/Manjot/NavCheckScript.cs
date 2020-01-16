@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 public class NavCheckScript : MonoBehaviour
 {
     public Camera cam;
