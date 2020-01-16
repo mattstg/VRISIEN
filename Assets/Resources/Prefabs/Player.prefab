@@ -271,7 +271,7 @@ MonoBehaviour:
       rotationWeight: 1
       pelvisPositionWeight: 0
       pelvisRotationWeight: 0
-      chestGoal: {fileID: 0}
+      chestGoal: {fileID: 8858277322249483148}
       chestGoalWeight: 0
       minHeadHeight: 0.8
       bodyPosStiffness: 0.55
@@ -359,7 +359,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       useAnimatedBendNormal: 0
     locomotion:
-      weight: 1
+      weight: 0
       footDistance: 0.3
       stepThreshold: 0.4
       angleThreshold: 60
@@ -2164,7 +2164,12 @@ PrefabInstance:
     - target: {fileID: 6320347520100602121, guid: bef67f136f9a53d4f80621f7e49401c8,
         type: 3}
       propertyPath: m_Radius
-      value: 0.03
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320347520100602121, guid: bef67f136f9a53d4f80621f7e49401c8,
+        type: 3}
+      propertyPath: m_Height
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6320347520104964579, guid: bef67f136f9a53d4f80621f7e49401c8,
         type: 3}
@@ -2209,7 +2214,12 @@ PrefabInstance:
     - target: {fileID: 6320347520526147044, guid: bef67f136f9a53d4f80621f7e49401c8,
         type: 3}
       propertyPath: m_Radius
-      value: 0.03
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320347520526147044, guid: bef67f136f9a53d4f80621f7e49401c8,
+        type: 3}
+      propertyPath: m_Height
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6320347520789199085, guid: bef67f136f9a53d4f80621f7e49401c8,
         type: 3}
@@ -2257,12 +2267,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 82ad56baab39d08478f1d64ae10c628b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.15
+      value: -2.816
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 82ad56baab39d08478f1d64ae10c628b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.76
+      value: -1.044
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 82ad56baab39d08478f1d64ae10c628b,
         type: 3}
