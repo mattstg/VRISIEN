@@ -46,7 +46,7 @@ public class Melee :Enemy
             if (Physics.Raycast(head.position, transform.TransformDirection(Vector3.forward), out hit, playerDetactingRange))//get bool value from player whn raycast on enemy to make enemy dodge whn in target range or whn shooting and add that bool in OR condition
             {
                 if(hit.collider.CompareTag("Player"))
-                    dodge2(transform.position);
+                    dodge(transform.position);
             }
 
             if (Vector3.SqrMagnitude(player.position - transform.position) < enemyHittingRadious)
@@ -72,20 +72,20 @@ public class Melee :Enemy
     }
     void dodge(Vector3 oldPos)
     {
-        if (Random.value > 0.5f)
-            rb.AddForce(-transform.right * dodgeForce);
-        else
-            rb.AddForce(transform.right * dodgeForce);
-        //Vector3 newPosition;
         //if (Random.value > 0.5f)
-        //{
-        //    newPosition = new Vector3(oldPos.x + 5, oldPos.y, oldPos.z + 5);
-        //}
+        //    rb.AddForce(-transform.right * dodgeForce);
         //else
-        //{
-        //    newPosition = new Vector3(oldPos.x - 5, oldPos.y, oldPos.z - 5);
-        //}
-        //transform.position = Vector3.Lerp(oldPos, newPosition, 2f);
+        //    rb.AddForce(transform.right * dodgeForce);
+        Vector3 newPosition;
+        if (Random.value > 0.5f)
+        {
+            newPosition = new Vector3(oldPos.x + 5, oldPos.y, oldPos.z + 5);
+        }
+        else
+        {
+            newPosition = new Vector3(oldPos.x - 5, oldPos.y, oldPos.z - 5);
+        }
+        transform.position = Vector3.Lerp(oldPos, newPosition, 2f);
     }
     void dodge2(Vector3 oldPos)
     {
