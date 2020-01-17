@@ -184,6 +184,8 @@ GameObject:
   - component: {fileID: 4744988862356727282}
   - component: {fileID: 4744988862356727280}
   - component: {fileID: 4744988862356727283}
+  - component: {fileID: 1913673795695612603}
+  - component: {fileID: 1244181201248221461}
   m_Layer: 0
   m_Name: Plane.001
   m_TagString: Untagged
@@ -251,3 +253,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1913673795695612603
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744988862356727309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.008148544, y: 0.06482411, z: 0.0009539246}
+  m_Center: {x: -0.0046664453, y: 0.013370537, z: 0.00007327208}
+--- !u!114 &1244181201248221461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744988862356727309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3838dc05323bf4b48aed48ba37c7fda3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 4744988861423356693}
