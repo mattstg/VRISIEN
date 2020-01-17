@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour
+public class RangedEnemy : MonoBehaviour,IHittable
 {
     public Transform gunPoint;
 
     GameObject player;
     GameObject[] coverObjects;
     Vector3 coverLocation;
+
     NavMeshAgent nv;
+    Rigidbody rb;
+    Animator animController;
 
     bool isFoundCover = false;
     bool isInCover = false;
@@ -21,12 +24,15 @@ public class RangedEnemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         coverObjects = GameObject.FindGameObjectsWithTag("CoverLocation");
         nv = GetComponent<NavMeshAgent>();
+        animController = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         RayCast();
+        UpdateAnimations();
 
         if (!isFoundCover)
             FindCover();
@@ -46,22 +52,16 @@ public class RangedEnemy : MonoBehaviour
     {
         float nearestCoverDistance = 0;
         Vector3 nearestCoverLocation = Vector3.zero;
-        for(int i=0;i < coverObjects.Length;i++)
+        bool isCoverAssigned = false;
+        while (!isCoverAssigned)
         {
-            if (i == 0)
+            int i = Random.Range(0, coverObjects.Length);
+            if(!coverObjects[i].GetComponent<CoverSpot>().isCoverSpotOccupied)
             {
                 nearestCoverLocation = coverObjects[i].transform.position;
                 nearestCoverDistance = Vector3.Distance(transform.position, coverObjects[i].transform.position);
                 coverObjects[i].GetComponent<CoverSpot>().isCoverSpotOccupied = true;
-            }
-            else
-            {
-                if (Vector3.Distance(transform.position, coverObjects[i].transform.position) < nearestCoverDistance)
-                {
-                    nearestCoverLocation = coverObjects[i].transform.position;
-                    nearestCoverDistance = Vector3.Distance(transform.position, coverObjects[i].transform.position);
-                    coverObjects[i].GetComponent<CoverSpot>().isCoverSpotOccupied = true;
-                }
+                isCoverAssigned = true;
             }
         }
         coverLocation = nearestCoverLocation;
@@ -79,12 +79,22 @@ public class RangedEnemy : MonoBehaviour
     void ShootPlayer()
     {
         RotateTowardsPlayer();
-        print("Shooting");
+        //print("Shooting");
     }
 
     void RotateTowardsPlayer()
     {
         transform.LookAt(player.transform);
+    }
+
+    void UpdateAnimations()
+    {
+        if (nv.velocity != Vector3.zero)
+            animController.SetBool("isRunning", true);
+        else
+            animController.SetBool("isRunning", false);
+
+        animController.SetBool("isInCover", isInCover);
     }
 
     public void Hit()
