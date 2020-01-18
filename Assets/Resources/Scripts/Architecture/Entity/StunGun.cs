@@ -60,11 +60,12 @@ public class StunGun : MonoBehaviour
     }
     void Shoot()
     {
-        RaycastHit hit;
-        Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity,1<<LayerMask.NameToLayer("Enemy"));
-        Debug.DrawRay(transform.position, Vector3.forward, Color.white, .1f);
-        if (hit.transform)
-            StartCoroutine(Stun(hit.transform.GetComponent<RagdollControl>()));
+        //RaycastHit hit;
+        //Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity,1<<LayerMask.NameToLayer("Enemy"));
+        var go = transform.CheckRaycast();
+        // Debug.DrawRay(transform.position, Vector3.forward, Color.white, .1f);
+        if (go)
+            StartCoroutine(Stun(go.GetComponent<RagdollControl>()));
         
            // hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         
