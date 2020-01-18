@@ -12,7 +12,6 @@ public class swordDamage : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             other.transform.SetParent(transform);                  // Lmao cheap dismembering let's see. If works, put for threshold velocities
-            OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
@@ -20,6 +19,8 @@ public class swordDamage : MonoBehaviour
             
         velocity = rb.velocity.magnitude;
         angularVelocity = rb.angularVelocity.magnitude;
+
+        OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
     }
 
     private void OnTriggerExit(Collider other)
