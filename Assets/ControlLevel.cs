@@ -6,6 +6,7 @@ public class ControlLevel : MonoBehaviour
 {
     public int numEnemiesKilled;
     public bool FoundSecretExit, SaiSaysYes, FoundCollectible, UsedCollectible, KilledBoss;
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +23,9 @@ public class ControlLevel : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))         // Secret Exit
             FoundSecretExit = !FoundSecretExit;
-        if (Input.GetKeyDown(KeyCode.S))         // Secret Exit
+        if (Input.GetKeyDown(KeyCode.S))         // Sai controls collectible state
             SaiSaysYes = !SaiSaysYes;
-        if (Input.GetKeyDown(KeyCode.C))         // Secret Exit
+        if (Input.GetKeyDown(KeyCode.C))         // 
             FoundCollectible = !FoundCollectible;
         if (Input.GetKeyDown(KeyCode.E))         // Secret Exit
             UsedCollectible = !UsedCollectible;
