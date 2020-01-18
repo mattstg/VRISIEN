@@ -35,14 +35,14 @@ public class StunGun : MonoBehaviour
         {
             if (grabRef.grabbedByRight)
             {
-                if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger) && cooldownTime > timer)
+                if (OVRInput.Get(OVRInput.Button.One) && cooldownTime > timer)
                 {
                     Shoot();
                     cooldownTime = 0;
                 }
             }
             else
-                if (OVRInput.Get(OVRInput.RawButton.LIndexTrigger) && cooldownTime > timer)
+                if (OVRInput.Get(OVRInput.Button.One) && cooldownTime > timer)
                 {
                     Shoot();
                     cooldownTime = 0;
