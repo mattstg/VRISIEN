@@ -75,7 +75,7 @@ public class StunGun : MonoBehaviour
         }
         else
         {
-            while (Vector3.Distance(transform.position, endPos.position) != endPos.position.sqrMagnitude)
+            while (Vector3.Distance(transform.position, endPos.position) >=.2f)//!= endPos.position.sqrMagnitude)
             {
                 transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
                 transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
