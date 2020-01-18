@@ -7,12 +7,12 @@ public class RagdollControl : MonoBehaviour
     Rigidbody[] ragdollBodies;
     public bool ragdollToggle;
     Animator anim;
-    OVRGrabbable grabDoll;
+    OVRGrabbable[] grabDoll;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        grabDoll = GetComponentInChildren<OVRGrabbable>();
+        grabDoll = gameObject.GetComponentsInChildren<OVRGrabbable>();
         ragdollBodies = gameObject.GetComponentsInChildren<Rigidbody>();
     }
 
@@ -25,7 +25,8 @@ public class RagdollControl : MonoBehaviour
         foreach (Rigidbody r in ragdollBodies)
             r.isKinematic = !(ragdollToggle);           // Put this part into a function called Ragdoll Toggle, call it from stungun on timer
         anim.enabled = !ragdollToggle;
-        grabDoll.enabled = ragdollToggle;
+        foreach(var g in grabDoll)                      // Include this if grabbable. Can then use body as shield, maybe throw for damage
+            g.enabled = ragdollToggle;
         
     }
 }
