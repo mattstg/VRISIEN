@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("controller Awake");
+       // Debug.Log("controller Awake");
         EnemyManager.Instance.SetSpawnLocations(SpawnLocation);
     }
 
