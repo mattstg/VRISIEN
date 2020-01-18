@@ -66,7 +66,10 @@ public class StunGun : MonoBehaviour
 
         var go = transform.CheckRaycast();
         if (go)
-            StartCoroutine(Stun(go.GetComponent<RagdollControl>()));
+        {
+            Debug.Log("SDHOWIDHE");
+            StartCoroutine(Stun(go.transform.root.GetComponent<RagdollControl>()));
+        }
         
            // hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         
@@ -76,7 +79,7 @@ public class StunGun : MonoBehaviour
     {
         ragdoll.DoRagdoll(true);
         yield return new WaitForSeconds(2f);
-        ragdoll.DoRagdoll(false);
+        //ragdoll.DoRagdoll(false);
     }
 
 
