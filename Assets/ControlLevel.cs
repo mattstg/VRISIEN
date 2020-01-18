@@ -34,6 +34,7 @@ public class ControlLevel : MonoBehaviour
 
 
         anim.SetInteger("EnemiesKilled", numEnemiesKilled);
+        
         if (FoundSecretExit)
             anim.SetTrigger("FoundSecretExit");
         if (SaiSaysYes)
