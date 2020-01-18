@@ -16,4 +16,11 @@ public class swordDamage : MonoBehaviour
         velocity = rb.velocity.magnitude;
         angularVelocity = rb.angularVelocity.magnitude;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        var contacts = collision.contacts;
+        foreach (var c in contacts)
+            rb.AddForce(-c.normal * 2f);
+    }
 }
