@@ -10,7 +10,7 @@ public class ControlLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,5 +31,18 @@ public class ControlLevel : MonoBehaviour
             UsedCollectible = !UsedCollectible;
         if (Input.GetKeyDown(KeyCode.F))         // Secret Exit
             KilledBoss = !KilledBoss;
+
+
+        anim.SetInteger("EnemiesKilled", numEnemiesKilled);
+        if (FoundSecretExit)
+            anim.SetTrigger("FoundSecretExit");
+        if (SaiSaysYes)
+            anim.SetTrigger("SaiSaysYes");
+        if (FoundCollectible)
+            anim.SetTrigger("FoundCollectible");
+        if (UsedCollectible)
+            anim.SetTrigger("UseCollectible");
+        if (KilledBoss)
+            anim.SetTrigger("KilledBoss");
     }
 }
