@@ -19,6 +19,8 @@ public class swordDamage : MonoBehaviour
 
             var blood = GameObject.Instantiate(gushingBlood, other.transform);
             blood.transform.localPosition = Vector3.zero;
+
+            OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
@@ -27,7 +29,6 @@ public class swordDamage : MonoBehaviour
         velocity = rb.velocity.magnitude;
         angularVelocity = rb.angularVelocity.magnitude;
 
-        OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
     }
 
     private void OnTriggerExit(Collider other)

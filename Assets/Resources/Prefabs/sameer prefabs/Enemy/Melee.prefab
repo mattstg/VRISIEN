@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31cc804cc3d882b47932e3b632e3d826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  isAlive: 0
   head: {fileID: 4832461170661793123}
   enemyHittingRadious: 6
   playerDetactingRange: 7
@@ -197,7 +197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4832461170661793122}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.247}
   m_LocalScale: {x: 0.125, y: 0.36250013, z: 0.11289006}
   m_Children: []
   m_Father: {fileID: 4832461169724760216}

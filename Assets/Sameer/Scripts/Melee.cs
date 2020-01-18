@@ -19,6 +19,13 @@ public class Melee :Enemy
     bool isChasing = false;
     bool isAttacking = false;
     bool playerDetected = true;
+        RaycastHit rayBack;
+        RaycastHit rayLeft ;
+        RaycastHit rayRight;
+        RaycastHit rayForwardLeft;
+        RaycastHit rayForwardRight;
+        RaycastHit rayBackLeft;
+        RaycastHit rayBackRight;
 
     
 
@@ -35,7 +42,8 @@ public class Melee :Enemy
     public override void Refresh()
     {
         base.Refresh();
-        Debug.Log("Chasing Player");
+                    dodge2(transform.position);
+        
         RaycastHit hit;
         Physics.Raycast(head.position, transform.TransformDirection(Vector3.forward) , out hit,playerDetactingRange);
         Debug.DrawRay(head.position, transform.TransformDirection(Vector3.forward) * playerDetactingRange);
@@ -45,8 +53,7 @@ public class Melee :Enemy
             
             if (Physics.Raycast(head.position, transform.TransformDirection(Vector3.forward), out hit, playerDetactingRange))//get bool value from player whn raycast on enemy to make enemy dodge whn in target range or whn shooting and add that bool in OR condition
             {
-                if(hit.collider.CompareTag("Player"))
-                    dodge(transform.position);
+              //  if(hit.collider.CompareTag("Player"))
             }
 
             if (Vector3.SqrMagnitude(player.position - transform.position) < enemyHittingRadious)
@@ -54,10 +61,11 @@ public class Melee :Enemy
 
                 //call player's HitByProjectile and do damage
             }
-            chasePlayer();
+            //chasePlayer();
         }
         else
         {
+            Debug.Log("RAND WANDER");
             agent.SetDestination(new Vector3(Random.Range(0, 15), 1, Random.Range(0, 15)));
         }
        
@@ -89,14 +97,7 @@ public class Melee :Enemy
     }
     void dodge2(Vector3 oldPos)
     {
-        Debug.Log("dodge");
-        RaycastHit rayBack;
-        RaycastHit rayLeft;
-        RaycastHit rayRight;
-        RaycastHit rayForwardLeft;
-        RaycastHit rayForwardRight;
-        RaycastHit rayBackLeft;
-        RaycastHit rayBackRight;
+        Debug.Log("dodge2");
 
         Debug.DrawRay(head.position, transform.TransformDirection(-Vector3.forward) * playerDetactingRange);
         Debug.DrawRay(head.position, transform.TransformDirection(-Vector3.right) * playerDetactingRange);
@@ -107,47 +108,55 @@ public class Melee :Enemy
         Debug.DrawRay(head.position, transform.TransformDirection(new Vector3(-1, 0, -1f)) * playerDetactingRange);
 
         
-        if (Physics.Raycast(head.position, transform.TransformDirection(-Vector3.forward) * playerDetactingRange, out rayBack) && rayBack.collider.CompareTag("Obstacle"))
+        if (Physics.Raycast(head.position, transform.TransformDirection(-Vector3.forward) * playerDetactingRange, out rayBack))
         {
-            Debug.Log("dodge back");
-            //agent.SetDestination(rayBack.collider.gameObject.transform.position);
-            //rb.AddForce(rayBack.collider.gameObject.transform.position-oldPos * dodgeForce);
-            transform.position = Vector3.Lerp(oldPos, rayBack.collider.gameObject.transform.position, 2f);
+            if (rayBack.collider.CompareTag("Obstacle"))
+            {
+                Debug.Log("dodge back:  " + rayBack.collider.gameObject.transform.position);
+                agent.SetDestination(rayBack.collider.ClosestPoint(rayBack.collider.gameObject.transform.position));
+                //rb.AddForce(rayBack.collider.gameObject.transform.position-oldPos * dodgeForce);
+                //transform.position = Vector3.Lerp(oldPos, rayBack.collider.gameObject.transform.position, 2f);
+            }
         }
         else if(Physics.Raycast(head.position, transform.TransformDirection(-Vector3.right) * playerDetactingRange, out rayLeft) && rayLeft.collider.CompareTag("Obstacle"))
         {
             //agent.SetDestination(rayLeft.collider.gameObject.transform.position);
-           // rb.AddForce(rayLeft.collider.gameObject.transform.position - oldPos * dodgeForce);
-            transform.position = Vector3.Lerp(oldPos, rayBack.collider.gameObject.transform.position, 2f);
-
+            // rb.AddForce(rayLeft.collider.gameObject.transform.position - oldPos * dodgeForce);
+            //transform.position = Vector3.Lerp(oldPos, rayBack.collider.gameObject.transform.position, 2f);
+            agent.SetDestination(rayLeft.collider.ClosestPoint(rayLeft.collider.gameObject.transform.position));
         }
         else if (Physics.Raycast(head.position, transform.TransformDirection(Vector3.right) * playerDetactingRange, out rayRight) && rayRight.collider.CompareTag("Obstacle"))
         {
             //agent.SetDestination(rayRight.collider.gameObject.transform.position);
-           // rb.AddForce(rayRight.collider.gameObject.transform.position - oldPos * dodgeForce);
-            transform.position = Vector3.Lerp(oldPos, rayBack.collider.gameObject.transform.position, 2f);
+            // rb.AddForce(rayRight.collider.gameObject.transform.position - oldPos * dodgeForce);
+            //transform.position = Vector3.Lerp(oldPos, rayBack.collider.gameObject.transform.position, 2f);
+            agent.SetDestination(rayRight.collider.ClosestPoint(rayRight.collider.gameObject.transform.position));
 
         }
         else if (Physics.Raycast(head.position, transform.TransformDirection(new Vector3(1, 0, 1f)) * playerDetactingRange, out rayForwardLeft) && rayForwardLeft.collider.CompareTag("Obstacle"))
         {
             //agent.SetDestination(rayForwardLeft.collider.gameObject.transform.position);
+            agent.SetDestination(rayForwardLeft.collider.ClosestPoint(rayForwardLeft.collider.gameObject.transform.position));
         }
         else if (Physics.Raycast(head.position, transform.TransformDirection(new Vector3(-1, 0, 1f)) * playerDetactingRange, out rayForwardRight) && rayForwardRight.collider.CompareTag("Obstacle"))
         {
-           // agent.SetDestination(rayForwardRight.collider.gameObject.transform.position);
+            // agent.SetDestination(rayForwardRight.collider.gameObject.transform.position);
+            agent.SetDestination(rayForwardRight.collider.ClosestPoint(rayForwardRight.collider.gameObject.transform.position));
         }
         else if (Physics.Raycast(head.position, transform.TransformDirection(new Vector3(1, 0, -1f)) * playerDetactingRange, out rayBackLeft) && rayBackLeft.collider.CompareTag("Obstacle"))
         {
-           // agent.SetDestination(rayBackLeft.collider.gameObject.transform.position);
+            // agent.SetDestination(rayBackLeft.collider.gameObject.transform.position);
+            agent.SetDestination(rayBackLeft.collider.ClosestPoint(rayBackLeft.collider.gameObject.transform.position));
         }
         else if (Physics.Raycast(head.position, transform.TransformDirection(new Vector3(-1, 0, -1f)) * playerDetactingRange, out rayBackRight) && rayBackRight.collider.CompareTag("Obstacle"))
         {
-           // agent.SetDestination(rayBackRight.collider.gameObject.transform.position);
+            // agent.SetDestination(rayBackRight.collider.gameObject.transform.position);
+            agent.SetDestination(rayBackRight.collider.ClosestPoint(rayBackRight.collider.gameObject.transform.position));
+
         }
         else
         {
-            Debug.Log("call frm dodge 2dodge");
-            //dodge( oldPos);
+            transform.RotateAround(transform.position, Vector3.up, 45f);
         }
 
     }
