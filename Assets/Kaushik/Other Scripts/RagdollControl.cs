@@ -12,14 +12,20 @@ public class RagdollControl : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        grabDoll = gameObject.GetComponentsInChildren<OVRGrabbable>();
-        ragdollBodies = gameObject.GetComponentsInChildren<Rigidbody>();
+        SetupRagdoll();
     }
 
     // Update is called once per frame
     void Update()
     {      
         
+    }
+    
+    void SetupRagdoll()
+    {
+        grabDoll = gameObject.GetComponentsInChildren<OVRGrabbable>();
+        ragdollBodies = gameObject.GetComponentsInChildren<Rigidbody>();
+        DoRagdoll(false);
     }
 
     public void DoRagdoll(bool isRagdoll)
