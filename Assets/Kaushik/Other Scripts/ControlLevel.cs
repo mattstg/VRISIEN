@@ -21,15 +21,15 @@ public class ControlLevel : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow))
             numEnemiesKilled--;
 
-        if (Input.GetKeyDown(KeyCode.X))         // Secret Exit
+        if (Input.GetKeyDown(KeyCode.X))         // Secret Exit : Transform
             FoundSecretExit = !FoundSecretExit;
-        if (Input.GetKeyDown(KeyCode.S))         // Sai controls collectible state
+        if (Input.GetKeyDown(KeyCode.S))         // Sai controls collectible state : Conditions for collectible to be active
             SaiSaysYes = !SaiSaysYes;
-        if (Input.GetKeyDown(KeyCode.C))         // 
+        if (Input.GetKeyDown(KeyCode.C))         // Collectible has been grabbed
             FoundCollectible = !FoundCollectible;
-        if (Input.GetKeyDown(KeyCode.E))         // Secret Exit
+        if (Input.GetKeyDown(KeyCode.E))         // Unsure how to use. Added this here to skip the grind after getting collectible
             UsedCollectible = !UsedCollectible;
-        if (Input.GetKeyDown(KeyCode.F))         // Secret Exit
+        if (Input.GetKeyDown(KeyCode.F))         // Fucked the boss' shit up
             KilledBoss = !KilledBoss;
 
 
