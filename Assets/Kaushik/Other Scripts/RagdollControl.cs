@@ -18,15 +18,16 @@ public class RagdollControl : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-            ragdollToggle = !ragdollToggle;
-
-        foreach (Rigidbody r in ragdollBodies)
-            r.isKinematic = !(ragdollToggle);           // Put this part into a function called Ragdoll Toggle, call it from stungun on timer
-        anim.enabled = !ragdollToggle;
-        foreach(var g in grabDoll)                      // Include this if grabbable. Can then use body as shield, maybe throw for damage
-            g.enabled = ragdollToggle;
+    {      
         
+    }
+
+    public void DoRagdoll(bool isRagdoll)
+    {
+        foreach (Rigidbody r in ragdollBodies)
+            r.isKinematic = !(isRagdoll);           // Put this part into a function called Ragdoll Toggle, call it from stungun on timer
+        anim.enabled = !ragdollToggle;
+        foreach (var g in grabDoll)                      // Include this if grabbable. Can then use body as shield, maybe throw for damage
+            g.enabled = isRagdoll;
     }
 }

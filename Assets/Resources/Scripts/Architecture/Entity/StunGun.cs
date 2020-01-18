@@ -53,13 +53,23 @@ public class StunGun : MonoBehaviour
     void Shoot()
     {
         RaycastHit hit;
-        Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity);
+        Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity,1<<LayerMask.NameToLayer("Enemy"));
         Debug.DrawRay(transform.position, Vector3.forward, Color.white, .1f);
         if (hit.transform)
+            StartCoroutine(Stun(hit.transform.GetComponent<RagdollControl>()));
         
-            hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+           // hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         
     }
+
+    IEnumerator Stun(RagdollControl ragdoll)
+    {
+        ragdoll.DoRagdoll(true);
+        yield return new WaitForSeconds(2f);
+        ragdoll.DoRagdoll(false);
+    }
+
+
     IEnumerator Lerp()
     {
         // needs to be fixed.
