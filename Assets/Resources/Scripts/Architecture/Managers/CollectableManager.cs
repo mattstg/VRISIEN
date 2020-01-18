@@ -11,8 +11,16 @@ public class CollectableManager
     public static CollectableManager Instance { get { return instance ?? (instance = new CollectableManager()); } }
     #endregion
 
+    public List<GameObject> collectables;
+
     public void Initialize()
     {
+        GameObject book = Resources.Load<GameObject>("Prefabs/OrnateBook");
+        collectables.Add(book);
+        GameObject card = Resources.Load<GameObject>("Prefabs/SD_Card");
+        collectables.Add(card);
+        GameObject plasmaSword = Resources.Load<GameObject>("Prefabs/SwordCustom");
+        collectables.Add(plasmaSword);
 
     }
 
@@ -30,7 +38,26 @@ public class CollectableManager
     {
     }
 
+    public void GotSword()
+    {
+        //Call playermanager
+        //Call levelmanager
+    }
 
+    public void GotCard()
+    {
+        //Call playermanager to increase speed
+    }
+
+    public void GotBook()
+    {
+        //Call playermanager to double slowmo time
+    }
+
+    public void SpawnCollectables()
+    {
+        //Check if trigger and then spawn them at possible spawn spots
+    }
 
 }
 
