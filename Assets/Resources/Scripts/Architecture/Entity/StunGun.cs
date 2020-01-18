@@ -33,14 +33,22 @@ public class StunGun : MonoBehaviour
         cooldownTime += Time.deltaTime;
         if (grabRef.isGrabbed)
         {
-            if (OVRInput.Get(OVRInput.Button.One) && cooldownTime > timer)
+            if (grabRef.grabbedByRight)
             {
-                Debug.Log("Shot!!!");
-                Shoot();
-                cooldownTime = 0;
-
+                if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger) && cooldownTime > timer)
+                {
+                    Shoot();
+                    cooldownTime = 0;
+                }
             }
+            else
+                if (OVRInput.Get(OVRInput.RawButton.LIndexTrigger) && cooldownTime > timer)
+                {
+                    Shoot();
+                    cooldownTime = 0;
+                }
         }
+
         if (OVRInput.Get(OVRInput.Button.Two))
         {
             StartCoroutine(Lerp());
@@ -52,14 +60,26 @@ public class StunGun : MonoBehaviour
     }
     void Shoot()
     {
-        RaycastHit hit;
-        Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity);
-        Debug.DrawRay(transform.position, Vector3.forward, Color.white, .1f);
-        if (hit.transform)
+        //RaycastHit hit;
+        //Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity,1<<LayerMask.NameToLayer("Enemy"));
+        // Debug.DrawRay(transform.position, Vector3.forward, Color.white, .1f);
+
+        var go = transform.CheckRaycast();
+        if (go)
+            StartCoroutine(Stun(go.GetComponent<RagdollControl>()));
         
-            hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+           // hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         
     }
+
+    IEnumerator Stun(RagdollControl ragdoll)
+    {
+        ragdoll.DoRagdoll(true);
+        yield return new WaitForSeconds(2f);
+        ragdoll.DoRagdoll(false);
+    }
+
+
     IEnumerator Lerp()
     {
         // needs to be fixed.
@@ -75,7 +95,7 @@ public class StunGun : MonoBehaviour
         }
         else
         {
-            while (Vector3.Distance(transform.position, endPos.position) != endPos.position.sqrMagnitude)
+            while (Vector3.Distance(transform.position, endPos.position) >=.2f)//!= endPos.position.sqrMagnitude)
             {
                 transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
                 transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);

@@ -36,7 +36,7 @@ public class OVRGrabbable : MonoBehaviour
     protected bool m_grabbedKinematic = false;
     protected Collider m_grabbedCollider = null;
     protected OVRGrabber m_grabbedBy = null;
-
+    public bool grabbedByRight = false;
 	/// <summary>
 	/// If true, the object can currently be grabbed.
 	/// </summary>
@@ -115,8 +115,9 @@ public class OVRGrabbable : MonoBehaviour
 	virtual public void GrabBegin(OVRGrabber hand, Collider grabPoint)
     {
         m_grabbedBy = hand;
+        grabbedByRight = hand.CompareTag("Right");
         m_grabbedCollider = grabPoint;
-        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+       // gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }
 
 	/// <summary>
@@ -154,6 +155,15 @@ public class OVRGrabbable : MonoBehaviour
     }
 
     void OnDestroy()
+    {
+        if (m_grabbedBy != null)
+        {
+            // Notify the hand to release destroyed grabbables
+            m_grabbedBy.ForceRelease(this);
+        }
+    }
+
+    public void ReleaseObject()
     {
         if (m_grabbedBy != null)
         {

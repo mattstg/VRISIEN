@@ -9,6 +9,8 @@ TagManager:
   - SpawnPoints
   - Enemy
   - Obstacle
+  - Right
+  - Left
   layers:
   - Default
   - TransparentFX
@@ -22,8 +24,8 @@ TagManager:
   - Blade
   - Player
   - Collectables
-  - 
-  - 
+  - Enemy
+  - Bullet
   - 
   - 
   - 

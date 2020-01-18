@@ -223,7 +223,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.6, z: 0}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &2765001374999248895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2351,6 +2351,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6320347520095230327, guid: bef67f136f9a53d4f80621f7e49401c8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Left
+      objectReference: {fileID: 0}
     - target: {fileID: 6320347520100602121, guid: bef67f136f9a53d4f80621f7e49401c8,
         type: 3}
       propertyPath: m_Radius
@@ -2395,6 +2400,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320347520513243518, guid: bef67f136f9a53d4f80621f7e49401c8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Right
       objectReference: {fileID: 0}
     - target: {fileID: 6320347520519872678, guid: bef67f136f9a53d4f80621f7e49401c8,
         type: 3}

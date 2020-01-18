@@ -62,10 +62,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.74
+  m_Radius: 0.3
   m_Height: 3.3
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 3.08}
+  m_Center: {x: -0.48, y: 0, z: 2.99}
 --- !u!114 &4744988861423356694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+  grabbedByRight: 0
 --- !u!1 &4744988862172326798
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +185,9 @@ GameObject:
   - component: {fileID: 4744988862356727282}
   - component: {fileID: 4744988862356727280}
   - component: {fileID: 4744988862356727283}
+  - component: {fileID: 1913673795695612603}
+  - component: {fileID: 1244181201248221461}
+  - component: {fileID: 6774265315467879720}
   m_Layer: 0
   m_Name: Plane.001
   m_TagString: Untagged
@@ -199,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4744988862356727309}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4744988861423356698}
@@ -251,3 +255,47 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1913673795695612603
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744988862356727309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.008148544, y: 0.06482411, z: 0.0009539246}
+  m_Center: {x: -0.0046664453, y: 0.013370537, z: 0.00007327208}
+--- !u!114 &1244181201248221461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744988862356727309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3838dc05323bf4b48aed48ba37c7fda3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 4744988861423356693}
+  hiltGrabber: {fileID: 4744988861423356695}
+  gushingBlood: {fileID: 7054701420462410794, guid: 2686bcb932c9e874db894ac6a157cec2,
+    type: 3}
+  velocity: 0
+  angularVelocity: 0
+--- !u!65 &6774265315467879720
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744988862356727309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.008148544, y: 0.06482411, z: 0.0009539246}
+  m_Center: {x: -0.0046664453, y: 0.013370537, z: 0.00007327208}
