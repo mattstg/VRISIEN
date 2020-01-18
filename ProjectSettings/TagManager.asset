@@ -9,6 +9,8 @@ TagManager:
   - SpawnPoints
   - Enemy
   - Obstacle
+  - Right
+  - Left
   layers:
   - Default
   - TransparentFX

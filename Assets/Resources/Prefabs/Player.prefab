@@ -2351,6 +2351,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6320347520095230327, guid: bef67f136f9a53d4f80621f7e49401c8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Left
+      objectReference: {fileID: 0}
     - target: {fileID: 6320347520100602121, guid: bef67f136f9a53d4f80621f7e49401c8,
         type: 3}
       propertyPath: m_Radius
@@ -2395,6 +2400,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320347520513243518, guid: bef67f136f9a53d4f80621f7e49401c8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Right
       objectReference: {fileID: 0}
     - target: {fileID: 6320347520519872678, guid: bef67f136f9a53d4f80621f7e49401c8,
         type: 3}

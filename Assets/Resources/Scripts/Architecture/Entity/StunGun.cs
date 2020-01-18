@@ -33,14 +33,22 @@ public class StunGun : MonoBehaviour
         cooldownTime += Time.deltaTime;
         if (grabRef.isGrabbed)
         {
-            if (OVRInput.Get(OVRInput.Button.One) && cooldownTime > timer)
+            if (grabRef.grabbedByRight)
             {
-                Debug.Log("Shot!!!");
-                Shoot();
-                cooldownTime = 0;
-
+                if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger) && cooldownTime > timer)
+                {
+                    Shoot();
+                    cooldownTime = 0;
+                }
             }
+            else
+                if (OVRInput.Get(OVRInput.RawButton.LIndexTrigger) && cooldownTime > timer)
+                {
+                    Shoot();
+                    cooldownTime = 0;
+                }
         }
+
         if (OVRInput.Get(OVRInput.Button.Two))
         {
             StartCoroutine(Lerp());
