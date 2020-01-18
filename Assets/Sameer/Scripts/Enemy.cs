@@ -14,10 +14,12 @@ public class Enemy : MonoBehaviour
     int rangedCountPerLocation = 0;
     int droneCountPerLocation = 0;
 
+    public Animator brainAnimator;
+    public Animator modelAnimator;
     public virtual void Initialize()
     {
         
-        Debug.Log("Enemy Initialize()");
+        //Debug.Log("Enemy Initialize()");
         TempNextWaveCounter = nextWaveCounter;
         isAlive = true;
         meleeCountPerLocation = 3;
@@ -37,7 +39,7 @@ public class Enemy : MonoBehaviour
     public virtual void Refresh()
     {
         
-        Debug.Log("Enemy Refresh()");
+        //Debug.Log("Enemy Refresh()");
         if (EnemyManager.Instance.enemies.Count <= 0)
         {
             TempNextWaveCounter -= Time.deltaTime;
@@ -49,6 +51,11 @@ public class Enemy : MonoBehaviour
                 TempNextWaveCounter = nextWaveCounter;
             }
         }
+    }
+
+    private void UpdateBrain()
+    {
+
     }
     public virtual void Die()
     {

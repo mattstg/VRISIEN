@@ -35,7 +35,7 @@ public class EnemyManager
         }
         //Initially spawning enemies
         // NumberOfEnemyToSpawn(3,5,2);
-        NumberOfEnemyToSpawn(3, 0, 0);
+        NumberOfEnemyToSpawn(1, 0, 0);
 
     }
     public void Refresh()
