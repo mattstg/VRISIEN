@@ -9,13 +9,24 @@ public class swordDamage : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer==LayerMask.NameToLayer("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            other.transform.SetParent(transform);                  // Lmao cheap dismembering let's see. If works, put for threshold velocities
             OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
-        else
-            OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+            other.GetComponent<Rigidbody>().Deflect();
+            
         velocity = rb.velocity.magnitude;
         angularVelocity = rb.angularVelocity.magnitude;
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
