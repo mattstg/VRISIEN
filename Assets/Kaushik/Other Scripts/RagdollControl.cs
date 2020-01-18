@@ -12,7 +12,7 @@ public class RagdollControl : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        grabDoll = GetComponent<OVRGrabbable>();
+        grabDoll = GetComponentInChildren<OVRGrabbable>();
         ragdollBodies = gameObject.GetComponentsInChildren<Rigidbody>();
     }
 
