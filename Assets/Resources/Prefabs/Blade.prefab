@@ -95,6 +95,7 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+  grabbedByRight: 0
 --- !u!1 &4744988862172326798
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4744988861423356693}
+  hiltGrabber: {fileID: 4744988861423356695}
   velocity: 0
   angularVelocity: 0
 --- !u!65 &6774265315467879720

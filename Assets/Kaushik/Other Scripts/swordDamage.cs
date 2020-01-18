@@ -5,13 +5,16 @@ using UnityEngine;
 public class swordDamage : MonoBehaviour
 {
     public Rigidbody rb;
+    public OVRGrabbable hiltGrabber;
     public float velocity, angularVelocity;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            other.transform.SetParent(transform);                  // Lmao cheap dismembering let's see. If works, put for threshold velocities
+            transform.parent.SetParent(other.transform);                  // Stick sword in enemy. Reverse setting of parent to 'dismember' enemy
+            transform.localPosition = Vector3.zero;
+            hiltGrabber.ReleaseObject();
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
