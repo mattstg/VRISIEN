@@ -13,9 +13,7 @@ public class swordDamage : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            //   transform.parent.SetParent(other.transform);                  // Stick sword in enemy. Reverse setting of parent to 'dismember' enemy
-            //   transform.localPosition = Vector3.zero;
-            //   hiltGrabber.ReleaseObject();
+           
 
             velocity = rb.velocity.magnitude;
             angularVelocity = rb.angularVelocity.magnitude;
@@ -26,6 +24,15 @@ public class swordDamage : MonoBehaviour
 
                 OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
                 other.transform.root.GetComponent<RagdollControl>().DoRagdoll(true);
+            }
+
+            else
+            {
+                transform.parent.SetParent(other.transform);
+                rb.velocity = Vector3.zero;
+                rb.isKinematic = true;                // Stick sword in enemy. Reverse setting of parent to 'dismember' enemy
+                transform.position = Vector3.zero;
+                hiltGrabber.ReleaseObject();
             }
         }
 
