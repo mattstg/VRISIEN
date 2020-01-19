@@ -53,6 +53,10 @@ public class StunGun : MonoBehaviour
         {
             StartCoroutine(Lerp());
         }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            BulletManager.Instance.CreateBullet(this.transform);
+        }
     }
     public void PhysicsRefresh()
     {
