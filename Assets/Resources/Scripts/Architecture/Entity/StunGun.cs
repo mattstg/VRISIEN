@@ -35,14 +35,14 @@ public class StunGun : MonoBehaviour
         {
             if (grabRef.grabbedByRight)
             {
-                if (OVRInput.Get(OVRInput.Button.One) && cooldownTime > timer)
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && cooldownTime > timer)
                 {
                     Shoot();
                     cooldownTime = 0;
                 }
             }
             else
-                if (OVRInput.Get(OVRInput.Button.One) && cooldownTime > timer)
+                if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && cooldownTime > timer)
                 {
                     Shoot();
                     cooldownTime = 0;
@@ -52,6 +52,10 @@ public class StunGun : MonoBehaviour
         if (OVRInput.Get(OVRInput.Button.Two))
         {
             StartCoroutine(Lerp());
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            BulletManager.Instance.CreateBullet(this.transform);
         }
     }
     public void PhysicsRefresh()
@@ -67,7 +71,6 @@ public class StunGun : MonoBehaviour
         var go = transform.CheckRaycast();
         if (go)
         {
-            Debug.Log("SDHOWIDHE");
             StartCoroutine(Stun(go.transform.root.GetComponent<RagdollControl>()));
         }
         

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿//bulletmanager
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -14,28 +15,68 @@ public class BulletManager
     #endregion
 
 
-    public Dictionary<WeaponType, GameObject> prefabDict;
-    Transform weaponParent;
+    public List<Bullet> bulletList;
+    GameObject bulletPrefab;
+    Transform bulletParent;
 
     public void Initialize()
     {
-        Debug.Log("BulletManager");
-        weaponParent = new GameObject("Weapon").transform;
-        prefabDict = new Dictionary<WeaponType, GameObject>();
-        prefabDict.Add(WeaponType.StunGun, Resources.Load<GameObject>("Prefabs/StunGun"));
+        Debug.Log("BulletManager is Loaded");
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+        bulletParent = new GameObject("BulletParent").transform;
+        bulletList = new List<Bullet>();
+
+        foreach (Bullet b in bulletList)
+        {
+            b.Initialize();
+        }
+
     }
+
 
     public void PostInitialize()
     {
 
+        foreach (Bullet b in bulletList)
+        {
+
+            b.PostInitialize();
+        }
     }
 
     public void PhysicsRefresh()
     {
+        foreach (Bullet b in bulletList)
+        {
 
+            b.PhysicsRefresh();
+        }
     }
 
     public void Refresh()
     {
+        foreach (Bullet b in bulletList)
+        {
+
+            b.Refresh();
+        }
+    }
+    public Bullet CreateBullet(Transform trans)
+    {
+        Bullet bullet = null;
+        Debug.Log("Bullet is Created");
+        if (bulletList.Count == 0)
+        {
+            bullet = GameObject.Instantiate(bulletPrefab, trans.position, trans.rotation, bulletParent).GetComponent<Bullet>();
+            bulletList.Add(bullet);
+            bullet.Initialize();
+            bullet.PostInitialize();
+            bulletList.Add(bullet);
+        }
+        else
+        {
+            // After a short break
+        }
+        return bullet;
     }
 }
