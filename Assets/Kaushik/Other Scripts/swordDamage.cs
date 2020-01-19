@@ -19,7 +19,7 @@ public class swordDamage : MonoBehaviour
 
             velocity = rb.velocity.magnitude;
             angularVelocity = rb.angularVelocity.magnitude;
-            if ((velocity + angularVelocity) / 2 > 0.5f)
+            if ((velocity + angularVelocity) / 2 > 9.5f)
             {
                 var blood = GameObject.Instantiate(gushingBlood, other.transform);
                 blood.transform.localPosition = Vector3.zero;
