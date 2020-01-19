@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //StunGun
-public class StunGun : MonoBehaviour
+public class Blade : MonoBehaviour
 {
     private Transform endPos; // can be the  player's location where the gun will lerp back and forth 
     private Transform startPos;
@@ -13,8 +13,8 @@ public class StunGun : MonoBehaviour
 
     public float smoothing = 1f;
 
-    private float cooldownTime = 0; // time difference between shooting of bullets
-    private float timer = 0.5f;
+    private float cooldownTime = 0; // cool down for GETOVERHERE!!! *experimental*
+    private float timer = 1.5f;
 
     public Vector3 angle;
 
@@ -23,8 +23,8 @@ public class StunGun : MonoBehaviour
     public void Initialize()
     {
 
-        endPos = GameObject.Find("Right").transform;
-        startPos = this.transform;
+        endPos = GameObject.Find("Left").transform;
+      //  startPos.position = 
         grabRef = gameObject.GetComponent<OVRGrabbable>();
 
     }
@@ -37,48 +37,44 @@ public class StunGun : MonoBehaviour
             {
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && cooldownTime > timer)
                 {
-                    Shoot();
+                    Spear();
                     cooldownTime = 0;
                 }
             }
             else
                 if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && cooldownTime > timer)
                 {
-                    Shoot();
+                    Spear();
                     cooldownTime = 0;
                 }
         }
 
-        if (OVRInput.Get(OVRInput.Button.Two))
+        if (OVRInput.Get(OVRInput.Button.Four))
         {
             StartCoroutine(Lerp());
         }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            BulletManager.Instance.CreateBullet(this.transform);
-        }
+       
     }
     public void PhysicsRefresh()
     {
 
     }
-    void Shoot()
+    void Spear()
     {
-        //RaycastHit hit;
-        //Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity,1<<LayerMask.NameToLayer("Enemy"));
-        // Debug.DrawRay(transform.position, Vector3.forward, Color.white, .1f);
 
         var go = transform.CheckRaycast();
         if (go)
         {
-            StartCoroutine(Stun(go.transform.root.GetComponent<RagdollControl>()));
+            StartCoroutine(Lerp());
+            StartCoroutine(Lerp());
+
         }
-        
-           // hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-        
+
+        // hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+
     }
 
-    IEnumerator Stun(RagdollControl ragdoll)
+    IEnumerator SpearKill(RagdollControl ragdoll)
     {
         ragdoll.DoRagdoll(true);
         yield return new WaitForSeconds(2f);
@@ -89,7 +85,7 @@ public class StunGun : MonoBehaviour
     IEnumerator Lerp()
     {
         // needs to be fixed.
-        if (this.transform.position == endPos.position)
+        if (Vector3.Distance(transform.position,endPos.position) <=.2f)
         {
             while (Vector3.Distance(transform.position, startPos.position) != startPos.position.sqrMagnitude)
             {
@@ -101,7 +97,7 @@ public class StunGun : MonoBehaviour
         }
         else
         {
-            while (Vector3.Distance(transform.position, endPos.position) >=.2f)//!= endPos.position.sqrMagnitude)
+            while (Vector3.Distance(transform.position, endPos.position) >= .2f)//!= endPos.position.sqrMagnitude)
             {
                 transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
                 transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
