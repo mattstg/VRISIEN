@@ -6,6 +6,7 @@ using UnityEngine;
 public class RangedEnemy : MonoBehaviour
 {
     public Transform gunPoint;
+    public float fireRate = 0.25f;
 
     GameObject player;
     GameObject[] coverObjects;
@@ -14,9 +15,11 @@ public class RangedEnemy : MonoBehaviour
     NavMeshAgent nv;
     Rigidbody rb;
     Animator animController;
+    float fireRateCounter = 0f;
 
     bool isFoundCover = false;
     bool isInCover = false;
+    bool canShoot = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +29,7 @@ public class RangedEnemy : MonoBehaviour
         nv = GetComponent<NavMeshAgent>();
         animController = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
@@ -79,6 +83,20 @@ public class RangedEnemy : MonoBehaviour
     void ShootPlayer()
     {
         RotateTowardsPlayer();
+
+        if (fireRateCounter >= fireRate)
+        {
+            fireRateCounter = 0f;
+            if (canShoot)
+                BulletManager.Instance.CreateBullet(gunPoint);
+
+        }
+        else
+        {
+            fireRateCounter += Time.deltaTime;
+        }
+        
+
         //print("Shooting");
     }
 

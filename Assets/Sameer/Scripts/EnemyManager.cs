@@ -40,7 +40,7 @@ public class EnemyManager
     }
     public void Refresh()
     {
-        Debug.Log("EnemyManager Refresh()");
+       // Debug.Log("EnemyManager Refresh()");
         foreach (Enemy e in enemies)
             if (e.isAlive)
                 e.Refresh();

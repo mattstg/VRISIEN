@@ -17,12 +17,11 @@ public class Bullet : MonoBehaviour
         startPos = transform.forward;
         counter = bulletLife;
         Debug.Log("Bullet");
-
     }
 
     public void PostInitialize()
     {
-
+        
     }
 
     public void Refresh()
@@ -50,6 +49,5 @@ public class Bullet : MonoBehaviour
     {
         RaycastHit hit;
         Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity);
-
     }
 }

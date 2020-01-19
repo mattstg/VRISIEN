@@ -8,12 +8,14 @@ public class callformanager : MonoBehaviour
     void Start()
     {
         EnemyManager.Instance.Initialize();
+        BulletManager.Instance.Initialize();
       //  Debug.Log("CallforManager start()");
     }
 
     // Update is called once per frame
     void Update()
     {
+        EnemyManager.Instance.Refresh();
         EnemyManager.Instance.Refresh();
        // Debug.Log("CallforManager Update()");
     }
