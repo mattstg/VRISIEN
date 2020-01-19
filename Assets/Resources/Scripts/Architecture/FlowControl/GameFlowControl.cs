@@ -32,6 +32,7 @@ public class GameFlowControl
         VRCameraManager.Instance.Initialize();
        // BulletManager.Instance.Initialize();
         WeaponManager.Instance.Initialize();
+        SoundManager.Instance.Initialize();
 
         //EnemyManager.Instance.Initialize();
     }
@@ -43,6 +44,7 @@ public class GameFlowControl
         VRCameraManager.Instance.PostInitialize();
      //   BulletManager.Instance.PostInitialize();
         WeaponManager.Instance.PostInitialize();
+        SoundManager.Instance.PostInitialize();
 
         //EnemyManager.Instance.PostInitialize();
 
@@ -55,6 +57,7 @@ public class GameFlowControl
        VRCameraManager.Instance.PhysicsRefresh();
      //   BulletManager.Instance.PhysicsRefresh();
         WeaponManager.Instance.PhysicsRefresh();
+        SoundManager.Instance.PhysicsRefresh();
 
         //EnemyManager.Instance.PhysicsRefresh();
 
@@ -67,6 +70,7 @@ public class GameFlowControl
         VRCameraManager.Instance.Refresh();
      //   BulletManager.Instance.Refresh();
         WeaponManager.Instance.Refresh();
+        SoundManager.Instance.Refresh();
         //EnemyManager.Instance.Refresh();
 
     }
