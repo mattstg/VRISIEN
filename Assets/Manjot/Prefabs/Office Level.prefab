@@ -14512,7 +14512,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: large Door
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2340787926811574499, guid: a37c7b1d9b87d5a4eaab481ac3def956, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a37c7b1d9b87d5a4eaab481ac3def956, type: 3}
 --- !u!4 &179275900766922573 stripped
 Transform:
