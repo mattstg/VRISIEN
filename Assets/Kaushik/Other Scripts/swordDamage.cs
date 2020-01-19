@@ -25,7 +25,7 @@ public class swordDamage : MonoBehaviour
                 blood.transform.localPosition = Vector3.zero;
 
                 OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
-                other.GetComponent<RagdollControl>().DoRagdoll(true);
+                other.transform.root.GetComponent<RagdollControl>().DoRagdoll(true);
             }
         }
 
