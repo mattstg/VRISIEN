@@ -723,7 +723,7 @@ Transform:
   m_GameObject: {fileID: 3531232736904666508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.8864565, y: 0, z: -27.567986}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.7, y: 2.7, z: 2.7}
   m_Children:
   - {fileID: 6846877172435214554}
   - {fileID: 45315551547591961}
@@ -1603,6 +1603,7 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+  grabbedByRight: 0
 --- !u!114 &528585271341280922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1620,6 +1621,7 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+  grabbedByRight: 0
 --- !u!1 &6259767692045857864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2598,6 +2600,7 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+  grabbedByRight: 0
 --- !u!114 &5181770831267946614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2615,6 +2618,7 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+  grabbedByRight: 0
 --- !u!1 &8537227984020684081
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,6 +3087,7 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+  grabbedByRight: 0
 --- !u!114 &8014412947837763511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3100,6 +3105,7 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+  grabbedByRight: 0
 --- !u!1 &9219742270643009334
 GameObject:
   m_ObjectHideFlags: 0
