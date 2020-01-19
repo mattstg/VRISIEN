@@ -13,21 +13,26 @@ public class swordDamage : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-         //   transform.parent.SetParent(other.transform);                  // Stick sword in enemy. Reverse setting of parent to 'dismember' enemy
-         //   transform.localPosition = Vector3.zero;
-         //   hiltGrabber.ReleaseObject();
+            //   transform.parent.SetParent(other.transform);                  // Stick sword in enemy. Reverse setting of parent to 'dismember' enemy
+            //   transform.localPosition = Vector3.zero;
+            //   hiltGrabber.ReleaseObject();
 
-            var blood = GameObject.Instantiate(gushingBlood, other.transform);
-            blood.transform.localPosition = Vector3.zero;
+            velocity = rb.velocity.magnitude;
+            angularVelocity = rb.angularVelocity.magnitude;
+            if ((velocity + angularVelocity) / 2 > 0.5f)
+            {
+                var blood = GameObject.Instantiate(gushingBlood, other.transform);
+                blood.transform.localPosition = Vector3.zero;
 
-            OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
+                OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
+                other.GetComponent<RagdollControl>().DoRagdoll(true);
+            }
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
             other.GetComponent<Rigidbody>().Deflect();
             
-        velocity = rb.velocity.magnitude;
-        angularVelocity = rb.angularVelocity.magnitude;
+
 
     }
 
