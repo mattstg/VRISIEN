@@ -35,5 +35,6 @@ public class RagdollControl : MonoBehaviour
         anim.enabled = !isRagdoll;
         foreach (var g in grabDoll)                      // Include this if grabbable. Can then use body as shield, maybe throw for damage
             g.enabled = isRagdoll;
+        gameObject.layer = isRagdoll ? LayerMask.NameToLayer("Ragdoll") : LayerMask.NameToLayer("Enemy");
     }
 }
