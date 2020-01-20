@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float bulletLife = 1f;
+    private float bulletLife = 5f;
     Vector3 startPos;
     public bool isHit = false;
     Rigidbody rb;
-    float speed = 10f;
+    float speed = 5f;
     float counter;
 
     public void Initialize()
@@ -30,9 +30,9 @@ public class Bullet : MonoBehaviour
         checkHit();
         // check for WALL OR ENEMY
         counter -= Time.deltaTime;
-        if (counter <= 0)
+        if (counter <= 0 || isHit)
         {
-            Debug.Log("Will Destroy automatically after few seconds");
+            BulletManager.Instance.BulletDied(this.gameObject.GetComponent<Bullet>());
             counter = bulletLife;
         }
     }
