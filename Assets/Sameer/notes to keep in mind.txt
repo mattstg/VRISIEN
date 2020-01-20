@@ -4,4 +4,5 @@ and make a delay of 3 seconds
 check when to stop waves of enemy
 
 
-
+Use Enemy_Melee_Ragdoll for model. Or make Ragdoll on Ranged Model, and use script RagdollControl.cs to rig for stun/kill.
+- KaushikV
