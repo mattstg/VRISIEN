@@ -30,7 +30,7 @@ public class StunGun : MonoBehaviour
     }
     public void Refresh()
     {
-        Debug.Log(1);
+       
         cooldownTime += Time.deltaTime;
         if (grabRef.isGrabbed)
         {

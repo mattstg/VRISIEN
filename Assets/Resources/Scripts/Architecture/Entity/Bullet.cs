@@ -10,10 +10,12 @@ public class Bullet : MonoBehaviour
     Rigidbody rb;
     float speed = 5f;
     float counter;
+    private Transform target;
 
     public void Initialize()
     {
         rb = GetComponent<Rigidbody>();
+        target = GameObject.Find("Player").transform;
         startPos = transform.forward;
         counter = bulletLife;
         Debug.Log("Bullet");
@@ -27,10 +29,11 @@ public class Bullet : MonoBehaviour
     public void Refresh()
     {
         BulletShootDir(startPos);
-        checkHit();
-        // check for WALL OR ENEMY
+        CheckHit();
+        //FollowPlayer();
+        
         counter -= Time.deltaTime;
-        if (counter <= 0 || isHit)
+        if (counter <= 0) //(counter <= 0 || isHit)
         {
             BulletManager.Instance.BulletDied(this.gameObject.GetComponent<Bullet>());
             counter = bulletLife;
@@ -45,9 +48,33 @@ public class Bullet : MonoBehaviour
     {
         transform.position += shootDir.normalized * speed * Time.deltaTime;
     }
-    public void checkHit()
+    public void CheckHit()
     {
         RaycastHit hit;
-        Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity);
+        Physics.Raycast(transform.position, transform.forward, out hit,2f);
+        //if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
+        //{
+        //    isHit = true;
+        //    Debug.Log("Player Hit");
+        //    //HitPlayer(); call a function on player
+        //}
+       if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            isHit = true;
+            Debug.Log("Wall Hit");
+            HitWall(); 
+        }
+        else
+        {
+            isHit = false;
+        }
+    }
+    public void FollowPlayer()
+    {
+        transform.position += Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+    }
+    public void HitWall()
+    {
+        rb.Deflect();
     }
 }
