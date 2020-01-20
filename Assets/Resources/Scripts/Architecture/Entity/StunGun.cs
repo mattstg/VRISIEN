@@ -30,6 +30,7 @@ public class StunGun : MonoBehaviour
     }
     public void Refresh()
     {
+       
         cooldownTime += Time.deltaTime;
         if (grabRef.isGrabbed)
         {
@@ -55,6 +56,7 @@ public class StunGun : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
+       
             BulletManager.Instance.CreateBullet(this.transform);
         }
     }

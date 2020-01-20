@@ -1,10 +1,9 @@
-﻿//bulletmanager
+﻿
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-//BulletManager
-//In progress
+
 public enum WeaponType { StunGun, Sword };
 public class BulletManager
 {
@@ -25,14 +24,7 @@ public class BulletManager
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
         bulletParent = new GameObject("BulletParent").transform;
         bulletList = new List<Bullet>();
-
-        foreach (Bullet b in bulletList)
-        {
-            b.Initialize();
-        }
-
     }
-
 
     public void PostInitialize()
     {
@@ -64,19 +56,54 @@ public class BulletManager
     public Bullet CreateBullet(Transform trans)
     {
         Bullet bullet = null;
-        Debug.Log("Bullet is Created");
         if (bulletList.Count == 0)
         {
             bullet = GameObject.Instantiate(bulletPrefab, trans.position, trans.rotation, bulletParent).GetComponent<Bullet>();
-            bulletList.Add(bullet);
             bullet.Initialize();
             bullet.PostInitialize();
             bulletList.Add(bullet);
+            return bullet;
         }
         else
         {
-            // After a short break
+            foreach (Bullet b in bulletList)
+            {
+                if (b.gameObject.activeSelf)
+                {
+                    bullet = GameObject.Instantiate(bulletPrefab, trans.position, trans.rotation, bulletParent).GetComponent<Bullet>();
+
+                    bullet.Initialize();
+                    bullet.PostInitialize();
+                    bulletList.Add(bullet);
+                    return bullet;
+                }
+                else
+                {
+
+                    int inactiveBullet = 0;
+                    for (int i = 0; i < bulletList.Count; i++)
+                    {
+                        if (!bulletList[i].gameObject.activeSelf)
+                            inactiveBullet = i;
+                    }
+                    bulletList[inactiveBullet].gameObject.SetActive(true);
+                    bullet = bulletList[inactiveBullet].gameObject.GetComponent<Bullet>();
+                    bullet.transform.position = trans.position;
+                    bullet.transform.rotation = trans.rotation;
+                    bullet.Initialize();
+                    bullet.PostInitialize();
+                    return bullet;
+                }
+            }
+
+            return bullet;
         }
-        return bullet;
+
     }
+    public void BulletDied(Bullet b)
+    {
+        b.gameObject.SetActive(false);
+    }
+
+
 }
