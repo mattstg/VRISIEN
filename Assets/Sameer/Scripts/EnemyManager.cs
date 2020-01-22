@@ -12,35 +12,40 @@ public class EnemyManager
     public static EnemyManager Instance { get { return instance ?? (instance = new EnemyManager()); } }
     #endregion
 
+    float meleeHealth,rangedHealth;
     Transform enemyParent;
     Transform SpawnLocations;
     public int enemyCountofCurrentWave = 0;
     public HashSet<Enemy> enemies;//stacks to keep track of enemies
     public Stack<Enemy> toRemove;
     public Stack<Enemy> toAdd;
+    //public int EnemyCount { get { return enemies.Count; } }
 
     Dictionary<EnemyType, GameObject> enemyPrefabDict = new Dictionary<EnemyType, GameObject>(); //all enemy prefabs
 
     public void Initialize()
     {
-        Debug.Log("EnemyManager Initialize()");
+        //Debug.Log("EnemyManager Initialize()");
+        meleeHealth = GameSetupClass.Instance.MeleeHealth;
+        rangedHealth = GameSetupClass.Instance.RangedHealth;
         toRemove = new Stack<Enemy>();
         toAdd = new Stack<Enemy>();
         enemies = new HashSet<Enemy>();
         enemyParent = new GameObject("EnemyParent").transform;
-        SpawnLocations = GetSpawnLocations();
+        SpawnLocations = GameObject.FindGameObjectWithTag("EnemySpawnLocationParent").transform;
+        //SpawnLocations = GameSetupClass.Instance.SpawnLocation;
         foreach (EnemyType etype in System.Enum.GetValues(typeof(EnemyType))) //fill the resource dictionary with all the prefabs
         {
             enemyPrefabDict.Add(etype, Resources.Load<GameObject>("Prefabs/sameer prefabs/Enemy/" + etype.ToString())); //Each enum matches the name of the enemy perfectly
         }
         //Initially spawning enemies
         // NumberOfEnemyToSpawn(3,5,2);
-        NumberOfEnemyToSpawn(1, 0, 0);
+       // NumberOfEnemyToSpawn(1, 0, 0);
 
     }
     public void Refresh()
     {
-        Debug.Log("EnemyManager Refresh()");
+       // Debug.Log("EnemyManager Refresh()");
         foreach (Enemy e in enemies)
             if (e.isAlive)
                 e.Refresh();
@@ -56,6 +61,8 @@ public class EnemyManager
         while (toAdd.Count > 0) //Add new ones
             enemies.Add(toAdd.Pop());
     }
+    public void PhysicsRefresh() { }
+    public void PostInitialize() { }
     public void SetSpawnLocations(Transform spawnLocation)
     {
         Debug.Log("Setspawnlocation in enemy mnger");
@@ -90,7 +97,12 @@ public class EnemyManager
                 newEnemy.transform.position += spawnLocation;
                 Debug.Log("Enw Enemy Created");
                 e = newEnemy.GetComponent<Enemy>();
-                e.Initialize();
+                
+                if (etype.Equals(EnemyType.Melee))
+                    e.Initialize(meleeHealth);
+                else if(etype.Equals(EnemyType.Ranged))
+                    e.Initialize(rangedHealth);
+
                 toAdd.Push(e);  
             }
            

@@ -11,6 +11,8 @@ TagManager:
   - Obstacle
   - Right
   - Left
+  - EnemySpawnTrigger
+  - EnemySpawnLocationParent
   layers:
   - Default
   - TransparentFX

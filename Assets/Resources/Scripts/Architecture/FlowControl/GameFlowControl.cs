@@ -26,14 +26,15 @@ public class GameFlowControl
     
     public void Initialize()
     {
-        //GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
+        
         //InputManager.Instance.Initialize();
         PlayerManager.Instance.Initialize();
         VRCameraManager.Instance.Initialize();
        // BulletManager.Instance.Initialize();
         WeaponManager.Instance.Initialize();
 
-        //EnemyManager.Instance.Initialize();
+        GameSetupClass.Instance.Initialize();
+        EnemyManager.Instance.Initialize();
     }
 
     public void PostInitialize()
@@ -44,7 +45,8 @@ public class GameFlowControl
      //   BulletManager.Instance.PostInitialize();
         WeaponManager.Instance.PostInitialize();
 
-        //EnemyManager.Instance.PostInitialize();
+        GameSetupClass.Instance.PostInitialize();
+        EnemyManager.Instance.PostInitialize();
 
     }
 
@@ -56,18 +58,20 @@ public class GameFlowControl
      //   BulletManager.Instance.PhysicsRefresh();
         WeaponManager.Instance.PhysicsRefresh();
 
-        //EnemyManager.Instance.PhysicsRefresh();
+        GameSetupClass.Instance.PhysicsRefresh();
+        EnemyManager.Instance.PhysicsRefresh();
 
     }
 
-    public void Refresh()
+    public void Refresh(float DeltaTime)
     {
+        GameSetupClass.Instance.Refresh(DeltaTime);
         //InputManager.Instance .Refresh();
         PlayerManager.Instance.Refresh();
         VRCameraManager.Instance.Refresh();
      //   BulletManager.Instance.Refresh();
         WeaponManager.Instance.Refresh();
-        //EnemyManager.Instance.Refresh();
+        EnemyManager.Instance.Refresh();
 
     }
 

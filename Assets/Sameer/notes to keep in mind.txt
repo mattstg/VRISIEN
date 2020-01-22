@@ -3,5 +3,6 @@ and make a delay of 3 seconds
 
 check when to stop waves of enemy
 
+MAke event management system to track enemy enter enemy spawn area
 
-
+Get Movable Points from manjot To roam Artound in scene
