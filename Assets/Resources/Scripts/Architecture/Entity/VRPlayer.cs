@@ -18,6 +18,7 @@ public class VRPlayer : OVRPlayerController, IManagable
     override public void Initialize()
     {
         base.Initialize();
+      
     }
 
     override public void Refresh()
