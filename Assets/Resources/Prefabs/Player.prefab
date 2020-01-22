@@ -151,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 2765001374999248836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -20.666645, y: 2.02, z: -29.51}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 306477296521707647}
   - {fileID: 7205814667500838784}
@@ -236,13 +236,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70a4417295deb64abca43392cd7849e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Acceleration: 0.75
+  Acceleration: 0.5
   Damping: 1
   BackAndSideDampen: 0.5
   JumpForce: 0.3
   RotationAmount: 1.5
-  RotationRatchet: 45
-  SnapRotation: 1
+  RotationRatchet: 10
+  SnapRotation: 0
   FixedSpeedSteps: 0
   HmdResetsY: 0
   HmdRotatesY: 0
@@ -2375,6 +2375,16 @@ PrefabInstance:
         type: 3}
       propertyPath: near clip plane
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320347520200010237, guid: bef67f136f9a53d4f80621f7e49401c8,
+        type: 3}
+      propertyPath: far clip plane
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6320347520200010237, guid: bef67f136f9a53d4f80621f7e49401c8,
+        type: 3}
+      propertyPath: m_RenderingPath
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6320347520513012080, guid: bef67f136f9a53d4f80621f7e49401c8,
         type: 3}
