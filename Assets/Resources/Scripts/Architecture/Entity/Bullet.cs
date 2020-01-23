@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     Vector3 startPos;
     public bool isHit = false;
     Rigidbody rb;
-    float speed = 5f;
+    float speed = 20f;
     float counter;
     private Transform target;
 

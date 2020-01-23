@@ -7,7 +7,7 @@ public class callformanager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnemyManager.Instance.Initialize();
+       // EnemyManager.Instance.Initialize();
         BulletManager.Instance.Initialize();
       //  Debug.Log("CallforManager start()");
     }
@@ -15,8 +15,8 @@ public class callformanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        EnemyManager.Instance.Refresh();
-        EnemyManager.Instance.Refresh();
+      //  EnemyManager.Instance.Refresh();
+        BulletManager.Instance.Refresh();
        // Debug.Log("CallforManager Update()");
     }
 }

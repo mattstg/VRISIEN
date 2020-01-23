@@ -7,6 +7,8 @@ public class RangedEnemy : MonoBehaviour
 {
     public Transform gunPoint;
     public float fireRate = 0.25f;
+    public int maxHitResistance = 3;
+    public bool isHit = false;
 
     GameObject player;
     GameObject[] coverObjects;
@@ -15,11 +17,13 @@ public class RangedEnemy : MonoBehaviour
     NavMeshAgent nv;
     Rigidbody rb;
     Animator animController;
+    Outline outlineScript;
     float fireRateCounter = 0f;
 
     bool isFoundCover = false;
     bool isInCover = false;
-    bool canShoot = false;
+    bool canShoot = true;
+    bool isStunned = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +33,7 @@ public class RangedEnemy : MonoBehaviour
         nv = GetComponent<NavMeshAgent>();
         animController = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        
+        outlineScript = GetComponent<Outline>();        
     }
 
     // Update is called once per frame
@@ -84,19 +88,16 @@ public class RangedEnemy : MonoBehaviour
     {
         RotateTowardsPlayer();
 
-        if (fireRateCounter >= fireRate)
+        fireRateCounter += Time.deltaTime;
+        if (fireRateCounter > fireRate)
         {
             fireRateCounter = 0f;
+            print("shoot");
             if (canShoot)
+            {
                 BulletManager.Instance.CreateBullet(gunPoint);
-
-        }
-        else
-        {
-            fireRateCounter += Time.deltaTime;
-        }
-        
-
+            }
+        }  
         //print("Shooting");
     }
 
@@ -113,11 +114,39 @@ public class RangedEnemy : MonoBehaviour
             animController.SetBool("isRunning", false);
 
         animController.SetBool("isInCover", isInCover);
+
+        if (isHit)
+        {
+            isHit = false;
+            Hit();
+        }
     }
 
     public void Hit()
     {
         //throw new System.NotImplementedException();
         print("DamageReceived");
+        if(isStunned)
+        {
+            animController.SetTrigger("Die");
+        }
+        else
+        {
+            if (maxHitResistance > 0)
+            {
+                StartCoroutine(RunOutlineEffect(2f));
+                maxHitResistance--;
+                animController.SetTrigger("Hit");
+            }
+            else
+                animController.SetTrigger("Die");
+        }
+    }
+
+    IEnumerator RunOutlineEffect(float time)
+    {
+        outlineScript.enabled = true;
+        yield return new WaitForSeconds(time);
+        outlineScript.enabled = false;
     }
 }
