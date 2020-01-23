@@ -13,6 +13,10 @@ public class CollectableManager
 
     public List<GameObject> collectables;
 
+    public bool gotSword;
+    public bool gotChip;
+    public bool gotBook;
+
     public void Initialize()
     {
         GameObject book = Resources.Load<GameObject>("Prefabs/OrnateBook");
@@ -40,17 +44,22 @@ public class CollectableManager
 
     public void GotSword()
     {
+        gotSword = true;
         //Call playermanager
         //Call levelmanager
     }
 
-    public void GotCard()
+    public void GotChip()
     {
+        gotChip = true;
+        PlayerManager.Instance.player.Acceleration = 0.1f;
         //Call playermanager to increase speed
     }
 
     public void GotBook()
     {
+        gotBook = true;
+
         //Call playermanager to double slowmo time
     }
 
