@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &280490161157763001
+--- !u!1 &5998156832973152595
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3873053383461576106}
-  - component: {fileID: 5252568493736667036}
-  - component: {fileID: 2006448589133241189}
-  m_Layer: 0
+  - component: {fileID: 7306775955616600896}
+  - component: {fileID: 1746803725808937334}
+  - component: {fileID: 5404721770590655887}
+  - component: {fileID: 2313819735327586396}
+  - component: {fileID: 821145378451905576}
+  - component: {fileID: 5998156832973152594}
+  m_Layer: 11
   m_Name: SD_Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3873053383461576106
+--- !u!4 &7306775955616600896
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280490161157763001}
+  m_GameObject: {fileID: 5998156832973152595}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.1687617, y: 2.42, z: -68.67}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5252568493736667036
+--- !u!33 &1746803725808937334
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280490161157763001}
-  m_Mesh: {fileID: -3881043684522279627, guid: a56e2bc5ea531314eb0497ea76559f79, type: 3}
---- !u!23 &2006448589133241189
+  m_GameObject: {fileID: 5998156832973152595}
+  m_Mesh: {fileID: -3881043684522279627, guid: a8777e805e1d6fc44a9ec24befbf0291, type: 3}
+--- !u!23 &5404721770590655887
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280490161157763001}
+  m_GameObject: {fileID: 5998156832973152595}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -57,8 +60,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3c275e318a07e1d468505aa595589bff, type: 2}
-  - {fileID: 2100000, guid: df1d020f332da1948868168b9cac0be7, type: 2}
+  - {fileID: 2100000, guid: 7f4b5f83bc41d9e4f849bff17ffed793, type: 2}
+  - {fileID: 2100000, guid: 9716658c9e99a3f47b045ee6083834ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,3 +82,51 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2313819735327586396
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998156832973152595}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.45, y: 1.85, z: 0.11}
+  m_Center: {x: 0.000561893, y: 0.0012042823, z: 0}
+--- !u!54 &821145378451905576
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998156832973152595}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &5998156832973152594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998156832973152595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_allowOffhandGrab: 1
+  m_snapPosition: 0
+  m_snapOrientation: 0
+  m_snapOffset: {fileID: 7306775955616600896}
+  m_grabPoints:
+  - {fileID: 2313819735327586396}
+  grabbedByRight: 0

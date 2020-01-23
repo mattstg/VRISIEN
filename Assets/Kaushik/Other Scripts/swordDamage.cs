@@ -13,21 +13,34 @@ public class swordDamage : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-         //   transform.parent.SetParent(other.transform);                  // Stick sword in enemy. Reverse setting of parent to 'dismember' enemy
-         //   transform.localPosition = Vector3.zero;
-         //   hiltGrabber.ReleaseObject();
+           
 
-            var blood = GameObject.Instantiate(gushingBlood, other.transform);
-            blood.transform.localPosition = Vector3.zero;
+            velocity = rb.velocity.magnitude;
+            angularVelocity = rb.angularVelocity.magnitude;
+            if ((velocity + angularVelocity) / 2 > 9.5f)
+            {
+                var blood = GameObject.Instantiate(gushingBlood, other.transform);
+                blood.transform.localPosition = Vector3.zero;
+
+                OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
+                other.transform.root.GetComponent<RagdollControl>().DoRagdoll(true);
+            }
+
+            else
+            {
+             //   transform.parent.SetParent(other.transform);
+            //    rb.velocity = Vector3.zero;
+             //   rb.isKinematic = true;                // Stick sword in enemy. Reverse setting of parent to 'dismember' enemy
+             //   transform.position = Vector3.zero;
+                hiltGrabber.ReleaseObject();
+            }
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
             other.GetComponent<Rigidbody>().Deflect();
             
-        velocity = rb.velocity.magnitude;
-        angularVelocity = rb.angularVelocity.magnitude;
 
-        OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
+
     }
 
     private void OnTriggerExit(Collider other)

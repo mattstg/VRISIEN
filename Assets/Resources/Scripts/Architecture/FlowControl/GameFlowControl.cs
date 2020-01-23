@@ -7,7 +7,7 @@ public class GameFlowControl
     #region Singleton
     private static GameFlowControl instance = null;
 
-    private GameFlowControl() {}
+    private GameFlowControl() { }
 
     public static GameFlowControl Instance
     {
@@ -23,15 +23,16 @@ public class GameFlowControl
 
     #endregion
 
-    
+
     public void Initialize()
     {
         
         //InputManager.Instance.Initialize();
         PlayerManager.Instance.Initialize();
         VRCameraManager.Instance.Initialize();
-       // BulletManager.Instance.Initialize();
+        BulletManager.Instance.Initialize();
         WeaponManager.Instance.Initialize();
+        //SoundManager.Instance.Initialize();
 
         GameSetupClass.Instance.Initialize();
         EnemyManager.Instance.Initialize();
@@ -42,8 +43,9 @@ public class GameFlowControl
         //InputManager.Instance.PostInitialize();
         PlayerManager.Instance.PostInitialize();
         VRCameraManager.Instance.PostInitialize();
-     //   BulletManager.Instance.PostInitialize();
+        BulletManager.Instance.PostInitialize();
         WeaponManager.Instance.PostInitialize();
+       // SoundManager.Instance.PostInitialize();
 
         GameSetupClass.Instance.PostInitialize();
         EnemyManager.Instance.PostInitialize();
@@ -54,9 +56,10 @@ public class GameFlowControl
     {
         //InputManager.Instance.PhysicsRefresh();
         PlayerManager.Instance.PhysicsRefresh();
-       VRCameraManager.Instance.PhysicsRefresh();
-     //   BulletManager.Instance.PhysicsRefresh();
+        VRCameraManager.Instance.PhysicsRefresh();
+        BulletManager.Instance.PhysicsRefresh();
         WeaponManager.Instance.PhysicsRefresh();
+       // SoundManager.Instance.PhysicsRefresh();
 
         GameSetupClass.Instance.PhysicsRefresh();
         EnemyManager.Instance.PhysicsRefresh();
@@ -69,11 +72,11 @@ public class GameFlowControl
         //InputManager.Instance .Refresh();
         PlayerManager.Instance.Refresh();
         VRCameraManager.Instance.Refresh();
-     //   BulletManager.Instance.Refresh();
+        BulletManager.Instance.Refresh();
         WeaponManager.Instance.Refresh();
         EnemyManager.Instance.Refresh();
 
     }
 
-    
+
 }

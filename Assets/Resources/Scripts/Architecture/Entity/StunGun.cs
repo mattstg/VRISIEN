@@ -30,19 +30,20 @@ public class StunGun : MonoBehaviour
     }
     public void Refresh()
     {
+       
         cooldownTime += Time.deltaTime;
         if (grabRef.isGrabbed)
         {
             if (grabRef.grabbedByRight)
             {
-                if (OVRInput.Get(OVRInput.Button.One) && cooldownTime > timer)
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && cooldownTime > timer)
                 {
                     Shoot();
                     cooldownTime = 0;
                 }
             }
             else
-                if (OVRInput.Get(OVRInput.Button.One) && cooldownTime > timer)
+                if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && cooldownTime > timer)
                 {
                     Shoot();
                     cooldownTime = 0;
@@ -52,6 +53,11 @@ public class StunGun : MonoBehaviour
         if (OVRInput.Get(OVRInput.Button.Two))
         {
             StartCoroutine(Lerp());
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+       
+            BulletManager.Instance.CreateBullet(this.transform);
         }
     }
     public void PhysicsRefresh()
@@ -66,7 +72,9 @@ public class StunGun : MonoBehaviour
 
         var go = transform.CheckRaycast();
         if (go)
-            StartCoroutine(Stun(go.GetComponent<RagdollControl>()));
+        {
+            StartCoroutine(Stun(go.transform.root.GetComponent<RagdollControl>()));
+        }
         
            // hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         
@@ -76,7 +84,7 @@ public class StunGun : MonoBehaviour
     {
         ragdoll.DoRagdoll(true);
         yield return new WaitForSeconds(2f);
-        ragdoll.DoRagdoll(false);
+        //ragdoll.DoRagdoll(false);
     }
 
 
