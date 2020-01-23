@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour
+public class RangedEnemy : MonoBehaviour,IHittable
 {
     public Transform gunPoint;
     public float fireRate = 0.25f;
+    public int maxAmmo = 10;
     public int maxHitResistance = 3;
     public bool isHit = false;
 
@@ -19,11 +20,14 @@ public class RangedEnemy : MonoBehaviour
     Animator animController;
     Outline outlineScript;
     float fireRateCounter = 0f;
+    int currentAmmoCount;
 
     bool isFoundCover = false;
     bool isInCover = false;
     bool canShoot = true;
     bool isStunned = false;
+    bool isReloading = false;
+    bool canReactToDamage = true;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +37,8 @@ public class RangedEnemy : MonoBehaviour
         nv = GetComponent<NavMeshAgent>();
         animController = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        outlineScript = GetComponent<Outline>();        
+        outlineScript = GetComponent<Outline>();
+        currentAmmoCount = maxAmmo;
     }
 
     // Update is called once per frame
@@ -92,10 +97,19 @@ public class RangedEnemy : MonoBehaviour
         if (fireRateCounter > fireRate)
         {
             fireRateCounter = 0f;
-            print("shoot");
-            if (canShoot)
+            //print("shoot");
+            if (canShoot && !isReloading)
             {
-                BulletManager.Instance.CreateBullet(gunPoint);
+                if (currentAmmoCount <= 0)
+                {
+                    Reload();
+                }
+                else
+                {
+                    BulletManager.Instance.CreateBullet(gunPoint);
+                    currentAmmoCount--;
+                }
+
             }
         }  
         //print("Shooting");
@@ -118,35 +132,73 @@ public class RangedEnemy : MonoBehaviour
         if (isHit)
         {
             isHit = false;
-            Hit();
+            StartCoroutine(HitReactionSequence(2f));
         }
     }
 
-    public void Hit()
+    void Reload()
     {
-        //throw new System.NotImplementedException();
-        print("DamageReceived");
-        if(isStunned)
-        {
-            animController.SetTrigger("Die");
-        }
-        else
-        {
-            if (maxHitResistance > 0)
-            {
-                StartCoroutine(RunOutlineEffect(2f));
-                maxHitResistance--;
-                animController.SetTrigger("Hit");
-            }
-            else
-                animController.SetTrigger("Die");
-        }
+        StartCoroutine(ReloadSequence(3f));
     }
 
-    IEnumerator RunOutlineEffect(float time)
+    IEnumerator HitReactionSequence(float time)
     {
         outlineScript.enabled = true;
+        canShoot = false;
+        animController.SetTrigger("Hit");
         yield return new WaitForSeconds(time);
+        canShoot = true;
         outlineScript.enabled = false;
+    }
+
+    IEnumerator ReloadSequence(float time)
+    {
+        isReloading = true;
+        animController.SetBool("isReloading", true);
+        print("isreloading");
+        yield return new WaitForSeconds(time);
+        currentAmmoCount = maxAmmo;
+        animController.SetBool("isReloading", false);
+        isReloading = false;
+    }
+
+    IEnumerator DeathSequence(float time)
+    {
+        canReactToDamage = false;
+        //Activate RagDoll
+        animController.SetTrigger("Die");
+        yield return new WaitForSeconds(time);
+        //Remove from EnemyManager
+    }
+
+    void IHittable.Stun()
+    {
+        //throw new System.NotImplementedException();
+        isStunned = true;
+        StartCoroutine(HitReactionSequence(2f));
+    }
+
+    void IHittable.SwordHit()
+    {
+        // throw new System.NotImplementedException();
+        if (canReactToDamage)
+        {
+            if (isStunned)
+            {
+                StartCoroutine(DeathSequence(5f));
+            }
+            else
+            {
+                if(maxHitResistance > 0)
+                {
+                    maxHitResistance--;
+                    StartCoroutine(HitReactionSequence(2f));
+                }
+                else
+                {
+                    StartCoroutine(DeathSequence(5f));
+                }              
+            }
+        }
     }
 }
