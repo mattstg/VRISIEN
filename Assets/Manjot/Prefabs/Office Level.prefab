@@ -17286,6 +17286,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grabbable Items
       objectReference: {fileID: 0}
+    - target: {fileID: 4194408598704579721, guid: 3b2a13501f7df944faeb75290f0b2a5b,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.0126784
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194408598704579721, guid: 3b2a13501f7df944faeb75290f0b2a5b,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.10354955
+      objectReference: {fileID: 0}
     - target: {fileID: 6493063821914811810, guid: 3b2a13501f7df944faeb75290f0b2a5b,
         type: 3}
       propertyPath: m_LocalPosition.x
