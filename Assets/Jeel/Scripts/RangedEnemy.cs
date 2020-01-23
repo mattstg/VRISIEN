@@ -118,6 +118,7 @@ public class RangedEnemy : MonoBehaviour, IHittable
     void RotateTowardsPlayer()
     {
         transform.LookAt(player.transform);
+        gunPoint.transform.LookAt(player.transform);
     }
 
     void UpdateAnimations()

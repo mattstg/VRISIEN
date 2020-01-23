@@ -28,29 +28,34 @@ public class BulletManager
 
     public void PostInitialize()
     {
-
-        foreach (Bullet b in bulletList)
+        if (bulletList != null)
         {
-
-            b.PostInitialize();
+            foreach (Bullet b in bulletList)
+            {
+                b.PostInitialize();
+            }
         }
     }
 
     public void PhysicsRefresh()
     {
-        foreach (Bullet b in bulletList)
+        if (bulletList != null)
         {
-
-            b.PhysicsRefresh();
+            foreach (Bullet b in bulletList)
+            {
+                b.PhysicsRefresh();
+            }
         }
     }
 
     public void Refresh()
     {
-        foreach (Bullet b in bulletList)
+        if (bulletList != null)
         {
-
-            b.Refresh();
+            foreach (Bullet b in bulletList)
+            {
+                b.Refresh();
+            }
         }
     }
     public Bullet CreateBullet(Transform trans)
