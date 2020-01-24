@@ -30,7 +30,7 @@ public class RangedEnemy : MonoBehaviour, IHittable
     bool canReactToDamage = true;
 
     // Start is called before the first frame update
-    public void Initialize()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         coverObjects = GameObject.FindGameObjectsWithTag("CoverLocation");
@@ -42,14 +42,15 @@ public class RangedEnemy : MonoBehaviour, IHittable
     }
 
     // Update is called once per frame
-    public void Refresh()
+   private void Update()
     {
+
         RayCast();
         UpdateAnimations();
 
         if (!isFoundCover)
             FindCover();
-        if (isFoundCover)
+        else
             if (!isInCover)
                 MoveToCover();
             else

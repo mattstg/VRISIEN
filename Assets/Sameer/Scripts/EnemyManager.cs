@@ -39,16 +39,20 @@ public class EnemyManager
             enemyPrefabDict.Add(etype, Resources.Load<GameObject>("Prefabs/sameer prefabs/Enemy/" + etype.ToString())); //Each enum matches the name of the enemy perfectly
         }
         //Initially spawning enemies
-        // NumberOfEnemyToSpawn(3,5,2);
+        NumberOfEnemyToSpawn(0,3,0);
        // NumberOfEnemyToSpawn(1, 0, 0);
 
     }
     public void Refresh()
     {
-       // Debug.Log("EnemyManager Refresh()");
+        // Debug.Log("EnemyManager Refresh()");
         foreach (Enemy e in enemies)
+        {
             if (e.isAlive)
+            {
                 e.Refresh();
+            }
+        }
 
 
         while (toRemove.Count > 0) //remove all dead ones
