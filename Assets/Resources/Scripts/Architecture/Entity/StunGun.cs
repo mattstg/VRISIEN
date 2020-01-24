@@ -34,7 +34,7 @@ public class StunGun : MonoBehaviour
         cooldownTime += Time.deltaTime;
         if (grabRef.isGrabbed)
         {
-            if (grabRef.grabbedByRight)
+            if (!grabRef.grabbedByRight)
             {
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && cooldownTime > timer)
                 {
@@ -84,7 +84,7 @@ public class StunGun : MonoBehaviour
     {
         ragdoll.DoRagdoll(true);
         yield return new WaitForSeconds(2f);
-        //ragdoll.DoRagdoll(false);
+        ragdoll.DoRagdoll(false);
     }
 
 
@@ -103,7 +103,7 @@ public class StunGun : MonoBehaviour
         }
         else
         {
-            while (Vector3.Distance(transform.position, endPos.position) >=.2f)//!= endPos.position.sqrMagnitude)
+            while (Vector3.Distance(transform.position, endPos.position) >=.25f)//!= endPos.position.sqrMagnitude)
             {
                 transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
                 transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
