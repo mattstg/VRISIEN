@@ -22,7 +22,6 @@ public class StunGun : MonoBehaviour
 
     public void Initialize()
     {
-
         endPos = GameObject.Find("Right").transform;
         startPos = this.transform;
         grabRef = gameObject.GetComponent<OVRGrabbable>();
@@ -49,11 +48,12 @@ public class StunGun : MonoBehaviour
                     cooldownTime = 0;
                 }
         }
-
-        if (OVRInput.Get(OVRInput.Button.Two))
+        else
         {
             StartCoroutine(Lerp());
         }
+
+     
         if (Input.GetKeyDown(KeyCode.K))
         {
        
@@ -66,18 +66,14 @@ public class StunGun : MonoBehaviour
     }
     void Shoot()
     {
-        //RaycastHit hit;
-        //Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity,1<<LayerMask.NameToLayer("Enemy"));
-        // Debug.DrawRay(transform.position, Vector3.forward, Color.white, .1f);
-
+    
         var go = transform.CheckRaycast();
         if (go)
         {
             StartCoroutine(Stun(go.transform.root.GetComponent<RagdollControl>()));
         }
         
-           // hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-        
+          
     }
 
     IEnumerator Stun(RagdollControl ragdoll)
@@ -90,27 +86,15 @@ public class StunGun : MonoBehaviour
 
     IEnumerator Lerp()
     {
-        // needs to be fixed.
-        if (this.transform.position == endPos.position)
-        {
-            while (Vector3.Distance(transform.position, startPos.position) != startPos.position.sqrMagnitude)
-            {
-                transform.position = Vector3.Lerp(transform.position, startPos.transform.position, smoothing * Time.deltaTime);
-                transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
+     
+        //while (Vector3.Distance(transform.position, endPos.position) >=.25f)
+        //    {
+        //        transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
+        //        transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
 
-                yield return null;
-            }
-        }
-        else
-        {
-            while (Vector3.Distance(transform.position, endPos.position) >=.25f)//!= endPos.position.sqrMagnitude)
-            {
-                transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
-                transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
-
-                yield return null;
-            }
-        }
+        //        yield return null;
+        //    }      
+        
         yield return new WaitForSeconds(1f);
 
     }
