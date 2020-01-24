@@ -32,7 +32,7 @@ public class swordDamage : MonoBehaviour
             //    rb.velocity = Vector3.zero;
              //   rb.isKinematic = true;                // Stick sword in enemy. Reverse setting of parent to 'dismember' enemy
              //   transform.position = Vector3.zero;
-                hiltGrabber.ReleaseObject();
+             //   hiltGrabber.ReleaseObject();
             }
         }
 
