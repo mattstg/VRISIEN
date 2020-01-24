@@ -24,6 +24,8 @@ public class swordDamage : MonoBehaviour
 
                 OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
                 other.transform.root.GetComponent<RagdollControl>().DoRagdoll(true);
+
+                // NOW THATS A LOTTA DAAAAAAMAAGE !!!!
             }
 
             else
