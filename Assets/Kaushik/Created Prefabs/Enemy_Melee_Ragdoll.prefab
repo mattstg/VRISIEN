@@ -931,7 +931,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000037252903, y: 0.2318038, z: 0.000000018626451}
+  m_ConnectedAnchor: {x: 0.000000028871, y: 0.23180345, z: 0.000000018626451}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -1532,7 +1532,6 @@ GameObject:
   - component: {fileID: 987569713135389709}
   - component: {fileID: 987569713135389710}
   - component: {fileID: 8695495008303208414}
-  - component: {fileID: 528585271341280922}
   m_Layer: 12
   m_Name: mixamorig:Hips
   m_TagString: Untagged
@@ -1587,24 +1586,6 @@ BoxCollider:
   m_Size: {x: 0.3, y: 0.29211557, z: 0.27418834}
   m_Center: {x: -0.0047190045, y: 0.08642402, z: -0.027374417}
 --- !u!114 &8695495008303208414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6044933684269910349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
-  grabbedByRight: 0
---- !u!114 &528585271341280922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2146,7 +2127,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.20724286, y: 0.257985, z: -0.0046002488}
+  m_ConnectedAnchor: {x: -0.2072425, y: 0.257985, z: -0.0046002488}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -2255,7 +2236,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000020535663, y: 0.23180228, z: -0.00000020116568}
+  m_ConnectedAnchor: {x: -0.00000021327287, y: 0.23180266, z: -0.0000001937151}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -2486,7 +2467,6 @@ GameObject:
   - component: {fileID: 987569713077378843}
   - component: {fileID: 987569713077378842}
   - component: {fileID: 8695495008667616548}
-  - component: {fileID: 5181770831267946614}
   m_Layer: 12
   m_Name: mixamorig:Spine1
   m_TagString: Untagged
@@ -2601,24 +2581,6 @@ MonoBehaviour:
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
   grabbedByRight: 0
---- !u!114 &5181770831267946614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8529112696319156340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
-  grabbedByRight: 0
 --- !u!1 &8537227984020684081
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,7 +2656,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.20724307, y: 0.2580333, z: -0.005067523}
+  m_ConnectedAnchor: {x: 0.20724271, y: 0.2580333, z: -0.005067523}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -2973,7 +2935,6 @@ GameObject:
   - component: {fileID: 987569711835913457}
   - component: {fileID: 987569711835913463}
   - component: {fileID: 8695495008378665009}
-  - component: {fileID: 8014412947837763511}
   m_Layer: 12
   m_Name: mixamorig:Head
   m_TagString: Untagged
@@ -3071,24 +3032,6 @@ CharacterJoint:
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &8695495008378665009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9201506365132213752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
-  grabbedByRight: 0
---- !u!114 &8014412947837763511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
