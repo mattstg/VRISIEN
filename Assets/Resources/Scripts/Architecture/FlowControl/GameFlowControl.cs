@@ -32,7 +32,7 @@ public class GameFlowControl
         VRCameraManager.Instance.Initialize();
         BulletManager.Instance.Initialize();
         WeaponManager.Instance.Initialize();
-        SoundManager.Instance.Initialize();
+        //SoundManager.Instance.Initialize();
         CollectableManager.Instance.Initialize();
 
         GameSetupClass.Instance.Initialize();
