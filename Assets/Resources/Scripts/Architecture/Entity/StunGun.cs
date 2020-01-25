@@ -19,13 +19,13 @@ public class StunGun : MonoBehaviour
     public Vector3 angle;
 
     bool lerp = false;
+    Transform HoldsterSocket;
 
     public void Initialize()
     {
         endPos = GameObject.Find("Right").transform;
         startPos = this.transform;
         grabRef = gameObject.GetComponent<OVRGrabbable>();
-
     }
     public void Refresh()
     {
@@ -42,11 +42,13 @@ public class StunGun : MonoBehaviour
                 }
             }
             else
+            {
                 if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && cooldownTime > timer)
                 {
                     Shoot();
                     cooldownTime = 0;
                 }
+            }
         }
         else
         {
