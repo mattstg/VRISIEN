@@ -14,8 +14,8 @@ public class Enemy : MonoBehaviour
     //int rangedCountPerLocation = 0;
     //int droneCountPerLocation = 0;
 
-    public Animator brainAnimator;
-    public Animator modelAnimator;
+    //public Animator brainAnimator;
+    //public Animator modelAnimator;
     public virtual void Initialize(float _hp=100)
     {
         
