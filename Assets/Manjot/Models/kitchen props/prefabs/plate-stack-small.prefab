@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33000013456027468}
   - component: {fileID: 23000011361244778}
   - component: {fileID: 5268349601361727688}
+  - component: {fileID: 3979742430294117372}
   m_Layer: 0
   m_Name: plate (2)
   m_TagString: Untagged
@@ -95,6 +96,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3979742430294117372
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010022399236}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2969464, y: 0.038008366, z: 0.29999995}
+  m_Center: {x: 0.000000007450581, y: -0.0020462908, z: 0}
 --- !u!1 &1000011192773154
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +121,7 @@ GameObject:
   - component: {fileID: 33000010351787446}
   - component: {fileID: 23000011546425622}
   - component: {fileID: 1292396289154601805}
+  - component: {fileID: 8402101574144508852}
   m_Layer: 0
   m_Name: plate (1)
   m_TagString: Untagged
@@ -190,6 +205,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &8402101574144508852
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011192773154}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2969464, y: 0.038008366, z: 0.29999995}
+  m_Center: {x: 0.000000007450581, y: -0.0020462908, z: 0}
 --- !u!1 &1000012869164536
 GameObject:
   m_ObjectHideFlags: 0
