@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour, IHittable
+public class RangedEnemy : Enemy, IHittable
 {
     public Transform gunPoint;
     public float fireRate = 0.25f;
@@ -24,14 +24,15 @@ public class RangedEnemy : MonoBehaviour, IHittable
 
     bool isFoundCover = false;
     bool isInCover = false;
-    bool canShoot = true;
+    bool canShoot = false;
     bool isStunned = false;
     bool isReloading = false;
     bool canReactToDamage = true;
 
     // Start is called before the first frame update
-    public void Initialize()
+    public override void Initialize(float _hp = 100)
     {
+        base.Initialize(_hp);
         player = GameObject.FindGameObjectWithTag("Player");
         coverObjects = GameObject.FindGameObjectsWithTag("CoverLocation");
         nv = GetComponent<NavMeshAgent>();
@@ -42,14 +43,15 @@ public class RangedEnemy : MonoBehaviour, IHittable
     }
 
     // Update is called once per frame
-    public void Refresh()
+    public override void Refresh()
     {
+        base.Refresh();
         RayCast();
         UpdateAnimations();
 
         if (!isFoundCover)
             FindCover();
-        if (isFoundCover)
+        else
             if (!isInCover)
                 MoveToCover();
             else
@@ -92,7 +94,6 @@ public class RangedEnemy : MonoBehaviour, IHittable
     void ShootPlayer()
     {
         RotateTowardsPlayer();
-
         fireRateCounter += Time.deltaTime;
         if (fireRateCounter > fireRate)
         {
@@ -107,6 +108,7 @@ public class RangedEnemy : MonoBehaviour, IHittable
                 else
                 {
                     BulletManager.Instance.CreateBullet(gunPoint);
+                    ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.MuzzleFlash, gunPoint, false, 0.25f);
                     currentAmmoCount--;
                 }
 
@@ -135,6 +137,11 @@ public class RangedEnemy : MonoBehaviour, IHittable
             isHit = false;
             StartCoroutine(HitReactionSequence(2f));
         }
+    }
+
+    public void ActivatePlayerShoot()
+    {
+        canShoot = true;
     }
 
     void Reload()

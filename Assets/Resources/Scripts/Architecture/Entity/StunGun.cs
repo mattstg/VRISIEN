@@ -81,7 +81,7 @@ public class StunGun : MonoBehaviour
     IEnumerator Stun(RagdollControl ragdoll)
     {
         ragdoll.DoRagdoll(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(10f);
         ragdoll.DoRagdoll(false);
     }
 

@@ -4,18 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - CoverLocation
-  - OVRCamera
-  - SpawnPoints
-  - Enemy
-  - Obstacle
-  - Right
-  - Left
-  - EnemySpawnTrigger
-  - EnemySpawnLocationParent
+  - FxTemporaire
   - Wall
-  - StunGun
-  - StunGunAttachSocket
   layers:
   - Default
   - TransparentFX
@@ -25,15 +15,15 @@ TagManager:
   - UI
   - 
   - 
-  - Gun
-  - Blade
-  - Player
-  - Collectables
-  - Enemy
-  - Bullet
-  - Interactibles
-  - Ragdoll
-  - Wall
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
