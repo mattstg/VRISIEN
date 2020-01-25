@@ -1808,7 +1808,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4196424424243803120}
   - component: {fileID: 6064020379628402706}
-  - component: {fileID: 6841209859462278638}
   m_Layer: 0
   m_Name: Ch15
   m_TagString: Untagged
@@ -1946,24 +1945,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000009328127, y: -0.110321045, z: 0.01001063}
     m_Extent: {x: 0.90016866, y: 0.9612603, z: 0.2974158}
   m_DirtyAABB: 0
---- !u!114 &6841209859462278638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7725350506533271869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &7844126328376054900
 GameObject:
   m_ObjectHideFlags: 0
@@ -2071,6 +2052,7 @@ GameObject:
   - component: {fileID: 821514608779329945}
   - component: {fileID: 821514608779329948}
   - component: {fileID: 821514608779329947}
+  - component: {fileID: 1380195879669609140}
   m_Layer: 0
   m_Name: Ranged
   m_TagString: Untagged
@@ -2087,7 +2069,7 @@ Transform:
   m_GameObject: {fileID: 8667025996852505406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.600621, y: 1.7150448e-16, z: -7.723875}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4196424424243803120}
   - {fileID: 5325221852021095339}
@@ -2183,6 +2165,24 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1380195879669609140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8667025996852505406}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.098634005, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8682589331470229339
 GameObject:
   m_ObjectHideFlags: 0
