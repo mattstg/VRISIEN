@@ -10,7 +10,7 @@ public class ParticlesManager
     public static ParticlesManager Instance { get { return instance ?? (instance = new ParticlesManager()); } }
     #endregion
     // Start is called before the first frame update
-    public enum ParticleType { MuzzleFlash,BloodSplash};
+    public enum ParticleType { MuzzleFlash,BloodSplash,StunGunMuzzle,BulletImpact};
     List<GameObject> ParticlePool;
     List<GameObject> ParticleList;
     public void Initialize()
@@ -33,15 +33,19 @@ public class ParticlesManager
 
     }
 
-    public void SpawnParticle(ParticleType particleType,Transform pos,bool isPermanant,float lifeTime)
+    public void CreateParticleEffect(ParticleType particleType,Transform pos,bool isPermanant,float lifeTime)
     {
         GameObject particlePrefab = null;
         GameObject spawnedParticle;
 
-        if(particleType.Equals(ParticleType.BloodSplash))
+        if (particleType.Equals(ParticleType.BloodSplash))
             particlePrefab = ParticlePool[0];
-        else if (particleType.Equals(ParticleType.MuzzleFlash))
+        else if(particleType.Equals(ParticleType.BulletImpact))
             particlePrefab = ParticlePool[1];
+        else if (particleType.Equals(ParticleType.MuzzleFlash))
+            particlePrefab = ParticlePool[2];
+        else if (particleType.Equals(ParticleType.StunGunMuzzle))
+            particlePrefab = ParticlePool[3];
 
         spawnedParticle = GameObject.Instantiate(particlePrefab, pos.position, pos.rotation);
         spawnedParticle.transform.SetParent(GameObject.FindGameObjectWithTag("ParticlesParent").transform);
