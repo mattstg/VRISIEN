@@ -5,6 +5,11 @@ using UnityEngine;
 //StunGun
 public class StunGun : MonoBehaviour
 {
+    const float gunDistanceOffset = 0.05f;
+    const float smoothLerp = 1f;
+    const float maxRadians = Mathf.PI / 4;
+
+
     private Transform endPos; // can be the  player's location where the gun will lerp back and forth 
     private Transform startPos;
 
@@ -19,14 +24,13 @@ public class StunGun : MonoBehaviour
     public Vector3 angle;
 
     bool lerp = false;
+    Transform HoldsterSocket;
 
     public void Initialize()
     {
-
         endPos = GameObject.Find("Right").transform;
         startPos = this.transform;
         grabRef = gameObject.GetComponent<OVRGrabbable>();
-
     }
     public void Refresh()
     {
@@ -34,6 +38,11 @@ public class StunGun : MonoBehaviour
         cooldownTime += Time.deltaTime;
         if (grabRef.isGrabbed)
         {
+            if (transform.parent == PlayerManager.Instance.player.gunSpot)
+            {
+                transform.parent = null;
+            }
+
             if (!grabRef.grabbedByRight)
             {
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && cooldownTime > timer)
@@ -43,17 +52,20 @@ public class StunGun : MonoBehaviour
                 }
             }
             else
+            {
                 if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && cooldownTime > timer)
                 {
                     Shoot();
                     cooldownTime = 0;
                 }
+            }
+        }
+        else
+        {
+            LerpBackToHolster();
         }
 
-        if (OVRInput.Get(OVRInput.Button.Two))
-        {
-            StartCoroutine(Lerp());
-        }
+     
         if (Input.GetKeyDown(KeyCode.K))
         {
        
@@ -66,18 +78,14 @@ public class StunGun : MonoBehaviour
     }
     void Shoot()
     {
-        //RaycastHit hit;
-        //Physics.Raycast(transform.position, Vector3.forward, out hit, Mathf.Infinity,1<<LayerMask.NameToLayer("Enemy"));
-        // Debug.DrawRay(transform.position, Vector3.forward, Color.white, .1f);
-
+    
         var go = transform.CheckRaycast();
         if (go)
         {
             StartCoroutine(Stun(go.transform.root.GetComponent<RagdollControl>()));
         }
         
-           // hit.transform.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-        
+          
     }
 
     IEnumerator Stun(RagdollControl ragdoll)
@@ -88,30 +96,30 @@ public class StunGun : MonoBehaviour
     }
 
 
-    IEnumerator Lerp()
+    void LerpBackToHolster()
     {
-        // needs to be fixed.
-        if (this.transform.position == endPos.position)
+        if (Vector3.SqrMagnitude(PlayerManager.Instance.player.gunSpot.position - transform.position) > gunDistanceOffset)
         {
-            while (Vector3.Distance(transform.position, startPos.position) != startPos.position.sqrMagnitude)
-            {
-                transform.position = Vector3.Lerp(transform.position, startPos.transform.position, smoothing * Time.deltaTime);
-                transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
-
-                yield return null;
-            }
+            transform.position = Vector3.MoveTowards(transform.position, PlayerManager.Instance.player.gunSpot.position, smoothLerp * Time.deltaTime);
+            transform.eulerAngles = Vector3.RotateTowards(transform.eulerAngles, PlayerManager.Instance.player.gunSpot.eulerAngles, 2, 1);
         }
-        else
+        else if(transform.parent != PlayerManager.Instance.player.gunSpot)
         {
-            while (Vector3.Distance(transform.position, endPos.position) >=.25f)//!= endPos.position.sqrMagnitude)
-            {
-                transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
-                transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
-
-                yield return null;
-            }
+            transform.SetParent(PlayerManager.Instance.player.gunSpot);
+            transform.localEulerAngles = Vector3.zero;
+            transform.localPosition = Vector3.zero;
         }
-        yield return new WaitForSeconds(1f);
+
+
+        //while (Vector3.Distance(transform.position, endPos.position) >=.25f)
+        //    {
+        //        transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
+        //        transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
+
+        //        yield return null;
+        //    }      
+        
+        //yield return new WaitForSeconds(1f);
 
     }
 }
