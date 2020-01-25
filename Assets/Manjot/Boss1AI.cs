@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Boss1AI : MonoBehaviour
+public class Boss1AI : Enemy, IHittable
 {
     Transform target;
     NavMeshAgent agent;
+    float fireRate = 0.15f;
+    float fireRateCount;
 
     Vector3 newPos;
 
@@ -16,22 +18,30 @@ public class Boss1AI : MonoBehaviour
     
     public float distanceToMaintain = 10f;
     public float sidewayTimer = 2f;
+    public Transform gunPoint1, gunPoint2;
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
+      //  base.Initialize();
+      //  Debug.Log("boss ai");
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<FakePlayer>().transform;
+        fireRateCount = fireRate;
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
+       // base.Refresh();
+     //   Debug.Log("AA");
         WalkingAI();
-        transform.LookAt(target);
+        Shoots();
     }
 
     public void WalkingAI()
     {
+        transform.LookAt(target);
         sidewayTimer -= Time.deltaTime;
         if(sidewayTimer <= 0)
         {
@@ -60,6 +70,26 @@ public class Boss1AI : MonoBehaviour
 
     public void Shoots()
     {
+        if(fireRateCount < 0)
+        {
+            BulletManager.Instance.CreateBullet(gunPoint1);
+            BulletManager.Instance.CreateBullet(gunPoint2);
+            fireRateCount = fireRate;
+        }
+        else
+        {
+            fireRateCount -= Time.deltaTime;
+        }
+        
+    }
 
+    public void Stun()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SwordHit()
+    {
+        throw new System.NotImplementedException();
     }
 }
