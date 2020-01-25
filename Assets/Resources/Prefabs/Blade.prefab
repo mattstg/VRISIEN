@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4744988861423356689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.435, y: 3.827, z: -30.019}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: -0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4744988862356727282}
   - {fileID: 4744988862172326799}
@@ -62,8 +62,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 3.3
+  m_Radius: 0.23
+  m_Height: 3
   m_Direction: 2
   m_Center: {x: -0.48, y: 0, z: 2.99}
 --- !u!114 &4744988861423356694
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4744988862172326799}
   - component: {fileID: 4744988862172326797}
   - component: {fileID: 4744988862172326796}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 1913673795695612603}
   - component: {fileID: 1244181201248221461}
   - component: {fileID: 6774265315467879720}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

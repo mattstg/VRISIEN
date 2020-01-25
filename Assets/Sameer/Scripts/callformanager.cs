@@ -8,6 +8,8 @@ public class callformanager : MonoBehaviour
     void Start()
     {
         EnemyManager.Instance.Initialize();
+        ParticlesManager.Instance.Initialize();
+        BulletManager.Instance.Initialize();
       //  Debug.Log("CallforManager start()");
     }
 
@@ -15,6 +17,7 @@ public class callformanager : MonoBehaviour
     void Update()
     {
         EnemyManager.Instance.Refresh();
+        BulletManager.Instance.Refresh();
        // Debug.Log("CallforManager Update()");
     }
 }

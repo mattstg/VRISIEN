@@ -29,7 +29,7 @@ public class Melee :Enemy
 
     
 
-    public override void Initialize()
+    public override void Initialize(float _hp = 100)
     {
         base.Initialize();
         player = GameObject.FindGameObjectWithTag("Player").transform;

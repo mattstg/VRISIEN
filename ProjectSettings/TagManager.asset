@@ -11,6 +11,14 @@ TagManager:
   - Obstacle
   - Right
   - Left
+  - EnemySpawnTrigger
+  - EnemySpawnLocationParent
+  - Wall
+  - ParticlesParent
+  - FxTemporaire
+  - BookLocations
+  - ChipLocations
+  - SwordLocations
   layers:
   - Default
   - TransparentFX
@@ -27,9 +35,9 @@ TagManager:
   - Enemy
   - Bullet
   - Interactibles
-  - 
-  - 
-  - 
+  - Ragdoll
+  - Wall
+  - GrabbableItems
   - 
   - 
   - 

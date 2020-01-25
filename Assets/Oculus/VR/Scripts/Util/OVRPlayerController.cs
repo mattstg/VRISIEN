@@ -24,7 +24,7 @@ public class OVRPlayerController : MonoBehaviour
 	/// <summary>
 	/// The rate acceleration during movement.
 	/// </summary>
-	public float Acceleration = 0.1f;
+	public float Acceleration = 0.05f;
 
 	/// <summary>
 	/// The rate of damping on movement.

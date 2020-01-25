@@ -5,7 +5,7 @@ using UnityEngine;
 public class RagdollControl : MonoBehaviour
 {
     Rigidbody[] ragdollBodies;
-    public bool ragdollToggle;
+    public bool isRagdolled;
     Animator anim;
     OVRGrabbable[] grabDoll;
     // Start is called before the first frame update
@@ -30,10 +30,17 @@ public class RagdollControl : MonoBehaviour
 
     public void DoRagdoll(bool isRagdoll)
     {
+        isRagdolled = isRagdoll;
         foreach (Rigidbody r in ragdollBodies)
-            r.isKinematic = !(isRagdoll);           // Put this part into a function called Ragdoll Toggle, call it from stungun on timer
-        anim.enabled = !ragdollToggle;
+        {
+            r.isKinematic = !(isRagdoll);
+            r.gameObject.layer = isRagdoll ? LayerMask.NameToLayer("Ragdoll") : LayerMask.NameToLayer("Enemy");
+        }
+        anim.enabled = !isRagdoll;
         foreach (var g in grabDoll)                      // Include this if grabbable. Can then use body as shield, maybe throw for damage
             g.enabled = isRagdoll;
+
+        
+       
     }
 }
