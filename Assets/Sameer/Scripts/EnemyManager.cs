@@ -32,7 +32,7 @@ public class EnemyManager
         toAdd = new Stack<Enemy>();
         enemies = new HashSet<Enemy>();
         enemyParent = new GameObject("EnemyParent").transform;
-        SpawnLocations = GameObject.FindGameObjectWithTag("EnemySpawnLocationParent").transform;
+        //SpawnLocations = GameObject.FindGameObjectWithTag("EnemySpawnLocationParent").transform;
         //SpawnLocations = GameSetupClass.Instance.SpawnLocation;
         foreach (EnemyType etype in System.Enum.GetValues(typeof(EnemyType))) //fill the resource dictionary with all the prefabs
         {
@@ -90,33 +90,33 @@ public class EnemyManager
     public Enemy SpawnEnemies(EnemyType etype,int qty)
     {
         Enemy e=null;
-        foreach (Transform spawnArea in SpawnLocations)  
-        {
-            for (int i = 0; i < qty; i++)
+        if(SpawnLocations != null)
+            foreach (Transform spawnArea in SpawnLocations)  
             {
-                Vector3 spawnLocation = new Vector3(Random.Range(-spawnArea.localScale.x * 10 / 2, spawnArea.localScale.x * 10 / 2), 1, Random.Range(-spawnArea.localScale.z * 10 / 2, spawnArea.localScale.z * 10 / 2));
-                GameObject newEnemy = GameObject.Instantiate(enemyPrefabDict[etype], enemyParent);
+                for (int i = 0; i < qty; i++)
+                {
+                    Vector3 spawnLocation = new Vector3(Random.Range(-spawnArea.localScale.x * 10 / 2, spawnArea.localScale.x * 10 / 2), 1, Random.Range(-spawnArea.localScale.z * 10 / 2, spawnArea.localScale.z * 10 / 2));
+                    GameObject newEnemy = GameObject.Instantiate(enemyPrefabDict[etype], enemyParent);
                 
-                newEnemy.transform.position = spawnArea.position;
-                newEnemy.transform.position += spawnLocation;
-                Debug.Log("Enw Enemy Created");
-                e = newEnemy.GetComponent<Enemy>();
+                    newEnemy.transform.position = spawnArea.position;
+                    newEnemy.transform.position += spawnLocation;
+                    Debug.Log("New Enemy Created");
+                    e = newEnemy.GetComponent<Enemy>();
                 
-                if (etype.Equals(EnemyType.Melee))
-                    e.Initialize(meleeHealth);
-                else if(etype.Equals(EnemyType.Ranged))
-                    e.Initialize(rangedHealth);
+                    if (etype.Equals(EnemyType.Melee))
+                        e.Initialize(meleeHealth);
+                    else if(etype.Equals(EnemyType.Ranged))
+                        e.Initialize(rangedHealth);
 
-                toAdd.Push(e);  
-            }
+                    toAdd.Push(e);  
+                }
            
-        }
+            }
         enemyCountofCurrentWave = toAdd.Count;
         return e;
     }
     public void EnemyDied(Enemy enemyDied)
     {
         toRemove.Push(enemyDied);
-
     }
 }

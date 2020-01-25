@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour, IHittable
+public class RangedEnemy : Enemy, IHittable
 {
     public Transform gunPoint;
     public float fireRate = 0.25f;
@@ -30,8 +30,9 @@ public class RangedEnemy : MonoBehaviour, IHittable
     bool canReactToDamage = true;
 
     // Start is called before the first frame update
-    private void Start()
+    public override void Initialize(float _hp = 100)
     {
+        base.Initialize(_hp);
         player = GameObject.FindGameObjectWithTag("Player");
         coverObjects = GameObject.FindGameObjectsWithTag("CoverLocation");
         nv = GetComponent<NavMeshAgent>();
@@ -42,9 +43,9 @@ public class RangedEnemy : MonoBehaviour, IHittable
     }
 
     // Update is called once per frame
-   private void Update()
+    public override void Refresh()
     {
-
+        base.Refresh();
         RayCast();
         UpdateAnimations();
 
