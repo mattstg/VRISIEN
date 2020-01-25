@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 5895002867113095295}
   - component: {fileID: 4031579409581161638}
   - component: {fileID: 4031579409581161632}
+  - component: {fileID: 4289848153424829748}
   m_Layer: 11
   m_Name: SwordCustom
   m_TagString: Untagged
@@ -123,7 +124,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -147,6 +148,18 @@ MonoBehaviour:
   m_grabPoints:
   - {fileID: 5895002867113095295}
   grabbedByRight: 0
+--- !u!114 &4289848153424829748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710147064083565953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec750ccb914c034bb34e4e4613ef869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2868188852610179320
 GameObject:
   m_ObjectHideFlags: 0
