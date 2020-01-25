@@ -85,7 +85,7 @@ public class VRPlayer : OVRPlayerController, IManagable
             Time.timeScale = 1;
 
         // Boost
-        boostTimer += Time.deltaTime;
+        /*boostTimer += Time.deltaTime;
         if (boostTimer >= boostCooldown)
         {
             if (OVRInput.GetDown(OVRInput.Button.One))
@@ -94,8 +94,8 @@ public class VRPlayer : OVRPlayerController, IManagable
                 boostTimer = 0;
             }
         }
-        //if (boostTimer >= boostActiveTime)
-        //    Acceleration -= .5f;
+        if (boostTimer >= boostActiveTime)
+            Acceleration -= .5f;*/
     }
 
     public void TakeDamage(float damage)
