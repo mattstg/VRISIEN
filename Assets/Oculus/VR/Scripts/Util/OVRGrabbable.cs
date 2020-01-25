@@ -117,7 +117,7 @@ public class OVRGrabbable : MonoBehaviour
         m_grabbedBy = hand;
         grabbedByRight = hand.CompareTag("Right");
         m_grabbedCollider = grabPoint;
-        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+         gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }
 
 	/// <summary>
