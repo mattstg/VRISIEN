@@ -108,7 +108,7 @@ public class RangedEnemy : Enemy, IHittable
                 else
                 {
                     BulletManager.Instance.CreateBullet(gunPoint);
-                    ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.MuzzleFlash, gunPoint, false, 0.25f);
+                    ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.MuzzleFlash, gunPoint, 0.25f);
                     currentAmmoCount--;
                 }
 
