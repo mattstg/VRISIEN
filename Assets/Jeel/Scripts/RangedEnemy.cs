@@ -107,7 +107,7 @@ public class RangedEnemy : MonoBehaviour, IHittable
                 else
                 {
                     BulletManager.Instance.CreateBullet(gunPoint);
-                    ParticlesManager.Instance.SpawnParticle(ParticlesManager.ParticleType.MuzzleFlash, gunPoint, false, 0.25f);
+                    ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.MuzzleFlash, gunPoint, false, 0.25f);
                     currentAmmoCount--;
                 }
 
