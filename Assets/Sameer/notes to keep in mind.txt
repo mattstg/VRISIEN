@@ -17,7 +17,7 @@ Melee Script
             void Attack()
             {
                 Debug.Log("Attacking Player");
-                //call the attack function of player Script
+                //call the attack function of player Script// add timer to inflict damage 
             }
 
             public void tassered()
@@ -25,3 +25,4 @@ Melee Script
 
             }
 Check Game Setup Scripts for State level 
+

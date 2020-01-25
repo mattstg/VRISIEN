@@ -94,8 +94,8 @@ public class VRPlayer : OVRPlayerController, IManagable
                 boostTimer = 0;
             }
         }
-        if (boostTimer >= boostActiveTime)
-            Acceleration -= .5f;
+        //if (boostTimer >= boostActiveTime)
+        //    Acceleration -= .5f;
     }
 
     public void TakeDamage(float damage)
