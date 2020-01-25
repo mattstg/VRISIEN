@@ -7380,6 +7380,7 @@ Transform:
   - {fileID: 4278611829388349513}
   - {fileID: 4278611829625381621}
   - {fileID: 6182457326918982141}
+  - {fileID: 4893969950944400318}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7475,6 +7476,7 @@ MonoBehaviour:
   EnableRotation: 1
   RotationEitherThumbstick: 0
   slowMoActiveTime: 3
+  gunSpot: {fileID: 4893969950944400318}
 --- !u!1 &4278611830233331598
 GameObject:
   m_ObjectHideFlags: 0
@@ -9633,3 +9635,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.0000019073486, y: 0, z: 0}
+--- !u!1 &7243085382604761164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4893969950944400318}
+  m_Layer: 10
+  m_Name: Gunspot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4893969950944400318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7243085382604761164}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.372, y: -0.511, z: -0.363}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4278611830231342113}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}

@@ -4,8 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - FxTemporaire
+  - CoverLocation
+  - OVRCamera
+  - SpawnPoints
+  - Enemy
+  - Obstacle
+  - Right
+  - Left
+  - EnemySpawnTrigger
+  - EnemySpawnLocationParent
   - Wall
+  - ParticlesParent
   layers:
   - Default
   - TransparentFX
@@ -15,16 +24,16 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Gun
+  - Blade
+  - Player
+  - Collectables
+  - Enemy
+  - Bullet
+  - Interactibles
+  - Ragdoll
+  - Wall
+  - GrabbableItems
   - 
   - 
   - 

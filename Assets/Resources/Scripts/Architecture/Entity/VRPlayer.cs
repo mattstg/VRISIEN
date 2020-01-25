@@ -14,6 +14,8 @@ public class VRPlayer : OVRPlayerController, IManagable
     float slowmoCooldown = 5;
     float slowmoTimer = 0;
 
+    public Transform gunSpot;
+
     //[HideInInspector]
     //public RootMotion.FinalIK.VRIK playerModelIK;
 
