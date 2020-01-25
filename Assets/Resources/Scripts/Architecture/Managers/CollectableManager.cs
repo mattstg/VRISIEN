@@ -81,8 +81,8 @@ public class CollectableManager
     public void SpawnCollectables()
     {
         GameObject.Instantiate(collectables[0], BookLocations[Random.Range(0, BookLocations.Length)].transform.position, Quaternion.identity);
-        GameObject.Instantiate(collectables[1], ChipLocations[Random.Range(0, BookLocations.Length)].transform.position, Quaternion.identity);
-        GameObject.Instantiate(collectables[2], SwordLocations[Random.Range(0, BookLocations.Length)].transform.position, Quaternion.identity);  
+        GameObject.Instantiate(collectables[1], ChipLocations[Random.Range(0, ChipLocations.Length)].transform.position, Quaternion.identity);
+        GameObject.Instantiate(collectables[2], SwordLocations[Random.Range(0, SwordLocations.Length)].transform.position, Quaternion.identity);  
     }
 
 }
