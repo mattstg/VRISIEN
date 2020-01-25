@@ -163,6 +163,7 @@ public class Melee :Enemy,IHittable
     {
         transform.LookAt(player.transform);
         Debug.Log("Attacking Player");
+        
         //call the attack function of player Script
 
     }
