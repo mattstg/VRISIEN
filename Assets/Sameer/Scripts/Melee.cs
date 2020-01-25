@@ -163,6 +163,9 @@ public class Melee :Enemy,IHittable
     {
         transform.LookAt(player.transform);
         Debug.Log("Attacking Player");
+        //
+
+        PlayerManager.Instance.player.TakeDamage(20f);
         //call the attack function of player Script
 
     }
