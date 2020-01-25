@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     Vector3 startPos;
     public bool isHit = false;
     Rigidbody rb;
-    float speed = 5f;
+    float speed = 20f;
     float counter;
     private Transform target;
 
@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
         target = GameObject.Find("Player").transform;
         startPos = transform.forward;
         counter = bulletLife;
-        Debug.Log("Bullet");
+        //Debug.Log("Bullet");
     }
 
     public void PostInitialize()
@@ -50,24 +50,7 @@ public class Bullet : MonoBehaviour
     }
     public void CheckHit()
     {
-        RaycastHit hit;
-        Physics.Raycast(transform.position, transform.forward, out hit,2f);
-        //if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
-        //{
-        //    isHit = true;
-        //    Debug.Log("Player Hit");
-        //    //HitPlayer(); call a function on player
-        //}
-       if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Wall"))
-        {
-            isHit = true;
-            Debug.Log("Wall Hit");
-            HitWall(); 
-        }
-        else
-        {
-            isHit = false;
-        }
+       
     }
     public void FollowPlayer()
     {
@@ -76,5 +59,14 @@ public class Bullet : MonoBehaviour
     public void HitWall()
     {
         rb.Deflect();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.BulletImpact, transform, false, 0.5f);
+            isHit = true;
+        }
     }
 }

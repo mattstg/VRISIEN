@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4744988862172326799}
   - component: {fileID: 4744988862172326797}
   - component: {fileID: 4744988862172326796}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 1913673795695612603}
   - component: {fileID: 1244181201248221461}
   - component: {fileID: 6774265315467879720}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

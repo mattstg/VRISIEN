@@ -11,7 +11,10 @@ TagManager:
   - Obstacle
   - Right
   - Left
+  - EnemySpawnTrigger
+  - EnemySpawnLocationParent
   - Wall
+  - ParticlesParent
   layers:
   - Default
   - TransparentFX
@@ -30,7 +33,7 @@ TagManager:
   - Interactibles
   - Ragdoll
   - Wall
-  - 
+  - GrabbableItems
   - 
   - 
   - 
