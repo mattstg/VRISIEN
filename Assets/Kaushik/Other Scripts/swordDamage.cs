@@ -24,6 +24,8 @@ public class swordDamage : MonoBehaviour
 
                 OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
                 other.transform.root.GetComponent<RagdollControl>().DoRagdoll(true);
+
+                // NOW THATS A LOTTA DAAAAAAMAAGE !!!!
             }
 
             else
@@ -32,7 +34,7 @@ public class swordDamage : MonoBehaviour
             //    rb.velocity = Vector3.zero;
              //   rb.isKinematic = true;                // Stick sword in enemy. Reverse setting of parent to 'dismember' enemy
              //   transform.position = Vector3.zero;
-                hiltGrabber.ReleaseObject();
+             //   hiltGrabber.ReleaseObject();
             }
         }
 

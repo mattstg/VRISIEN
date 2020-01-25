@@ -65,7 +65,7 @@ public class Bullet : MonoBehaviour
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            print("Hit Wall");
+            ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.BulletImpact, transform, 0.5f);
             isHit = true;
         }
     }

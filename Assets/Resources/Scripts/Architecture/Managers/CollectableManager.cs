@@ -16,15 +16,29 @@ public class CollectableManager
     public bool gotSword;
     public bool gotChip;
     public bool gotBook;
+    public GameObject[] BookLocations;
+    public GameObject[] ChipLocations;
+    public GameObject[] SwordLocations;
 
     public void Initialize()
     {
+        collectables = new List<GameObject>();
         GameObject book = Resources.Load<GameObject>("Prefabs/OrnateBook");
         collectables.Add(book);
+        //collectables.Add(Resources.Load<GameObject>("Prefabs/OrnateBook"));
         GameObject card = Resources.Load<GameObject>("Prefabs/SD_Card");
         collectables.Add(card);
         GameObject plasmaSword = Resources.Load<GameObject>("Prefabs/SwordCustom");
         collectables.Add(plasmaSword);
+
+        BookLocations = GameObject.FindGameObjectsWithTag("BookLocations");
+        ChipLocations = GameObject.FindGameObjectsWithTag("ChipLocations");
+        SwordLocations = GameObject.FindGameObjectsWithTag("SwordLocations");
+
+        
+        //GameObject.Instantiate(book, BookLocations[Random.Range(0, BookLocations.Length)].transform.position, Quaternion.identity);
+        
+        SpawnCollectables();
 
     }
 
@@ -59,13 +73,16 @@ public class CollectableManager
     public void GotBook()
     {
         gotBook = true;
+        PlayerManager.Instance.player.slowMoActiveTime = 5;
 
         //Call playermanager to double slowmo time
     }
 
     public void SpawnCollectables()
     {
-        //Check if trigger and then spawn them at possible spawn spots
+        GameObject.Instantiate(collectables[0], BookLocations[Random.Range(0, BookLocations.Length)].transform.position, Quaternion.identity);
+        GameObject.Instantiate(collectables[1], ChipLocations[Random.Range(0, ChipLocations.Length)].transform.position, Quaternion.identity);
+        GameObject.Instantiate(collectables[2], SwordLocations[Random.Range(0, SwordLocations.Length)].transform.position, Quaternion.identity);  
     }
 
 }

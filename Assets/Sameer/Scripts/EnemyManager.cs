@@ -39,16 +39,20 @@ public class EnemyManager
             enemyPrefabDict.Add(etype, Resources.Load<GameObject>("Prefabs/sameer prefabs/Enemy/" + etype.ToString())); //Each enum matches the name of the enemy perfectly
         }
         //Initially spawning enemies
-        // NumberOfEnemyToSpawn(3,5,2);
+        //NumberOfEnemyToSpawn(2,3,0);
        // NumberOfEnemyToSpawn(1, 0, 0);
 
     }
     public void Refresh()
     {
-       // Debug.Log("EnemyManager Refresh()");
+        // Debug.Log("EnemyManager Refresh()");
         foreach (Enemy e in enemies)
+        {
             if (e.isAlive)
+            {
                 e.Refresh();
+            }
+        }
 
 
         while (toRemove.Count > 0) //remove all dead ones
@@ -86,33 +90,33 @@ public class EnemyManager
     public Enemy SpawnEnemies(EnemyType etype,int qty)
     {
         Enemy e=null;
-        foreach (Transform spawnArea in SpawnLocations)  
-        {
-            for (int i = 0; i < qty; i++)
+        if(SpawnLocations != null)
+            foreach (Transform spawnArea in SpawnLocations)  
             {
-                Vector3 spawnLocation = new Vector3(Random.Range(-spawnArea.localScale.x * 10 / 2, spawnArea.localScale.x * 10 / 2), 1, Random.Range(-spawnArea.localScale.z * 10 / 2, spawnArea.localScale.z * 10 / 2));
-                GameObject newEnemy = GameObject.Instantiate(enemyPrefabDict[etype], enemyParent);
+                for (int i = 0; i < qty; i++)
+                {
+                    Vector3 spawnLocation = new Vector3(Random.Range(-spawnArea.localScale.x * 10 / 2, spawnArea.localScale.x * 10 / 2), 1, Random.Range(-spawnArea.localScale.z * 10 / 2, spawnArea.localScale.z * 10 / 2));
+                    GameObject newEnemy = GameObject.Instantiate(enemyPrefabDict[etype], enemyParent);
                 
-                newEnemy.transform.position = spawnArea.position;
-                newEnemy.transform.position += spawnLocation;
-                Debug.Log("Enw Enemy Created");
-                e = newEnemy.GetComponent<Enemy>();
+                    newEnemy.transform.position = spawnArea.position;
+                    newEnemy.transform.position += spawnLocation;
+                    Debug.Log("New Enemy Created");
+                    e = newEnemy.GetComponent<Enemy>();
                 
-                if (etype.Equals(EnemyType.Melee))
-                    e.Initialize(meleeHealth);
-                else if(etype.Equals(EnemyType.Ranged))
-                    e.Initialize(rangedHealth);
+                    if (etype.Equals(EnemyType.Melee))
+                        e.Initialize(meleeHealth);
+                    else if(etype.Equals(EnemyType.Ranged))
+                        e.Initialize(rangedHealth);
 
-                toAdd.Push(e);  
-            }
+                    toAdd.Push(e);  
+                }
            
-        }
+            }
         enemyCountofCurrentWave = toAdd.Count;
         return e;
     }
     public void EnemyDied(Enemy enemyDied)
     {
         toRemove.Push(enemyDied);
-
     }
 }

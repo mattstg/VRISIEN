@@ -15,6 +15,11 @@ TagManager:
   - EnemySpawnLocationParent
   - Wall
   - WalkPoints
+  - ParticlesParent
+  - FxTemporaire
+  - BookLocations
+  - ChipLocations
+  - SwordLocations
   layers:
   - Default
   - TransparentFX
@@ -33,7 +38,7 @@ TagManager:
   - Interactibles
   - Ragdoll
   - Wall
-  - 
+  - GrabbableItems
   - 
   - 
   - 
