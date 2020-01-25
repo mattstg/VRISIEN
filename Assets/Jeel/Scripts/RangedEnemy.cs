@@ -38,7 +38,7 @@ public class RangedEnemy : Enemy, IHittable
         nv = GetComponent<NavMeshAgent>();
         animController = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        outlineScript = GetComponent<Outline>();
+        outlineScript = GetComponentInChildren<Outline>();
         currentAmmoCount = maxAmmo;
     }
 

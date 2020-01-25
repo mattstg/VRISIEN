@@ -73,7 +73,7 @@ public class GameSetup : MonoBehaviour
         }
 
 
-        if (PlayerTriggeredEnemy || TimePassed >= 120f || Input.GetKeyDown(KeyCode.Alpha2))
+        if (PlayerTriggeredEnemy || TimePassed >= 120f || Input.GetKeyDown(KeyCode.Alpha2))//collected collectable
         {
             //Debug.Log("SpawnEnemies");
             PlayerTriggeredEnemy = false;
@@ -82,7 +82,7 @@ public class GameSetup : MonoBehaviour
             StateMachineFlowAnimator.SetBool("SpawnEnemy", true);
 
         }
-        if (CollectedSword ||  Input.GetKeyDown(KeyCode.Alpha3))
+        if (CollectedSword ||  Input.GetKeyDown(KeyCode.Alpha3))//collected sword
         {
             Debug.Log("Boss");
             StateMachineFlowAnimator.SetBool("SpawnEnemy", false);
