@@ -10,9 +10,12 @@ public class Boss1AI : MonoBehaviour
 
     Vector3 newPos;
 
-    public float SidewaySpeed = 10f;
+    int randSide;
+
+    public Transform leftSide, rightSide;
+    
     public float distanceToMaintain = 10f;
-    public float sidewayFloat = 1f;
+    public float sidewayTimer = 2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,16 +32,28 @@ public class Boss1AI : MonoBehaviour
 
     public void WalkingAI()
     {
+        sidewayTimer -= Time.deltaTime;
+        if(sidewayTimer <= 0)
+        {
+            randSide = Random.Range(0, 2);
+            sidewayTimer = 2f;
+           
+        }
         if ((transform.position - target.position).sqrMagnitude < Mathf.Pow(distanceToMaintain, 2))
         {
-            // Debug.Log("walking Sideways");
-            //transform.position -= new Vector3(sidewayFloat , transform.position.y, sidewayFloat) * SidewaySpeed * Time.deltaTime;
-            // agent.isStopped = true;
-            agent.SetDestination(transform.position + new Vector3(sidewayFloat, transform.position.y, sidewayFloat));
+            switch (randSide)
+            {
+                case 0:
+                    agent.SetDestination(leftSide.position);
+                    break;
+                case 1:
+                    agent.SetDestination(rightSide.position);
+                    break;
+                
+            }
         }
         else
         {
-            //agent.isStopped = false;
             agent.SetDestination(target.position);
         }   
     }
