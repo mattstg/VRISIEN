@@ -39,6 +39,7 @@ public class RangedEnemy : Enemy, IHittable
         animController = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         outlineScript = GetComponent<Outline>();
+        outlineScript.enabled = false;
         currentAmmoCount = maxAmmo;
     }
 
@@ -68,19 +69,26 @@ public class RangedEnemy : Enemy, IHittable
         float nearestCoverDistance = 0;
         Vector3 nearestCoverLocation = Vector3.zero;
         bool isCoverAssigned = false;
-        while (!isCoverAssigned)
+        if (coverObjects.Length != 0)
         {
-            int i = Random.Range(0, coverObjects.Length);
-            if(!coverObjects[i].GetComponent<CoverSpot>().isCoverSpotOccupied)
+            while (!isCoverAssigned)
             {
-                nearestCoverLocation = coverObjects[i].transform.position;
-                nearestCoverDistance = Vector3.Distance(transform.position, coverObjects[i].transform.position);
-                coverObjects[i].GetComponent<CoverSpot>().isCoverSpotOccupied = true;
-                isCoverAssigned = true;
+                int i = Random.Range(0, coverObjects.Length);
+                if (!coverObjects[i].GetComponent<CoverSpot>().isCoverSpotOccupied)
+                {
+                    nearestCoverLocation = coverObjects[i].transform.position;
+                    nearestCoverDistance = Vector3.Distance(transform.position, coverObjects[i].transform.position);
+                    coverObjects[i].GetComponent<CoverSpot>().isCoverSpotOccupied = true;
+                    isCoverAssigned = true;
+                }
             }
+            coverLocation = nearestCoverLocation;
+            isFoundCover = true;
         }
-        coverLocation = nearestCoverLocation;
-        isFoundCover = true;
+        else
+        {
+            isFoundCover = false;
+        }
     }
 
     void MoveToCover()
