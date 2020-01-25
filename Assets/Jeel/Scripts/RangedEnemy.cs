@@ -24,7 +24,7 @@ public class RangedEnemy : MonoBehaviour, IHittable
 
     bool isFoundCover = false;
     bool isInCover = false;
-    bool canShoot = true;
+    bool canShoot = false;
     bool isStunned = false;
     bool isReloading = false;
     bool canReactToDamage = true;
@@ -93,7 +93,6 @@ public class RangedEnemy : MonoBehaviour, IHittable
     void ShootPlayer()
     {
         RotateTowardsPlayer();
-
         fireRateCounter += Time.deltaTime;
         if (fireRateCounter > fireRate)
         {
@@ -108,6 +107,7 @@ public class RangedEnemy : MonoBehaviour, IHittable
                 else
                 {
                     BulletManager.Instance.CreateBullet(gunPoint);
+                    ParticlesManager.Instance.SpawnParticle(ParticlesManager.ParticleType.MuzzleFlash, gunPoint, false, 0.25f);
                     currentAmmoCount--;
                 }
 
@@ -136,6 +136,11 @@ public class RangedEnemy : MonoBehaviour, IHittable
             isHit = false;
             StartCoroutine(HitReactionSequence(2f));
         }
+    }
+
+    public void ActivatePlayerShoot()
+    {
+        canShoot = true;
     }
 
     void Reload()
