@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 65295634797059502}
   - component: {fileID: -7844460102699166761}
   - component: {fileID: 4401093711461102889}
-  - component: {fileID: 4781470712140262976}
+  - component: {fileID: 1949927071611249804}
   m_Layer: 0
   m_Name: Briefcase
   m_TagString: Untagged
@@ -124,7 +124,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4781470712140262976
+--- !u!114 &1949927071611249804
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
