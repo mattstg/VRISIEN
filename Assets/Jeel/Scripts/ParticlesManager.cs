@@ -33,7 +33,7 @@ public class ParticlesManager
 
     }
 
-    public void CreateParticleEffect(ParticleType particleType,Transform pos,bool isPermanant,float lifeTime)
+    public void CreateParticleEffect(ParticleType particleType,Transform pos,float lifeTime)
     {
         GameObject particlePrefab = null;
         GameObject spawnedParticle;
@@ -49,7 +49,7 @@ public class ParticlesManager
 
         spawnedParticle = GameObject.Instantiate(particlePrefab, pos.position, pos.rotation);
         spawnedParticle.transform.SetParent(GameObject.FindGameObjectWithTag("ParticlesParent").transform);
-        if(!isPermanant)
+        if(lifeTime == 0)
             GameObject.Destroy(spawnedParticle, lifeTime);
         spawnedParticle.SetActive(true);
     }

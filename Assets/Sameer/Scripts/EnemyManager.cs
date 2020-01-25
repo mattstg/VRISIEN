@@ -32,14 +32,14 @@ public class EnemyManager
         toAdd = new Stack<Enemy>();
         enemies = new HashSet<Enemy>();
         enemyParent = new GameObject("EnemyParent").transform;
-        //SpawnLocations = GameObject.FindGameObjectWithTag("EnemySpawnLocationParent").transform;
+        SpawnLocations = GameObject.FindGameObjectWithTag("EnemySpawnLocationParent").transform;
         //SpawnLocations = GameSetupClass.Instance.SpawnLocation;
         foreach (EnemyType etype in System.Enum.GetValues(typeof(EnemyType))) //fill the resource dictionary with all the prefabs
         {
             enemyPrefabDict.Add(etype, Resources.Load<GameObject>("Prefabs/sameer prefabs/Enemy/" + etype.ToString())); //Each enum matches the name of the enemy perfectly
         }
         //Initially spawning enemies
-        NumberOfEnemyToSpawn(0,3,0);
+        //NumberOfEnemyToSpawn(2,3,0);
        // NumberOfEnemyToSpawn(1, 0, 0);
 
     }
