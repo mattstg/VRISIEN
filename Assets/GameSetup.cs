@@ -62,10 +62,10 @@ public class GameSetup : MonoBehaviour
 
     public void Refresh(float DTime)
     {
-        Debug.Log("GameSetupRefresh");       
+       // Debug.Log("GameSetupRefresh");       
         if (!PlayerTriggeredEnemy && TimePassed <= 120 && EnemyCountInScene == 0 || Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log("main");
+           // Debug.Log("main");
             TimePassed += DTime;
             StateMachineFlowAnimator.SetBool("SpawnEnemy", false);
             StateMachineFlowAnimator.SetBool("AllEnemyDead", true);
@@ -75,7 +75,7 @@ public class GameSetup : MonoBehaviour
 
         if (PlayerTriggeredEnemy || TimePassed >= 120f || Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Debug.Log("SpawnEnemies");
+            //Debug.Log("SpawnEnemies");
             PlayerTriggeredEnemy = false;
             TimePassed = 0;
             StateMachineFlowAnimator.SetBool("AllEnemyDead", false);
