@@ -14,6 +14,6 @@ public class randomGravity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(Vector3.down * 2.79f);
+        rb.AddForce(Vector3.down * 7.29f);
     }
 }
