@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
 
     public void PostInitialize()
     {
-        
+
     }
 
     public void Refresh()
@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
         BulletShootDir(startPos);
         CheckHit();
         //FollowPlayer();
-        
+        Debug.DrawRay(transform.position, transform.forward * 100f ,Color.red);
         counter -= Time.deltaTime;
         if (counter <= 0) //(counter <= 0 || isHit)
         {
