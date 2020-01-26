@@ -34,14 +34,13 @@ public class Melee :Enemy,IHittable
     Transform WalkablePoints;
     GameObject[] coverObjects;
     Vector3 coverLocation;
-
+    //Animator anim;
     NavMeshAgent nv;
     Rigidbody rb;
     Animator animController;
     Outline outlineScript;
     float fireRateCounter = 0f;
     int currentAmmoCount;
-
     public float dodgeForce = 30f;
     public float PlayerDetectionRange = 100f;
     public float playerInAttackRange = 16f;
@@ -53,6 +52,7 @@ public class Melee :Enemy,IHittable
     bool hasNewDodgePose = false;
     bool hasDodged = false;
     float afterDodgeTime = 0f;
+    float attackTimer = 0f;
     bool hasWanderPoint = false;
     bool playerInRange = false;
     bool isInAttackingRange = false;
@@ -74,35 +74,38 @@ public class Melee :Enemy,IHittable
         allWalkablePoints= WalkablePoints.GetComponentsInChildren<Transform>();
 
     }
-    // Update is called once per frame
     public override void Refresh()
     {
         base.Refresh();
         isEnemyAlive=this.isAlive;
-
         if(Vector3.SqrMagnitude(transform.position-player.transform.position)<PlayerDetectionRange)
         {
             playerInRange = true;
+            animController.SetBool("playerInRange", true);
             if (Vector3.SqrMagnitude(transform.position - player.transform.position) < playerInAttackRange)
             {
                 isInAttackingRange = true;
+                animController.SetBool("isInAttackingRange", true);
+
             }
             else
             {
                 isInAttackingRange = false;
+                animController.SetBool("isInAttackingRange", false);
+
             }
-            isBeingAimedAt = true;//get Latest Values from Player Script
+            isBeingAimedAt = true; //get Latest Values from Player Script
             isBeingShootAt = false;//get Latest Values from Player Script
-            isTassered = false;     //get Latest Values from Player Script
+            isTassered = false;    //get Latest Values from Player Script
         }
         else
         {
             playerInRange = false;
-        }
+            animController.SetBool("playerInRange", false);
 
+        }
         Brain();
-    }
-    
+    }    
     public void Brain()
     {
         if (playerInRange)
@@ -112,7 +115,7 @@ public class Melee :Enemy,IHittable
             if (isInAttackingRange)
             {
                 Attack();
-            Debug.Log("AttackPlayer");
+                Debug.Log("AttackPlayer");
             }
             if (isBeingAimedAt || isBeingShootAt)
             {
@@ -130,13 +133,12 @@ public class Melee :Enemy,IHittable
                         afterDodgeTime = 0f;
                     }
                 }
-
             Debug.Log("DodgePlayer");
             }
             if (isTassered)
             {
                 tassered();
-            Debug.Log("TasserPlayer");
+                Debug.Log("TasserPlayer");
             }
         }
         else if (!isEnemyAlive)
@@ -148,13 +150,11 @@ public class Melee :Enemy,IHittable
         {
             Wander();
             Debug.Log("WanderPlayer");
-
         }
-    }
-
-    
+    }       
     void ChasePlayer()
     {
+       // animController.SetBool("playerInRange", true);
         Debug.Log("Chasing Player");
         Vector3 toLookAt = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         transform.LookAt(toLookAt);
@@ -162,15 +162,21 @@ public class Melee :Enemy,IHittable
     }
     void Attack()
     {
+        attackTimer+=Time.deltaTime;
         Vector3 toLookAt = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         transform.LookAt(toLookAt);
-
         Debug.Log("Attacking Player");
-        //
-
-        PlayerManager.Instance.player.TakeDamage(20f);
+        if (attackTimer > 3f)
+        {
+           // animController.SetBool("playerInRange", true);
+            PlayerManager.Instance.player.TakeDamage(20f);
+            attackTimer = 0;
+        }
+        else
+        {
+           // animController.SetBool("playerInRange", false);
+        }
         //call the attack function of player Script
-
     }
     void Dodge()
     {
@@ -185,7 +191,9 @@ public class Melee :Enemy,IHittable
 
         rb.AddForce(newDodgePos);
         transform.LookAt(newDodgePos);
-        if(Vector3.SqrMagnitude(transform.position-newDodgePos)<2f)
+       
+
+        if (Vector3.SqrMagnitude(transform.position-newDodgePos)<2f)
         {
             hasNewDodgePose = false;
         }
@@ -212,16 +220,13 @@ public class Melee :Enemy,IHittable
         //Debug.Log("5)hasWanderPoint: " + hasWanderPoint);
         nv.SetDestination(randomObject.position);
       //  Debug.Log("6)DestinationSet: " + randomObject.position);
-
         if (Vector3.SqrMagnitude(transform.position - randomObject.position)<20f)
         {
             hasWanderPoint = false;
            // Debug.Log("7)hasreachedWanderPoint: ");            
         }
 
-    }
-
-    
+    }    
 
     public void Stun()
     {
