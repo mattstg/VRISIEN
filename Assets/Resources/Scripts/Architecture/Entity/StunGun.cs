@@ -79,11 +79,12 @@ public class StunGun : MonoBehaviour
     }
     void Shoot()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity))     // Hey sir, why did you replace my extension function that does EXACTLY this ? :'(
         {
             Enemy e;
             if (e = hit.transform.gameObject.GetComponentInParent<Enemy>())
             {
+                
                 StartCoroutine(Stun(e.transform.GetComponentInParent<RagdollControl>()));
             }
         } 
