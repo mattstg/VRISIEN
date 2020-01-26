@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 //StunGun
 public class StunGun : MonoBehaviour
@@ -66,11 +67,11 @@ public class StunGun : MonoBehaviour
         }
 
      
-        if (Input.GetKeyDown(KeyCode.K))
+        /*if (Input.GetKeyDown(KeyCode.K))
         {
        
             BulletManager.Instance.CreateBullet(this.transform);
-        }
+        }*/
     }
     public void PhysicsRefresh()
     {
@@ -78,21 +79,24 @@ public class StunGun : MonoBehaviour
     }
     void Shoot()
     {
-    
-        var go = transform.CheckRaycast();
-        if (go)
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity))
         {
-            StartCoroutine(Stun(go.transform.root.GetComponent<RagdollControl>()));
-        }
-        
-          
+            Enemy e;
+            if (e = hit.transform.gameObject.GetComponentInParent<Enemy>())
+            {
+                StartCoroutine(Stun(e.transform.GetComponentInParent<RagdollControl>()));
+            }
+        } 
     }
 
     IEnumerator Stun(RagdollControl ragdoll)
     {
         ragdoll.DoRagdoll(true);
+        ragdoll.GetComponent<NavMeshAgent>().enabled = false;
         yield return new WaitForSeconds(10f);
+        ragdoll.GetComponent<NavMeshAgent>().enabled = true;
         ragdoll.DoRagdoll(false);
+        
     }
 
 
