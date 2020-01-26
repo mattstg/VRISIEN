@@ -14,6 +14,14 @@ public class VRPlayer : OVRPlayerController, IManagable
     float slowmoCooldown = 5;
     float slowmoTimer = 0;
 
+    float hp = 200;
+    float maxHP = 200;
+    float hpRegenTime = 10;
+    float hpRegenCooldown = 0;
+
+    [HideInInspector]
+    public bool isAlive = true;
+
     public Transform gunSpot;
 
     //[HideInInspector]
@@ -42,6 +50,7 @@ public class VRPlayer : OVRPlayerController, IManagable
         base.Refresh();
 
         PlayerSpecialPowers();
+        RegenerateHP();
     }
 
     /*
@@ -86,7 +95,30 @@ public class VRPlayer : OVRPlayerController, IManagable
             }
         }
         if (boostTimer >= boostActiveTime)
-            Acceleration -= .5f;
-            */
+            Acceleration -= .5f;*/
+    }
+
+    public void TakeDamage(float damage)
+    {
+        hp = Mathf.Clamp(hp - damage, 0, maxHP);
+        Debug.Log("Player HP: "+ hp );
+    }
+
+    void RegenerateHP(float regenerateBy = 10)
+    {
+        if (hp < maxHP)
+        {
+            hpRegenCooldown += Time.deltaTime;
+            if (hpRegenCooldown >= hpRegenTime)
+            {
+                hp = Mathf.Clamp(hp + regenerateBy, 0, maxHP);
+                hpRegenCooldown = 0;
+            }
+        }
+    }
+
+    public void isDead()
+    {
+        isAlive = false;
     }
 }

@@ -3,162 +3,233 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Melee :Enemy
+public class Melee :Enemy,IHittable
 {
     // Start is called before the first frame update
-    Transform player;
-    public Transform head;
-    public float enemyHittingRadious = 6f;
-    public float playerDetactingRange = 7f;
-    Rigidbody rb;
-    NavMeshAgent agent;
-    Player p;
-    float dodgeForce = 30f;
-    bool isDodging = false;
-    bool isWalking = false;
-    bool isChasing = false;
-    bool isAttacking = false;
-    bool playerDetected = true;
-        RaycastHit rayBack;
-        RaycastHit rayLeft ;
-        RaycastHit rayRight;
-        RaycastHit rayForwardLeft;
-        RaycastHit rayForwardRight;
-        RaycastHit rayBackLeft;
-        RaycastHit rayBackRight;
-
+    //Transform player;
+    //public Transform head;
+    //public float enemyHittingRadious = 6f;
+    //public float playerDetactingRange = 7f;
+    //Rigidbody rb;
+    //NavMeshAgent agent;
+    //Player p;
+    //bool isDodging = false;
+    //bool isWalking = false;
+    //bool isChasing = false;
+    //bool isAttacking = false;
+    //bool playerDetected = true;
+    //    RaycastHit rayBack;
+    //    RaycastHit rayLeft ;
+    //    RaycastHit rayRight;
+    //    RaycastHit rayForwardLeft;
+    //    RaycastHit rayForwardRight;
+    //    RaycastHit rayBackLeft;
+    //    RaycastHit rayBackRight;
     
+    
+    
+    
+
+    GameObject player;
+    Transform WalkablePoints;
+    GameObject[] coverObjects;
+    Vector3 coverLocation;
+
+    NavMeshAgent nv;
+    Rigidbody rb;
+    Animator animController;
+    Outline outlineScript;
+    float fireRateCounter = 0f;
+    int currentAmmoCount;
+
+    public float dodgeForce = 30f;
+    public float PlayerDetectionRange = 100f;
+    public float playerInAttackRange = 16f;
+    public float doDamage = 10f;
+    Transform[] allWalkablePoints;
+    Transform randomObject ; 
+    Vector3 newDodgePos = new Vector3();
+
+    bool hasNewDodgePose = false;
+    bool hasDodged = false;
+    float afterDodgeTime = 0f;
+    bool hasWanderPoint = false;
+    bool playerInRange = false;
+    bool isInAttackingRange = false;
+    bool isBeingAimedAt = false;
+    bool isBeingShootAt = false;
+    bool isTassered = false;
+    bool isEnemyAlive = true;
+
 
     public override void Initialize(float _hp = 100)
     {
         base.Initialize();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-       // p = player.gameObject.GetComponent<Player>();
-        agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        nv = GetComponent<NavMeshAgent>();
+        animController = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-    }
+        outlineScript = GetComponent<Outline>();
+        WalkablePoints = GameObject.FindGameObjectWithTag("WalkPoints").transform;       
+        allWalkablePoints= WalkablePoints.GetComponentsInChildren<Transform>();
 
+    }
     // Update is called once per frame
     public override void Refresh()
     {
         base.Refresh();
-                    dodge2(transform.position);
-        
-        RaycastHit hit;
-        Physics.Raycast(head.position, transform.TransformDirection(Vector3.forward) , out hit,playerDetactingRange);
-        Debug.DrawRay(head.position, transform.TransformDirection(Vector3.forward) * playerDetactingRange);
+        isEnemyAlive=this.isAlive;
 
-        if (playerDetected)
+        if(Vector3.SqrMagnitude(transform.position-player.transform.position)<PlayerDetectionRange)
         {
-            
-            if (Physics.Raycast(head.position, transform.TransformDirection(Vector3.forward), out hit, playerDetactingRange))//get bool value from player whn raycast on enemy to make enemy dodge whn in target range or whn shooting and add that bool in OR condition
+            playerInRange = true;
+            if (Vector3.SqrMagnitude(transform.position - player.transform.position) < playerInAttackRange)
             {
-              //  if(hit.collider.CompareTag("Player"))
+                isInAttackingRange = true;
             }
-
-            if (Vector3.SqrMagnitude(player.position - transform.position) < enemyHittingRadious)
+            else
             {
-
-                //call player's HitByProjectile and do damage
+                isInAttackingRange = false;
             }
-            //chasePlayer();
+            isBeingAimedAt = true;//get Latest Values from Player Script
+            isBeingShootAt = false;//get Latest Values from Player Script
+            isTassered = false;     //get Latest Values from Player Script
         }
         else
         {
-            Debug.Log("RAND WANDER");
-            agent.SetDestination(new Vector3(Random.Range(0, 15), 1, Random.Range(0, 15)));
+            playerInRange = false;
         }
-       
 
-
+        Brain();
     }
-    void chasePlayer()
+    
+    public void Brain()
+    {
+        if (playerInRange)
+        {
+            ChasePlayer();
+            Debug.Log("ChasePlayer");
+            if (isInAttackingRange)
+            {
+                Attack();
+            Debug.Log("AttackPlayer");
+            }
+            if (isBeingAimedAt || isBeingShootAt)
+            {
+                if (!hasDodged)
+                {
+                    Dodge();
+                    hasDodged = true;
+                }
+                else
+                {
+                    afterDodgeTime += Time.deltaTime;
+                    if(afterDodgeTime>=3f)
+                    {
+                        hasDodged = false;
+                        afterDodgeTime = 0f;
+                    }
+                }
+
+            Debug.Log("DodgePlayer");
+            }
+            if (isTassered)
+            {
+                tassered();
+            Debug.Log("TasserPlayer");
+            }
+        }
+        else if (!isEnemyAlive)
+        {
+            Debug.Log("DeathPlayer");
+            Death();
+        }
+        else
+        {
+            Wander();
+            Debug.Log("WanderPlayer");
+
+        }
+    }
+
+    
+    void ChasePlayer()
     {
         Debug.Log("Chasing Player");
-        transform.LookAt(player);
-        agent.SetDestination(player.position);
+        Vector3 toLookAt = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        transform.LookAt(toLookAt);
+        nv.SetDestination(player.transform.position);
     }
-    void dodge(Vector3 oldPos)
+    void Attack()
     {
-        //if (Random.value > 0.5f)
-        //    rb.AddForce(-transform.right * dodgeForce);
-        //else
-        //    rb.AddForce(transform.right * dodgeForce);
-        Vector3 newPosition;
-        if (Random.value > 0.5f)
-        {
-            newPosition = new Vector3(oldPos.x + 5, oldPos.y, oldPos.z + 5);
-        }
-        else
-        {
-            newPosition = new Vector3(oldPos.x - 5, oldPos.y, oldPos.z - 5);
-        }
-        transform.position = Vector3.Lerp(oldPos, newPosition, 2f);
+        Vector3 toLookAt = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        transform.LookAt(toLookAt);
+
+        Debug.Log("Attacking Player");
+        //
+
+        PlayerManager.Instance.player.TakeDamage(20f);
+        //call the attack function of player Script
+
     }
-    void dodge2(Vector3 oldPos)
+    void Dodge()
     {
-        Debug.Log("dodge2");
+        if (!hasNewDodgePose)
+        {
+            if (Random.value > 0.5f)
+                newDodgePos = -transform.right * dodgeForce;
+            else
+                newDodgePos = transform.right * dodgeForce;
+            hasNewDodgePose = true;
+        }
 
-        Debug.DrawRay(head.position, transform.TransformDirection(-Vector3.forward) * playerDetactingRange);
-        Debug.DrawRay(head.position, transform.TransformDirection(-Vector3.right) * playerDetactingRange);
-        Debug.DrawRay(head.position, transform.TransformDirection(Vector3.right) * playerDetactingRange);
-        Debug.DrawRay(head.position, transform.TransformDirection(new Vector3(1, 0, 1f)) * playerDetactingRange);
-        Debug.DrawRay(head.position, transform.TransformDirection(new Vector3(-1, 0, 1f)) * playerDetactingRange);
-        Debug.DrawRay(head.position, transform.TransformDirection(new Vector3(1, 0, -1f)) * playerDetactingRange);
-        Debug.DrawRay(head.position, transform.TransformDirection(new Vector3(-1, 0, -1f)) * playerDetactingRange);
+        rb.AddForce(newDodgePos);
+        transform.LookAt(newDodgePos);
+        if(Vector3.SqrMagnitude(transform.position-newDodgePos)<2f)
+        {
+            hasNewDodgePose = false;
+        }
+    }
+    public void tassered()
+    {
 
-        
-        if (Physics.Raycast(head.position, transform.TransformDirection(-Vector3.forward) * playerDetactingRange, out rayBack))
-        {
-            if (rayBack.collider.CompareTag("Obstacle"))
-            {
-                Debug.Log("dodge back:  " + rayBack.collider.gameObject.transform.position);
-                agent.SetDestination(rayBack.collider.ClosestPoint(rayBack.collider.gameObject.transform.position));
-                //rb.AddForce(rayBack.collider.gameObject.transform.position-oldPos * dodgeForce);
-                //transform.position = Vector3.Lerp(oldPos, rayBack.collider.gameObject.transform.position, 2f);
-            }
-        }
-        else if(Physics.Raycast(head.position, transform.TransformDirection(-Vector3.right) * playerDetactingRange, out rayLeft) && rayLeft.collider.CompareTag("Obstacle"))
-        {
-            //agent.SetDestination(rayLeft.collider.gameObject.transform.position);
-            // rb.AddForce(rayLeft.collider.gameObject.transform.position - oldPos * dodgeForce);
-            //transform.position = Vector3.Lerp(oldPos, rayBack.collider.gameObject.transform.position, 2f);
-            agent.SetDestination(rayLeft.collider.ClosestPoint(rayLeft.collider.gameObject.transform.position));
-        }
-        else if (Physics.Raycast(head.position, transform.TransformDirection(Vector3.right) * playerDetactingRange, out rayRight) && rayRight.collider.CompareTag("Obstacle"))
-        {
-            //agent.SetDestination(rayRight.collider.gameObject.transform.position);
-            // rb.AddForce(rayRight.collider.gameObject.transform.position - oldPos * dodgeForce);
-            //transform.position = Vector3.Lerp(oldPos, rayBack.collider.gameObject.transform.position, 2f);
-            agent.SetDestination(rayRight.collider.ClosestPoint(rayRight.collider.gameObject.transform.position));
+    }
+    public void Death()
+    {
 
-        }
-        else if (Physics.Raycast(head.position, transform.TransformDirection(new Vector3(1, 0, 1f)) * playerDetactingRange, out rayForwardLeft) && rayForwardLeft.collider.CompareTag("Obstacle"))
+    }
+    public void Wander()
+    {
+        ///Debug.Log("1)hasWanderPoint: "+hasWanderPoint);
+        if (!hasWanderPoint)
         {
-            //agent.SetDestination(rayForwardLeft.collider.gameObject.transform.position);
-            agent.SetDestination(rayForwardLeft.collider.ClosestPoint(rayForwardLeft.collider.gameObject.transform.position));
+          //  Debug.Log("2) No WanderPoint");
+            randomObject = allWalkablePoints[Random.Range(0, allWalkablePoints.Length)];
+          //  Debug.Log("3)Got Wander Point: "+ randomObject.position);
+            hasWanderPoint = true;
+          //  Debug.Log("4)hasWanderPoint: " + hasWanderPoint);
         }
-        else if (Physics.Raycast(head.position, transform.TransformDirection(new Vector3(-1, 0, 1f)) * playerDetactingRange, out rayForwardRight) && rayForwardRight.collider.CompareTag("Obstacle"))
-        {
-            // agent.SetDestination(rayForwardRight.collider.gameObject.transform.position);
-            agent.SetDestination(rayForwardRight.collider.ClosestPoint(rayForwardRight.collider.gameObject.transform.position));
-        }
-        else if (Physics.Raycast(head.position, transform.TransformDirection(new Vector3(1, 0, -1f)) * playerDetactingRange, out rayBackLeft) && rayBackLeft.collider.CompareTag("Obstacle"))
-        {
-            // agent.SetDestination(rayBackLeft.collider.gameObject.transform.position);
-            agent.SetDestination(rayBackLeft.collider.ClosestPoint(rayBackLeft.collider.gameObject.transform.position));
-        }
-        else if (Physics.Raycast(head.position, transform.TransformDirection(new Vector3(-1, 0, -1f)) * playerDetactingRange, out rayBackRight) && rayBackRight.collider.CompareTag("Obstacle"))
-        {
-            // agent.SetDestination(rayBackRight.collider.gameObject.transform.position);
-            agent.SetDestination(rayBackRight.collider.ClosestPoint(rayBackRight.collider.gameObject.transform.position));
+        //Debug.Log("5)hasWanderPoint: " + hasWanderPoint);
+        nv.SetDestination(randomObject.position);
+      //  Debug.Log("6)DestinationSet: " + randomObject.position);
 
-        }
-        else
+        if (Vector3.SqrMagnitude(transform.position - randomObject.position)<20f)
         {
-            transform.RotateAround(transform.position, Vector3.up, 45f);
+            hasWanderPoint = false;
+           // Debug.Log("7)hasreachedWanderPoint: ");            
         }
 
     }
-   
+
+    
+
+    public void Stun()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SwordHit()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -8,3 +8,21 @@ MAke event management system to track enemy enter enemy spawn area
 Get Movable Points from manjot To roam Artound in scene
 Use Enemy_Melee_Ragdoll for model. Or make Ragdoll on Ranged Model, and use script RagdollControl.cs to rig for stun/kill.
 - KaushikV
+
+Melee Script
+            isBeingAimedAt = true;//get Latest Values from Player Script
+            isBeingShootAt = true;//get Latest Values from Player Script
+            tassered = true;     //get Latest Values from Player Script
+
+            void Attack()
+            {
+                Debug.Log("Attacking Player");
+                //call the attack function of player Script// add timer to inflict damage 
+            }
+
+            public void tassered()
+            {   
+
+            }
+Check Game Setup Scripts for State level 
+

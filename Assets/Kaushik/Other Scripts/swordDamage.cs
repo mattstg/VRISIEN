@@ -22,10 +22,14 @@ public class swordDamage : MonoBehaviour
                 var blood = GameObject.Instantiate(gushingBlood, other.transform);
                 blood.transform.localPosition = Vector3.zero;
 
-                OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
-                other.transform.root.GetComponent<RagdollControl>().DoRagdoll(true);
+                var enemyRef = other.transform.GetComponentInParent<Enemy>();
+                enemyRef.HitByProjectile(34f);
 
-                // NOW THATS A LOTTA DAAAAAAMAAGE !!!!
+
+                OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
+
+                if (!enemyRef.isAlive)
+                    other.transform.GetComponentInParent<RagdollControl>().DoRagdoll(true);
             }
 
             else
