@@ -101,6 +101,7 @@ public class VRPlayer : OVRPlayerController, IManagable
     public void TakeDamage(float damage)
     {
         hp = Mathf.Clamp(hp - damage, 0, maxHP);
+        Debug.Log("Player HP: "+ hp );
     }
 
     void RegenerateHP(float regenerateBy = 10)

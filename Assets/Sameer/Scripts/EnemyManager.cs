@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum EnemyType {Melee,Ranged,Drone}
 public class EnemyManager 
@@ -58,8 +59,11 @@ public class EnemyManager
         while (toRemove.Count > 0) //remove all dead ones
         {
             Enemy e = toRemove.Pop();
+            GameObject o = e.gameObject;
             enemies.Remove(e);
-            GameObject.Destroy(e.gameObject);
+            o.GetComponent<NavMeshAgent>().enabled = false; //.gameObject.SetActive(false);
+            o.GetComponent<Enemy>().enabled = false; //.gameObject.SetActive(false);
+            GameObject.Destroy(e.gameObject,15f);
         }
 
         while (toAdd.Count > 0) //Add new ones
@@ -107,7 +111,6 @@ public class EnemyManager
                         e.Initialize(meleeHealth);
                     else if(etype.Equals(EnemyType.Ranged))
                         e.Initialize(rangedHealth);
-
                     toAdd.Push(e);  
                 }
            

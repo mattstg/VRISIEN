@@ -34,8 +34,11 @@ public class Enemy : MonoBehaviour
     public virtual void HitByProjectile(float damage)
     {
         hp -= damage;
-        if (hp <= 0)
-            Die();
+        if (hp <= 0) { 
+            Debug.Log("Hp: "+hp);
+             Die();            
+            isAlive = false;
+        }
     }
     public virtual void Refresh()
     {
@@ -58,6 +61,7 @@ public class Enemy : MonoBehaviour
     public virtual void Die()
     {
         EnemyManager.Instance.EnemyDied(this);
+
         isAlive = false;
     }
 }

@@ -156,12 +156,15 @@ public class Melee :Enemy,IHittable
     void ChasePlayer()
     {
         Debug.Log("Chasing Player");
-        transform.LookAt(player.transform);
+        Vector3 toLookAt = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        transform.LookAt(toLookAt);
         nv.SetDestination(player.transform.position);
     }
     void Attack()
     {
-        transform.LookAt(player.transform);
+        Vector3 toLookAt = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        transform.LookAt(toLookAt);
+
         Debug.Log("Attacking Player");
         //
 
