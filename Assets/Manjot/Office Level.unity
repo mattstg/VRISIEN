@@ -5191,5 +5191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WalkPoints
       objectReference: {fileID: 0}
+    - target: {fileID: 4662711784709302878, guid: a0413cbc9bce6d248a4c382b02b795db,
+        type: 3}
+      propertyPath: m_TagString
+      value: WalkPoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0413cbc9bce6d248a4c382b02b795db, type: 3}
