@@ -20,6 +20,9 @@ TagManager:
   - BookLocations
   - ChipLocations
   - SwordLocations
+  - HoldsterSocket
+  - StunGunAttachSocket
+  - StunGun
   layers:
   - Default
   - TransparentFX
@@ -39,7 +42,7 @@ TagManager:
   - Ragdoll
   - Wall
   - GrabbableItems
-  - 
+  - Boss
   - 
   - 
   - 

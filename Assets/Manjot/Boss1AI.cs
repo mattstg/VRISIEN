@@ -5,10 +5,9 @@ using UnityEngine.AI;
 
 public class Boss1AI : Enemy, IHittable
 {
-    enum Abilities {Walk, Shoot, SpecialAttack};
-
     Transform target;
     NavMeshAgent agent;
+    Animator anim;
     float fireRate = 0.15f;
     float fireRateCount;
     float abilityTimer = 3f;
@@ -17,14 +16,14 @@ public class Boss1AI : Enemy, IHittable
     Vector3 newPos;
 
     int randSide;
-    int randAbility;
+    int randAbility = 0;
 
     public bool specialAtt = false;
     public Transform leftSide, rightSide;
    
     public float distanceToMaintain = 10f;
     public float sidewayTimer = 2f;
-    public Transform gunPoint1, gunPoint2;
+    public Transform gunPoint1;
     public Transform toiletSeat;
 
     // Start is called before the first frame update
@@ -36,34 +35,33 @@ public class Boss1AI : Enemy, IHittable
         target = FindObjectOfType<FakePlayer>().transform;
         fireRateCount = fireRate;
         abilityTimeCounter = abilityTimer;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     public void Update()
     {
-       // base.Refresh();
-     //   Debug.Log("AA");
-       // WalkingAI();
-       // Shoots();
-        //SpecialAttack();
-        RandomAbilities();
+        // base.Refresh();
+        // WalkAndPunch();
+        //  Shoots();
+        // SpecialAttack();
+         RandomAbilities();
         Debug.Log(randAbility);
-        Debug.Log(abilityTimeCounter);
     }
 
     public void RandomAbilities()
     {
-        abilityTimeCounter -= Time.deltaTime;
-        if(abilityTimeCounter <= 0)
-        {
-            randAbility = Random.Range(0, 4);
-            ResetAbilityTime(randAbility);
-        }
+        //abilityTimeCounter -= Time.deltaTime;
+        //if(abilityTimeCounter <= 0)
+        //{
+        //    randAbility = Random.Range(0, 4);
+        //    abilityTimeCounter = 5f;
+        //}
 
         switch (randAbility)
         {
             case 0:
-                WalkingAI();
+                WalkAndPunch();
                 break;
             case 1:
                 Shoots();
@@ -77,14 +75,19 @@ public class Boss1AI : Enemy, IHittable
         }
     }
 
-    public void WalkingAI()
+    public void WalkAndPunch()
     {
         transform.LookAt(target);
-        //if (!specialAtt)
-        //{
-           agent.SetDestination(target.position);
-       // }
-       
+        agent.SetDestination(target.position);
+        if (agent.remainingDistance <= agent.stoppingDistance + 4)
+        {
+            anim.ResetTrigger("Run");
+            anim.SetTrigger("Kick");
+        }
+        else
+        {
+            anim.SetTrigger("Run");
+        }
     }
 
     public void Shoots()
@@ -103,16 +106,19 @@ public class Boss1AI : Enemy, IHittable
             {
                 case 0:
                     agent.SetDestination(leftSide.position);
+                    anim.SetTrigger("StrafeLeft");
                     break;
                 case 1:
                     agent.SetDestination(rightSide.position);
+                    anim.SetTrigger("StrafeRight");
                     break;
             }
        // }
         if (fireRateCount < 0)
         {
-            BulletManager.Instance.CreateBullet(gunPoint1);
-            BulletManager.Instance.CreateBullet(gunPoint2);
+              ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.MuzzleFlash, gunPoint1, 0.15f);
+              BulletManager.Instance.CreateBullet(gunPoint1);
+          //  BulletManager.Instance.CreateBullet(gunPoint2);
             fireRateCount = fireRate;
         }
         else
@@ -125,9 +131,19 @@ public class Boss1AI : Enemy, IHittable
     public void SpecialAttack()
     {
         //if (specialAtt)
-       // {
+        // {
             transform.LookAt(toiletSeat);
             agent.SetDestination(toiletSeat.position);
+            if(agent.remainingDistance <= agent.stoppingDistance)
+            {
+                transform.LookAt(target);
+                anim.SetTrigger("Throw");
+            }
+            else
+            {
+                anim.SetTrigger("Run");
+                anim.ResetTrigger("Throw");
+            }
       // }
     }
 
@@ -141,7 +157,7 @@ public class Boss1AI : Enemy, IHittable
         throw new System.NotImplementedException();
     }
 
-    public void ResetAbilityTime(int ability)
+    public void ResetAbil(int ability)
     {
         if(ability == 0)
         {
@@ -155,5 +171,29 @@ public class Boss1AI : Enemy, IHittable
         {
             abilityTimeCounter = 4f;
         }
+    }
+    public void ResetAbilityTime()
+    {
+        randAbility = Random.Range(0, 3);
+        anim.ResetTrigger("Run");
+        anim.ResetTrigger("Kick");
+        anim.ResetTrigger("StrafeLeft");
+        anim.ResetTrigger("StrafeRight");
+        anim.ResetTrigger("Throw");
+        anim.ResetTrigger("FlyingKick");
+
+        //abilityTimeCounter = 1f;
+        ////anim.ResetTrigger("Run");
+        ////anim.ResetTrigger("Kick");
+        ////anim.ResetTrigger("StrafeLeft");
+        ////anim.ResetTrigger("StrafeRight");
+        ////anim.ResetTrigger("Throw");
+        ////anim.ResetTrigger("FlyingKick");
+        //anim.SetBool("Runs", false);
+        //anim.SetBool("Kicks", false);
+        //anim.SetBool("StrafeLefts", false);
+        //anim.SetBool("StrafeRights", false);
+        //anim.SetBool("Throws", false);
+        //anim.SetBool("FlyingKicks", false);
     }
 }

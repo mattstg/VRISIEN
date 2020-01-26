@@ -58,7 +58,7 @@ public class Melee :Enemy,IHittable
     bool isInAttackingRange = false;
     bool isBeingAimedAt = false;
     bool isBeingShootAt = false;
-    bool isTassered = false;
+    public bool isTassered = false;
     bool isEnemyAlive = true;
 
 
