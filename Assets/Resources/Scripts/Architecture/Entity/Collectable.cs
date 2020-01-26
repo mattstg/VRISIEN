@@ -7,7 +7,7 @@ public class Collectable : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.CompareTag("Player")) //mixamorig:RightHand 
+        if (collision.collider.gameObject.CompareTag("Left")|| collision.collider.gameObject.CompareTag("Right")) //mixamorig:RightHand 
         {
             gameObject.SetActive(false);
             if (gameObject.name.Equals("SwordCustom"))
