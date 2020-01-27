@@ -48,7 +48,10 @@ public class ParticlesManager
             particlePrefab = ParticlePool[3];
 
         spawnedParticle = GameObject.Instantiate(particlePrefab, pos.position, pos.rotation);
-        spawnedParticle.transform.SetParent(GameObject.FindGameObjectWithTag("ParticlesParent").transform);
+        if (GameObject.FindGameObjectWithTag("ParticlesParent") == null)
+            new GameObject("ParticlesParent").tag = "ParticlesParent";
+        else
+            spawnedParticle.transform.SetParent(GameObject.FindGameObjectWithTag("ParticlesParent").transform);
         if(lifeTime != 0)
             GameObject.Destroy(spawnedParticle, lifeTime);
         spawnedParticle.SetActive(true);
