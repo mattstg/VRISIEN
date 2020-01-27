@@ -18,6 +18,7 @@ public class StunGun : MonoBehaviour
 
 
     public float smoothing = 1f;
+    public Transform MuzzlePoint;
 
     private float cooldownTime = 0; // time difference between shooting of bullets
     private float timer = 0.5f;
@@ -54,8 +55,9 @@ public class StunGun : MonoBehaviour
             }
             else
             {
-                if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && cooldownTime > timer)
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && cooldownTime > timer)
                 {
+                    print("grabbed1");
                     Shoot();
                     cooldownTime = 0;
                 }
@@ -79,12 +81,13 @@ public class StunGun : MonoBehaviour
     }
     void Shoot()
     {
+        ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.StunGunMuzzle, MuzzlePoint, 0.2f);
+        print("shoot");
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity))     // Hey sir, why did you replace my extension function that does EXACTLY this ? :'(
         {
             Enemy e;
             if (e = hit.transform.gameObject.GetComponentInParent<Enemy>())
             {
-                
                 StartCoroutine(Stun(e.transform.GetComponentInParent<RagdollControl>()));
             }
         } 

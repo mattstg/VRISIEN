@@ -109,11 +109,7 @@ public class RangedEnemy : Enemy, IHittable
 
     void MoveToCover()
     {
-        print(Vector3.Distance(transform.position, coverLocation));
-        if (Vector3.Distance(transform.position, coverLocation) > 2f)
-            nv.SetDestination(coverLocation);
-        else
-            isInCover = true;
+        nv.SetDestination(coverLocation);
     }
 
     void ShootPlayer()
@@ -188,6 +184,14 @@ public class RangedEnemy : Enemy, IHittable
     {
         ReleaseAttackSlot();
         StartCoroutine(ReloadSequence(3f));
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("CoverLocation"))
+        {
+            isInCover = true;
+        }
     }
 
     IEnumerator HitReactionSequence(float time)
