@@ -30,6 +30,7 @@ public class RangedEnemy : Enemy, IHittable
     bool canReactToDamage = true;
     bool hasAttackSlot = false;
     bool canSeePlayer;
+    bool canMove = true;
 
     // Start is called before the first frame update
     public override void Initialize(float _hp = 100)
@@ -53,12 +54,27 @@ public class RangedEnemy : Enemy, IHittable
         UpdateAnimations();
 
         if (!isFoundCover)
+        {
             FindCover();
+        }
         else
-            if (!isInCover)
-                MoveToCover();
+        {
+            if (canMove)
+            {
+                if (!isInCover)
+                {
+                    MoveToCover();
+                }
+                else
+                {
+                    ShootPlayer();
+                }
+            }
             else
-                ShootPlayer();
+            {
+                nv.ResetPath();
+            }
+        }
     }
 
     void RayCast()
@@ -197,11 +213,13 @@ public class RangedEnemy : Enemy, IHittable
     IEnumerator HitReactionSequence(float time)
     {
         outlineScript.enabled = true;
+        canMove = false;
         canShoot = false;
         animController.SetTrigger("Hit");
         yield return new WaitForSeconds(time);
         canShoot = true;
         outlineScript.enabled = false;
+        canMove = true;
     }
 
     IEnumerator ReloadSequence(float time)
