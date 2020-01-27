@@ -1530,6 +1530,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 787744850086220281, guid: b3262ca4093ba2d469d5574db8c8e48e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3531232736904666508, guid: b3262ca4093ba2d469d5574db8c8e48e,
         type: 3}
       propertyPath: m_Name
@@ -5189,6 +5194,11 @@ PrefabInstance:
     - target: {fileID: 4662711784709302878, guid: a0413cbc9bce6d248a4c382b02b795db,
         type: 3}
       propertyPath: m_Name
+      value: WalkPoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 4662711784709302878, guid: a0413cbc9bce6d248a4c382b02b795db,
+        type: 3}
+      propertyPath: m_TagString
       value: WalkPoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []

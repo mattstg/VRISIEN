@@ -9627,9 +9627,8 @@ GameObject:
   - component: {fileID: 8852122724793334582}
   - component: {fileID: 8852122724773936758}
   - component: {fileID: 8852122724774021078}
-  - component: {fileID: 8852122724799337204}
   m_Layer: 0
-  m_Name: WFXMR_MF FPS RIFLE3
+  m_Name: MuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14395,16 +14394,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &8852122724799337204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8852122724793820950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cce2a86394e858c419a5d614b1036533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 1.5

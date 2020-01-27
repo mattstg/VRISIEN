@@ -28,6 +28,8 @@ public class RangedEnemy : Enemy, IHittable
     bool isStunned = false;
     bool isReloading = false;
     bool canReactToDamage = true;
+    bool hasAttackSlot = false;
+    bool canSeePlayer;
 
     // Start is called before the first frame update
     public override void Initialize(float _hp = 100)
@@ -61,7 +63,21 @@ public class RangedEnemy : Enemy, IHittable
 
     void RayCast()
     {
-        Debug.DrawLine(gunPoint.transform.position, player.transform.position,Color.blue);
+        //NOT using raycast for targetting because anymore because it was decides that bullets will be a driven by colliders for "Deflet" functionality
+        RaycastHit hit;
+        if(Physics.Raycast(gunPoint.transform.position,player.transform.position - gunPoint.transform.position,out hit,Mathf.Infinity))
+        {
+            if(hit.transform.CompareTag("Player"))
+            {
+                canSeePlayer = true;
+            }
+            else
+            {
+                canSeePlayer = false;
+            }
+        }
+        
+
     }
 
     void FindCover()
@@ -93,7 +109,8 @@ public class RangedEnemy : Enemy, IHittable
 
     void MoveToCover()
     {
-        if (Vector3.Distance(transform.position, coverLocation) > 1f)
+        print(Vector3.Distance(transform.position, coverLocation));
+        if (Vector3.Distance(transform.position, coverLocation) > 2f)
             nv.SetDestination(coverLocation);
         else
             isInCover = true;
@@ -107,7 +124,7 @@ public class RangedEnemy : Enemy, IHittable
         {
             fireRateCounter = 0f;
             //print("shoot");
-            if (canShoot && !isReloading)
+            if (canShoot && !isReloading && hasAttackSlot && canSeePlayer)
             {
                 if (currentAmmoCount <= 0)
                 {
@@ -121,6 +138,10 @@ public class RangedEnemy : Enemy, IHittable
                 }
 
             }
+            else
+            {
+                WaitForAttackSlot();
+            }
         }  
         //print("Shooting");
     }
@@ -128,7 +149,7 @@ public class RangedEnemy : Enemy, IHittable
     void RotateTowardsPlayer()
     {
         transform.LookAt(player.transform);
-        gunPoint.transform.LookAt(player.transform);
+        gunPoint.transform.LookAt(player.transform.position+new Vector3(Random.Range(-2,2), Random.Range(-2, 2), Random.Range(-2, 2)));
     }
 
     void UpdateAnimations()
@@ -147,6 +168,17 @@ public class RangedEnemy : Enemy, IHittable
         }
     }
 
+    void WaitForAttackSlot()
+    {
+        hasAttackSlot = EnemyManager.Instance.AssignAttackSlot();
+    }
+
+    void ReleaseAttackSlot()
+    {
+        EnemyManager.Instance.ReleaseAttackSlot();
+        hasAttackSlot = false;
+    }
+
     public void ActivatePlayerShoot()
     {
         canShoot = true;
@@ -154,6 +186,7 @@ public class RangedEnemy : Enemy, IHittable
 
     void Reload()
     {
+        ReleaseAttackSlot();
         StartCoroutine(ReloadSequence(3f));
     }
 

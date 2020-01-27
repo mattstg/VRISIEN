@@ -34,7 +34,7 @@ public class GameFlowControl
         WeaponManager.Instance.Initialize();
         //SoundManager.Instance.Initialize();
         CollectableManager.Instance.Initialize();
-
+        ParticlesManager.Instance.Initialize();
         GameSetupClass.Instance.Initialize();
         EnemyManager.Instance.Initialize();
     }

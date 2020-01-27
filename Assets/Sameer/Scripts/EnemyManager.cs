@@ -20,6 +20,7 @@ public class EnemyManager
     public HashSet<Enemy> enemies;//stacks to keep track of enemies
     public Stack<Enemy> toRemove;
     public Stack<Enemy> toAdd;
+    public bool[] attackSlots; 
     //public int EnemyCount { get { return enemies.Count; } }
 
     Dictionary<EnemyType, GameObject> enemyPrefabDict = new Dictionary<EnemyType, GameObject>(); //all enemy prefabs
@@ -41,7 +42,10 @@ public class EnemyManager
         }
         //Initially spawning enemies
         //NumberOfEnemyToSpawn(2,3,0);
-       // NumberOfEnemyToSpawn(1, 0, 0);
+        // NumberOfEnemyToSpawn(1, 0, 0);
+
+        attackSlots = new bool[GameObject.FindObjectOfType<GameSetup>().GetComponent<GameSetup>().attackSlots];
+
 
     }
     public void Refresh()
@@ -118,6 +122,33 @@ public class EnemyManager
         enemyCountofCurrentWave = toAdd.Count;
         return e;
     }
+
+    public bool AssignAttackSlot()
+    {
+        bool slot = false;
+        for(int i = 0;i<attackSlots.Length;i++)
+        {
+            if (attackSlots[i] == false)
+            {
+                slot = true;
+                break;
+            }
+        }
+        return slot;
+    }
+
+    public void ReleaseAttackSlot()
+    {
+        for (int i = 0; i < attackSlots.Length; i++)
+        {
+            if (attackSlots[i] == true)
+            {
+                attackSlots[i] = false;
+                break;
+            }
+        }
+    }
+
     public void EnemyDied(Enemy enemyDied)
     {
         toRemove.Push(enemyDied);
