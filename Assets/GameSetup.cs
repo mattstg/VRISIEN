@@ -30,6 +30,7 @@ public class GameSetup : MonoBehaviour
     bool BossDead = false;
 
     bool CollectedSword = false;
+    bool Collectedcolllectable = false;
     [HideInInspector]
     public Transform EnemySpawnTrigger;
     [HideInInspector]
@@ -63,8 +64,17 @@ public class GameSetup : MonoBehaviour
 
     public void Refresh(float DTime)
     {
-       // Debug.Log("GameSetupRefresh");       
-        if (!PlayerTriggeredEnemy && TimePassed <= 120 && EnemyCountInScene == 0 || Input.GetKeyDown(KeyCode.Alpha1))
+        if(CollectableManager.Instance.gotChip)
+        {
+            Collectedcolllectable = true;
+        }
+        if (CollectableManager.Instance.gotSword)
+        {
+            CollectedSword = true;
+        }
+
+        // Debug.Log("GameSetupRefresh");       
+            if (!PlayerTriggeredEnemy && TimePassed <= 120 && EnemyCountInScene == 0 || Input.GetKeyDown(KeyCode.Alpha1))
         {
            // Debug.Log("main");
             TimePassed += DTime;
