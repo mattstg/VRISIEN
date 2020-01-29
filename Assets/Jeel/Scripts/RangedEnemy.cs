@@ -130,7 +130,7 @@ public class RangedEnemy : Enemy, IHittable
 
     void ShootPlayer()
     {
-        SoundManager.Instance.PlayMusic("Ranged_Gun_Sound", gameObject);
+       // SoundManager.Instance.PlayMusic("Ranged_Gun_Sound", gameObject);
         RotateTowardsPlayer();
         fireRateCounter += Time.deltaTime;
         if (fireRateCounter > fireRate)
@@ -170,7 +170,7 @@ public class RangedEnemy : Enemy, IHittable
         if (nv.velocity != Vector3.zero)
         {
             animController.SetBool("isRunning", true);
-            SoundManager.Instance.PlayMusic("Enemy_Footsteps",gameObject);
+          //  SoundManager.Instance.PlayMusic("Enemy_Footsteps",gameObject);
         }
         else
             animController.SetBool("isRunning", false);

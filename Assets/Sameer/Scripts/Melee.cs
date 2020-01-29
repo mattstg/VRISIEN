@@ -209,7 +209,7 @@ public class Melee :Enemy
     }
     public void Wander()
     {
-        SoundManager.Instance.PlayMusic("Enemy_Footsteps", gameObject);
+        //SoundManager.Instance.PlayMusic("Enemy_Footsteps", gameObject);
 
         ///Debug.Log("1)hasWanderPoint: "+hasWanderPoint);
         if (!hasWanderPoint)
