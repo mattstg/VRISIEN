@@ -12,14 +12,19 @@ public class Collectable : MonoBehaviour
             gameObject.SetActive(false);
             if (gameObject.name.Equals("SwordCustom"))
             {
+                SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
                 CollectableManager.Instance.GotSword();
             }
             else if (gameObject.name.Equals("SD_Card"))
             {
                 CollectableManager.Instance.GotChip();
+                SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
             }
-            else if(gameObject.name.Equals("OrnateBook"))
+            else if (gameObject.name.Equals("OrnateBook"))
+            {
+                SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
                 CollectableManager.Instance.GotBook();
+            }
         }
     }
 }

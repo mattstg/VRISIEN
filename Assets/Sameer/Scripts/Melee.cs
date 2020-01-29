@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Melee :Enemy,IHittable
+public class Melee :Enemy
 {
     // Start is called before the first frame update
     //Transform player;
@@ -170,6 +170,7 @@ public class Melee :Enemy,IHittable
         {
            // animController.SetBool("playerInRange", true);
             PlayerManager.Instance.player.TakeDamage(20f);
+            SoundManager.Instance.PlayMusic("SwordHit", gameObject);
             attackTimer = 0;
         }
         else
@@ -208,6 +209,8 @@ public class Melee :Enemy,IHittable
     }
     public void Wander()
     {
+        SoundManager.Instance.PlayMusic("Enemy_Footsteps", gameObject);
+
         ///Debug.Log("1)hasWanderPoint: "+hasWanderPoint);
         if (!hasWanderPoint)
         {
@@ -228,13 +231,13 @@ public class Melee :Enemy,IHittable
 
     }    
 
-    public void Stun()
-    {
-        throw new System.NotImplementedException();
-    }
+    //public void Stun()
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
-    public void SwordHit()
-    {
-        throw new System.NotImplementedException();
-    }
+    //public void SwordHit()
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 }

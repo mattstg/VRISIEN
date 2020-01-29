@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42abf28040c45df40b81eef39e380eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  music_Source: {fileID: 7039798327107674637}
   smoothing: 1
   MuzzlePoint: {fileID: 1745474897389461705}
   angle: {x: 0, y: 0, z: 0}

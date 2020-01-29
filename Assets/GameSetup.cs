@@ -44,7 +44,7 @@ public class GameSetup : MonoBehaviour
     
     public void Initialize()
     {
-        EnemySpawnTrigger = GameObject.FindGameObjectWithTag("EnemySpawnTrigger").transform;
+       // EnemySpawnTrigger = GameObject.FindGameObjectWithTag("EnemySpawnTrigger").transform;
         player = PlayerManager.Instance.player.transform;//GameObject.FindGameObjectWithTag("Player").transform;
         StateMachineFlowAnimator = gameObject.GetComponent<Animator>();
         

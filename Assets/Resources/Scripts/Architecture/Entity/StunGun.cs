@@ -10,7 +10,6 @@ public class StunGun : MonoBehaviour
     const float smoothLerp = 1f;
     const float maxRadians = Mathf.PI / 4;
 
-
     private Transform endPos; // can be the  player's location where the gun will lerp back and forth 
     private Transform startPos;
 
@@ -81,8 +80,11 @@ public class StunGun : MonoBehaviour
     }
     void Shoot()
     {
+
         ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.StunGunMuzzle, MuzzlePoint, 0.2f);
         print("shoot");
+                SoundManager.Instance.PlayMusic("StunGun",gameObject);
+                
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity))     // Hey sir, why did you replace my extension function that does EXACTLY this ? :'(
         {
             Enemy e;
