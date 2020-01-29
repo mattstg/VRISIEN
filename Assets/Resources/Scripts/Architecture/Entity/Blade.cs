@@ -23,7 +23,7 @@ public class Blade : MonoBehaviour
     public void Initialize()
     {
 
-        endPos = GameObject.Find("Left").transform;
+      //  endPos = GameObject.Find("Left").transform;
       //  startPos.position = 
         grabRef = gameObject.GetComponent<OVRGrabbable>();
 
@@ -43,11 +43,14 @@ public class Blade : MonoBehaviour
             }
             else
                 if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && cooldownTime > timer)
-                {
-                    Spear();
-                    cooldownTime = 0;
-                }
+            {
+                Spear();
+                cooldownTime = 0;
+            }
         }
+
+        else
+            LerpBackToHolster();
 
         if (OVRInput.Get(OVRInput.Button.Four))
         {
@@ -65,6 +68,8 @@ public class Blade : MonoBehaviour
         var go = transform.CheckRaycast();
         if (go)
         {
+            endPos = go.transform; 
+            startPos = GameObject.Find("Left").transform;
             StartCoroutine(Lerp());
             StartCoroutine(Lerp());
 
@@ -87,7 +92,7 @@ public class Blade : MonoBehaviour
         // needs to be fixed.
         if (Vector3.Distance(transform.position,endPos.position) <=.2f)
         {
-            while (Vector3.Distance(transform.position, startPos.position) != startPos.position.sqrMagnitude)
+            while (Vector3.Distance(transform.position, startPos.position) >= .05f) //!= startPos.position.sqrMagnitude)
             {
                 transform.position = Vector3.Lerp(transform.position, startPos.transform.position, smoothing * Time.deltaTime);
                 transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
@@ -106,6 +111,33 @@ public class Blade : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(1f);
+
+    }
+
+    void LerpBackToHolster()
+    {
+        if (Vector3.SqrMagnitude(PlayerManager.Instance.player.swordSpot.position - transform.position) > 0.15f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, PlayerManager.Instance.player.swordSpot.position, 1f * Time.deltaTime);
+            transform.eulerAngles = Vector3.RotateTowards(transform.eulerAngles, PlayerManager.Instance.player.swordSpot.eulerAngles, 2, 1);
+        }
+        else if (transform.parent != PlayerManager.Instance.player.swordSpot)
+        {
+            transform.SetParent(PlayerManager.Instance.player.swordSpot);
+            transform.localEulerAngles = Vector3.zero;
+            transform.localPosition = Vector3.zero;
+        }
+
+
+        //while (Vector3.Distance(transform.position, endPos.position) >=.25f)
+        //    {
+        //        transform.position = Vector3.Lerp(transform.position, endPos.transform.position, smoothing * Time.deltaTime);
+        //        transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, angle, Time.deltaTime * smoothing);
+
+        //        yield return null;
+        //    }      
+
+        //yield return new WaitForSeconds(1f);
 
     }
 }

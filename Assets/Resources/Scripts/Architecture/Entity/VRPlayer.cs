@@ -22,7 +22,7 @@ public class VRPlayer : OVRPlayerController, IManagable
     [HideInInspector]
     public bool isAlive = true;
 
-    public Transform gunSpot;
+    public Transform gunSpot, swordSpot, specialSpot;
 
     //[HideInInspector]
     //public RootMotion.FinalIK.VRIK playerModelIK;
