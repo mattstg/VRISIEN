@@ -26,7 +26,8 @@ public class GameFlowControl
 
     public void Initialize()
     {
-        
+        GameSetup.gs = GameObject.FindObjectOfType<GameSetup>();
+
         //InputManager.Instance.Initialize();
         PlayerManager.Instance.Initialize();
         VRCameraManager.Instance.Initialize();
@@ -35,7 +36,7 @@ public class GameFlowControl
         //SoundManager.Instance.Initialize();
         CollectableManager.Instance.Initialize();
         ParticlesManager.Instance.Initialize();
-        GameSetupClass.Instance.Initialize();
+        GameSetup.gs.Initialize();
         EnemyManager.Instance.Initialize();
     }
 
@@ -48,7 +49,7 @@ public class GameFlowControl
         WeaponManager.Instance.PostInitialize();
         // SoundManager.Instance.PostInitialize();
         CollectableManager.Instance.PostInitialize();
-        GameSetupClass.Instance.PostInitialize();
+        GameSetup.gs.PostInitialize();
         EnemyManager.Instance.PostInitialize();
 
     }
@@ -62,14 +63,14 @@ public class GameFlowControl
         WeaponManager.Instance.PhysicsRefresh();
         // SoundManager.Instance.PhysicsRefresh();
         CollectableManager.Instance.PhysicsRefresh();
-        GameSetupClass.Instance.PhysicsRefresh();
+        GameSetup.gs.PhysicsRefresh();
         EnemyManager.Instance.PhysicsRefresh();
 
     }
 
-    public void Refresh(float DeltaTime)
+    public void Refresh()
     {
-        GameSetupClass.Instance.Refresh(DeltaTime);
+        GameSetup.gs.Refresh(Time.deltaTime);
         //InputManager.Instance .Refresh();
         PlayerManager.Instance.Refresh();
         VRCameraManager.Instance.Refresh();
