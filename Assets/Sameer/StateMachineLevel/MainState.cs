@@ -8,7 +8,7 @@ public class MainState : StateMachineBehaviour
     Transform player;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        EnemySpawnTrigger = GameSetupClass.Instance.EnemySpawnTrigger;
+        EnemySpawnTrigger = GameSetup.gs.EnemySpawnTrigger;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -17,7 +17,7 @@ public class MainState : StateMachineBehaviour
         //Update collectibla count,time state is on,check for trigger zones
            if(Input.GetKeyDown(KeyCode.P))
             {
-                GameSetupClass.Instance.PlayerTriggeredEnemy = true;
+                GameSetup.gs.PlayerTriggeredEnemy = true;
             }
         
            
