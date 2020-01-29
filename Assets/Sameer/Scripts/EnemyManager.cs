@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public enum EnemyType {Melee,Ranged,Drone}
 public class EnemyManager 
 {
-
     #region Singleton
     private static EnemyManager instance;
     private EnemyManager() { }
