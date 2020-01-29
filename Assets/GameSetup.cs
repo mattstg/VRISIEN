@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameSetup : MonoBehaviour
 {
 
-    public Transform SpawnTriggerLocation;
+    public static GameSetup gs;
+
     //public Transform SpawnLocation;
     
     public int CountOfMeleeEnemyAtOneSpawnLocation = 3;
@@ -43,21 +44,8 @@ public class GameSetup : MonoBehaviour
     
     public void Initialize()
     {
-        //GameSetupClass.Instance.SpawnLocation = SpawnLocation;
-        
-        GameSetupClass.Instance.CountOfMeleeEnemyAtOneSpawnLocation = CountOfMeleeEnemyAtOneSpawnLocation;
-        GameSetupClass.Instance.CountOfRangedEnemyAtOneSpawnLocation = CountOfRangedEnemyAtOneSpawnLocation;
-        GameSetupClass.Instance.CountOfDroneEnemyAtOneSpawnLocation = CountOfDroneEnemyAtOneSpawnLocation;
-        GameSetupClass.Instance.MeleeHealth = MeleeHealth;
-        GameSetupClass.Instance.RangedHealth = RangedHealth;
-        GameSetupClass.Instance.DroneHealth = DroneHealth;
-
-        GameSetupClass.Instance.EnemyCountInScene = EnemyCountInScene;
-        
-
-
         EnemySpawnTrigger = GameObject.FindGameObjectWithTag("EnemySpawnTrigger").transform;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = PlayerManager.Instance.player.transform;//GameObject.FindGameObjectWithTag("Player").transform;
         StateMachineFlowAnimator = gameObject.GetComponent<Animator>();
         
     }
@@ -80,10 +68,7 @@ public class GameSetup : MonoBehaviour
             TimePassed += DTime;
             StateMachineFlowAnimator.SetBool("SpawnEnemy", false);
             StateMachineFlowAnimator.SetBool("AllEnemyDead", true);
-
         }
-
-
         if (PlayerTriggeredEnemy || TimePassed >= 120f || Input.GetKeyDown(KeyCode.Alpha2))
         {
             //Debug.Log("SpawnEnemies");
@@ -91,7 +76,6 @@ public class GameSetup : MonoBehaviour
             TimePassed = 0;
             StateMachineFlowAnimator.SetBool("AllEnemyDead", false);
             StateMachineFlowAnimator.SetBool("SpawnEnemy", true);
-
         }
         if (CollectedSword ||  Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -106,8 +90,6 @@ public class GameSetup : MonoBehaviour
             Debug.Log("Exit");
             StateMachineFlowAnimator.SetBool("BossKilled", true);
         }
-
-
     }
     public void PostInitialize()
     { 
@@ -120,9 +102,4 @@ public class GameSetup : MonoBehaviour
     {
         CollectedSword = true;
     }
-
-    public void EnemySpawnTriggerZone() { 
-    
-    }
-    
  }

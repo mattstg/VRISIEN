@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public enum EnemyType {Melee,Ranged,Drone}
 public class EnemyManager 
 {
-
     #region Singleton
     private static EnemyManager instance;
     private EnemyManager() { }
@@ -28,14 +27,13 @@ public class EnemyManager
     public void Initialize()
     {
         //Debug.Log("EnemyManager Initialize()");
-        meleeHealth = GameSetupClass.Instance.MeleeHealth;
-        rangedHealth = GameSetupClass.Instance.RangedHealth;
+        meleeHealth = GameSetup.gs.MeleeHealth;
+        rangedHealth = GameSetup.gs.RangedHealth;
         toRemove = new Stack<Enemy>();
         toAdd = new Stack<Enemy>();
         enemies = new HashSet<Enemy>();
         enemyParent = new GameObject("EnemyParent").transform;
         SpawnLocations = GameObject.FindGameObjectWithTag("EnemySpawnLocationParent").transform;
-        //SpawnLocations = GameSetupClass.Instance.SpawnLocation;
         foreach (EnemyType etype in System.Enum.GetValues(typeof(EnemyType))) //fill the resource dictionary with all the prefabs
         {
             enemyPrefabDict.Add(etype, Resources.Load<GameObject>("Prefabs/sameer prefabs/Enemy/" + etype.ToString())); //Each enum matches the name of the enemy perfectly

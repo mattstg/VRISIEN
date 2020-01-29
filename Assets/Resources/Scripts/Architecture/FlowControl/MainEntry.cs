@@ -7,7 +7,6 @@ public class MainEntry : MonoBehaviour
     void Awake()
     {
         GameFlowControl.Instance.Initialize();
-        gameObject.GetComponent<GameSetup>().Initialize();
     }
 
     void Start()
@@ -17,8 +16,7 @@ public class MainEntry : MonoBehaviour
 
     void Update()
     {
-        GameFlowControl.Instance.Refresh(Time.deltaTime);
-        gameObject.GetComponent<GameSetup>().Refresh(Time.deltaTime);
+        GameFlowControl.Instance.Refresh();
     }
 
     void FixedUpdate()

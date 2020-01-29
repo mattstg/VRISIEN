@@ -7,7 +7,7 @@ public class SpawnEnemiesState : StateMachineBehaviour
     // Start is called before the first frame update
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        EnemyManager.Instance.NumberOfEnemyToSpawn(GameSetupClass.Instance.CountOfMeleeEnemyAtOneSpawnLocation, GameSetupClass.Instance.CountOfRangedEnemyAtOneSpawnLocation, 0);
+        EnemyManager.Instance.NumberOfEnemyToSpawn(GameSetup.gs.CountOfMeleeEnemyAtOneSpawnLocation, GameSetup.gs.CountOfRangedEnemyAtOneSpawnLocation, 0);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
