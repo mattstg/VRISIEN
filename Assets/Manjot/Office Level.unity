@@ -1105,6 +1105,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f80adb8cf0fdec4ebee1e2103a3e242, type: 3}
+--- !u!4 &647458906 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 817913796, guid: e64a337dda1f478408858be875cdcd9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1083621579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &680720174
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2194,36 +2200,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f80adb8cf0fdec4ebee1e2103a3e242, type: 3}
---- !u!1 &817913795
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 817913796}
-  m_Layer: 10
-  m_Name: SwordSpot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &817913796
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 817913795}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.372, y: -0.511, z: -0.2577}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 950557073}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &849541735
 GameObject:
   m_ObjectHideFlags: 0
@@ -2356,12 +2332,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3262ca4093ba2d469d5574db8c8e48e, type: 3}
---- !u!4 &950557073 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4278611830231342113, guid: e64a337dda1f478408858be875cdcd9a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1083621579}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &968916009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2758,7 +2728,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 817913796, guid: e64a337dda1f478408858be875cdcd9a, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4278611830231342113, guid: e64a337dda1f478408858be875cdcd9a,
         type: 3}
@@ -2824,7 +2794,7 @@ PrefabInstance:
         type: 3}
       propertyPath: swordSpot
       value: 
-      objectReference: {fileID: 817913796}
+      objectReference: {fileID: 647458906}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e64a337dda1f478408858be875cdcd9a, type: 3}
 --- !u!1 &1097150422
