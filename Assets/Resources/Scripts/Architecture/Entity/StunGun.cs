@@ -44,7 +44,7 @@ public class StunGun : MonoBehaviour
                 transform.parent = null;
             }
 
-            if (!grabRef.grabbedByRight)
+            if (grabRef.grabbedByRight)
             {
                 if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && cooldownTime > timer)
                 {
