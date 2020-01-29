@@ -118,7 +118,7 @@ public class Blade : MonoBehaviour
     {
         if (Vector3.SqrMagnitude(PlayerManager.Instance.player.swordSpot.position - transform.position) > 0.15f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, PlayerManager.Instance.player.swordSpot.position, 1f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, PlayerManager.Instance.player.swordSpot.position, 2.5f * Time.deltaTime);
             transform.eulerAngles = Vector3.RotateTowards(transform.eulerAngles, PlayerManager.Instance.player.swordSpot.eulerAngles, 2, 1);
         }
         else if (transform.parent != PlayerManager.Instance.player.swordSpot)

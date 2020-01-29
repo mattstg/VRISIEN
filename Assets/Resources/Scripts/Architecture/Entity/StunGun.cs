@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class StunGun : MonoBehaviour
 {
     const float gunDistanceOffset = 0.05f;
-    const float smoothLerp = 1f;
+    const float smoothLerp = 3.5f;
     const float maxRadians = Mathf.PI / 4;
 
     private Transform endPos; // can be the  player's location where the gun will lerp back and forth 
