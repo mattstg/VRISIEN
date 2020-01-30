@@ -33,6 +33,7 @@ public class Blade : MonoBehaviour
         cooldownTime += Time.deltaTime;
         if (grabRef.isGrabbed)
         {
+            transform.SetParent(null);
             if (grabRef.grabbedByRight)
             {
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && cooldownTime > timer)
