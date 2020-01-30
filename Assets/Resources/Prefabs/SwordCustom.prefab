@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 4584007557306982799}
   - component: {fileID: 113736764214330849}
   - component: {fileID: 4656694612401264016}
+  - component: {fileID: 8528350734252183071}
   m_Layer: 11
   m_Name: polySurface7
   m_TagString: Untagged
@@ -564,6 +565,23 @@ CapsuleCollider:
   m_Height: 0.06887937
   m_Direction: 0
   m_Center: {x: 0.049439657, y: 0.0017, z: 0}
+--- !u!114 &8528350734252183071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7517633737503991827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3838dc05323bf4b48aed48ba37c7fda3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  hiltGrabber: {fileID: 0}
+  gushingBlood: {fileID: 0}
+  velocity: 0
+  angularVelocity: 0
 --- !u!1 &7722221786191523320
 GameObject:
   m_ObjectHideFlags: 0
