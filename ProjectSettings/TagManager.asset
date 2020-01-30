@@ -23,6 +23,7 @@ TagManager:
   - HoldsterSocket
   - StunGunAttachSocket
   - StunGun
+  - DamageUI
   layers:
   - Default
   - TransparentFX
