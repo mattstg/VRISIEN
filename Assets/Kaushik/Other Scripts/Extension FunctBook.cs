@@ -18,6 +18,13 @@ public static class ExtensionFunctBook
         rb.AddForce(-rb.transform.forward * 100f);
     }
 
+    public static void Reflect(this Rigidbody rb)               // Call for blade on bullet collision. Reappropriate later for Reflect
+    {
+        rb.angularVelocity = Vector3.zero;
+        rb.velocity = Vector3.one;
+        rb.AddForce(-rb.transform.forward * 1000f);
+    }
+
 
 
 
