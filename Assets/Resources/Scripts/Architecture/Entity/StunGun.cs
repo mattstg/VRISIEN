@@ -94,9 +94,9 @@ public class StunGun : MonoBehaviour
                 StartCoroutine(Stun(e.transform.GetComponentInParent<RagdollControl>()));
             }
 
-            if(hit.transform.GetComponent<IHittable>() != null)
+            if(hit.transform.GetComponentInParent<IHittable>() != null)
             {
-                hit.transform.gameObject.GetComponent<IHittable>().Stun();
+                hit.transform.gameObject.GetComponentInParent<IHittable>().Stun();
             }
         } 
     }
