@@ -85,8 +85,10 @@ public class Bullet : MonoBehaviour
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 PlayerManager.Instance.player.TakeDamage(5f);
+                GameObject.FindGameObjectWithTag("DamageUI").GetComponent<Animator>().SetTrigger("PlayEffect");
             }
         }
 
     }
+
 }
