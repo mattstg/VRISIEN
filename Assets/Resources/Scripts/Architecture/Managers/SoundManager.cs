@@ -21,6 +21,7 @@ public class SoundManager
 
     public void Initialize()
     {
+        audioDict = new Dictionary<string, AudioClip>();
         resourceAudioClips = Resources.LoadAll<AudioClip>("Bhumit/Audio");
         for (int i = 0; i < resourceAudioClips.Length; i++)
         {
@@ -35,6 +36,7 @@ public class SoundManager
         activeSource.clip = audioDict[name];
         activeSource.volume = 0.8f;
         activeSource.Play();
+        activeSource.loop = false;
     }
     public void StopMusic( GameObject go)
     {

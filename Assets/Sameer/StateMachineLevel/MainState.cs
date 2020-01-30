@@ -23,10 +23,10 @@ public class MainState : StateMachineBehaviour
            }
         if (EnemyManager.Instance.enemies.Count > 0)
         {
-            Debug.Log("aa");
+    
             if (!musicPlay)
             {
-                Debug.Log("bb");
+            
                 go = new GameObject();
                 SoundManager.Instance.PlayMusic("Bg_Music", go);
                 musicPlay = true;
@@ -35,10 +35,10 @@ public class MainState : StateMachineBehaviour
         }
         else if(EnemyManager.Instance.enemies.Count<=0)
         {
-            Debug.Log("cc");
+           
             if (musicPlay)
             {
-                Debug.Log("dd");
+          
                 SoundManager.Instance.StopMusic( go);
                 musicPlay = false;
             }
