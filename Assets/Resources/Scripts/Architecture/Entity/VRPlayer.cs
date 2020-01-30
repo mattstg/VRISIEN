@@ -128,7 +128,7 @@ public class VRPlayer : OVRPlayerController, IManagable
 
     public void isDead()
     {
-        SoundManager.Instance.PlayMusic("Player_Die",gameObject);
+        SoundManager.Instance.PlaySfx("Player_Die",gameObject);
         isAlive = false;
     }
 }
