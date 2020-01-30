@@ -8,6 +8,7 @@ public class SpawnEnemiesState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         EnemyManager.Instance.NumberOfEnemyToSpawn(GameSetup.gs.CountOfMeleeEnemyAtOneSpawnLocation, GameSetup.gs.CountOfRangedEnemyAtOneSpawnLocation, 0);
+       
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

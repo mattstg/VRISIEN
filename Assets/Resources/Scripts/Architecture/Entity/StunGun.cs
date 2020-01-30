@@ -83,7 +83,7 @@ public class StunGun : MonoBehaviour
 
         ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.StunGunMuzzle, MuzzlePoint, 0.2f);
         print("shoot");
-                SoundManager.Instance.PlayMusic("StunGun",gameObject);
+        SoundManager.Instance.PlayMusic("StunGun",gameObject);
                 
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, Mathf.Infinity))     // Hey sir, why did you replace my extension function that does EXACTLY this ? :'(
         {

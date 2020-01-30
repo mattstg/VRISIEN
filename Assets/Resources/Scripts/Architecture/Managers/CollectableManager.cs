@@ -69,7 +69,8 @@ public class CollectableManager
     }
 
     public void GotSword()
-    {
+    {   
+        
         gotSword = true;
         WeaponManager.Instance.blades.Add(specialBlade);
         specialBlade.Initialize();
