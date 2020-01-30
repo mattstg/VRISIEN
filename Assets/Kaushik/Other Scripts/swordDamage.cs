@@ -53,7 +53,16 @@ public class swordDamage : MonoBehaviour
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
-            other.GetComponent<Rigidbody>().Deflect();
+        {
+            if (!blade.isSpecial)
+                other.GetComponent<Rigidbody>().Deflect();
+
+            else
+            {
+                other.GetComponent<Bullet>().canDamageEnemies = true;
+                other.GetComponent<Rigidbody>().Reflect();
+            }
+        }
             
 
 
