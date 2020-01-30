@@ -6,6 +6,7 @@ using UnityEngine;
 public class RangedEnemy : Enemy, IHittable
 {
     public Transform gunPoint;
+    public int maxHealth = 100;
     public float fireRate = 0.25f;
     public int maxAmmo = 10;
     public int maxHitResistance = 3;
@@ -275,5 +276,11 @@ public class RangedEnemy : Enemy, IHittable
                 }              
             }
         }
+    }
+
+    void IHittable.ApplyDamage(int damageAmt)
+    {
+        maxHealth -= damageAmt;
+        StartCoroutine(HitReactionSequence(2f));
     }
 }

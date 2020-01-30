@@ -7,4 +7,6 @@ public interface IHittable
     void Stun();
 
     void SwordHit();
+
+    void ApplyDamage(int damageAmt);
 }

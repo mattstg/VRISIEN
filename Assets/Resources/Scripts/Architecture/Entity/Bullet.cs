@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public bool canDamageEnemies = false;
     private float bulletLife = 5f;
     Vector3 startPos;
     public bool isHit = false;
@@ -68,5 +69,24 @@ public class Bullet : MonoBehaviour
             ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.BulletImpact, transform, 0.5f);
             isHit = true;
         }
+
+        if (canDamageEnemies)
+        {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                if(other.gameObject.GetComponent<IHittable>() != null)
+                {
+                    other.gameObject.GetComponent<IHittable>().ApplyDamage(50);
+                }
+            }
+        }
+        else
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                PlayerManager.Instance.player.TakeDamage(5f);
+            }
+        }
+
     }
 }
