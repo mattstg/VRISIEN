@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Boss1AI : Enemy, IHittable
+public class Boss1AI : MonoBehaviour, IHittable
 {
     public Transform target;
     NavMeshAgent agent;
@@ -12,7 +12,7 @@ public class Boss1AI : Enemy, IHittable
     float fireRateCount;
     float abilityTimer = 3f;
     float abilityTimeCounter;
-
+    int hp = 300;
     Vector3 newPos;
 
     int randSide;
@@ -28,28 +28,21 @@ public class Boss1AI : Enemy, IHittable
     public Transform toiletSeat;
 
     // Start is called before the first frame update
-    public void Start()
+   // public override void Initialize(float _hp = 300)
+   public void Start()
     {
-      //  base.Initialize();
+        //base.Initialize(_hp);
       //  Debug.Log("boss ai");
         agent = GetComponent<NavMeshAgent>();
-        target = FindObjectOfType<FakePlayer>().transform;
+        target = FindObjectOfType<VRPlayer>().transform;
         fireRateCount = fireRate;
         abilityTimeCounter = abilityTimer;
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    public void Update()
-    {
-        // base.Refresh();
-        // WalkAndPunch();
-        //  Shoots();
-        // SpecialAttack();
-       //  RandomAbilities();
-       // Debug.Log(randAbility);
-    }
+  
 
+   
     public void RandomAbilities()
     {
         //abilityTimeCounter -= Time.deltaTime;
@@ -80,7 +73,7 @@ public class Boss1AI : Enemy, IHittable
     {
         agent.SetDestination(target.position);
         //if (agent.remainingDistance <= agent.stoppingDistance + 4)
-        if((transform.position - target.position).sqrMagnitude <= 60)
+        if((transform.position - target.position).sqrMagnitude <= 50)
         {
             anim.SetTrigger("Kick");
         }
@@ -90,7 +83,6 @@ public class Boss1AI : Enemy, IHittable
     {
         transform.LookAt(target);
         sidewayTimer -= Time.deltaTime;
-        Debug.Log(randSide);
         if (sidewayTimer <= 0)
         {
             randSide = Random.Range(0, 2);
@@ -129,7 +121,7 @@ public class Boss1AI : Enemy, IHittable
     {
         agent.SetDestination(toiletSeat.position);
         //if(agent.remainingDistance <= agent.stoppingDistance)
-        if ((transform.position - toiletSeat.position).sqrMagnitude <= 10)
+        if ((transform.position - toiletSeat.position).sqrMagnitude <= 20)
         {
             transform.LookAt(target);
             anim.SetTrigger("Throw");
@@ -146,36 +138,10 @@ public class Boss1AI : Enemy, IHittable
         throw new System.NotImplementedException();
     }
     
-    public void ResetAbilityTime()
-    {
-        randAbility = Random.Range(0, 3);
-        anim.ResetTrigger("Run");
-        anim.ResetTrigger("Kick");
-        anim.ResetTrigger("StrafeLeft");
-        anim.ResetTrigger("StrafeRight");
-        anim.ResetTrigger("Throw");
-        anim.ResetTrigger("FlyingKick");
-
-        //abilityTimeCounter = 1f;
-        ////anim.ResetTrigger("Run");
-        ////anim.ResetTrigger("Kick");
-        ////anim.ResetTrigger("StrafeLeft");
-        ////anim.ResetTrigger("StrafeRight");
-        ////anim.ResetTrigger("Throw");
-        ////anim.ResetTrigger("FlyingKick");
-        //anim.SetBool("Runs", false);
-        //anim.SetBool("Kicks", false);
-        //anim.SetBool("StrafeLefts", false);
-        //anim.SetBool("StrafeRights", false);
-        //anim.SetBool("Throws", false);
-        //anim.SetBool("FlyingKicks", false);
-    }
-    
     public void AbilityComplete()
     {
         abilityDone = true;
     }
-
     public void ApplyDamage(int damage)
     {
         hp -= damage;

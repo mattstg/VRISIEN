@@ -13,7 +13,6 @@ public class BossRunBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent = animator.GetComponent<NavMeshAgent>();
-        target = FindObjectOfType<FakePlayer>().transform;
         bossAI = animator.GetComponent<Boss1AI>();
     }
 
@@ -34,7 +33,7 @@ public class BossRunBehavior : StateMachineBehaviour
                 break;
             case 3://SpecialAttack
                 //animator.SetTrigger("Throw");
-                bossAI.SpecialAttack();
+                bossAI.RunAndKick();
                 break;
             default:
                 Debug.Log("Default");
