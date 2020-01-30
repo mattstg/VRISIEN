@@ -113,7 +113,7 @@ public class EnemyManager
                         e.Initialize(meleeHealth);
                     else if(etype.Equals(EnemyType.Ranged))
                         e.Initialize(rangedHealth);
-                    toAdd.Push(e);  
+                    enemies.Add(e);  
                 }
            
             }

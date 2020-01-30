@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Boss1AI : MonoBehaviour, IHittable
+public class Boss1AI : Enemy, IHittable
 {
     public Transform target;
     NavMeshAgent agent;
@@ -31,8 +31,6 @@ public class Boss1AI : MonoBehaviour, IHittable
    // public override void Initialize(float _hp = 300)
    public void Start()
     {
-        //base.Initialize(_hp);
-      //  Debug.Log("boss ai");
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<VRPlayer>().transform;
         fireRateCount = fireRate;
@@ -40,9 +38,16 @@ public class Boss1AI : MonoBehaviour, IHittable
         anim = GetComponent<Animator>();
     }
 
-  
+    public override void Initialize(float _hp = 300)
+    {
+        base.Initialize(_hp);
+    }
 
-   
+    public override void Refresh()
+    {
+        base.Refresh();
+    }
+
     public void RandomAbilities()
     {
         //abilityTimeCounter -= Time.deltaTime;
@@ -82,6 +87,7 @@ public class Boss1AI : MonoBehaviour, IHittable
     public void Shoots()
     {
         transform.LookAt(target);
+        gunPoint1.LookAt(target);
         sidewayTimer -= Time.deltaTime;
         if (sidewayTimer <= 0)
         {
