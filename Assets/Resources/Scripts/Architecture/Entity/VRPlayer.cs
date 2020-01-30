@@ -14,7 +14,8 @@ public class VRPlayer : OVRPlayerController, IManagable
     float slowmoCooldown = 5;
     float slowmoTimer = 0;
 
-    float hp = 200;
+    [HideInInspector]
+    public float hp = 200;
     float maxHP = 200;
     float hpRegenTime = 10;
     float hpRegenCooldown = 0;
@@ -109,7 +110,7 @@ public class VRPlayer : OVRPlayerController, IManagable
         hp = Mathf.Clamp(hp - damage, 0, maxHP);
         Debug.Log("Player HP: "+ hp );
         if (hp <= 0)
-            isAlive = false;
+            isDead();
     }
 
     void RegenerateHP(float regenerateBy = 10)
