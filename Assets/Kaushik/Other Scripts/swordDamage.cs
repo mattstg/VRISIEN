@@ -17,7 +17,7 @@ public class swordDamage : MonoBehaviour
 
             velocity = rb.velocity.magnitude;
             angularVelocity = rb.angularVelocity.magnitude;
-            if ((velocity + angularVelocity) / 2 > 9.5f)
+            if ((velocity + angularVelocity) / 2 > 19.5f)
             {
                 var blood = GameObject.Instantiate(gushingBlood, other.transform);
                 blood.transform.localPosition = Vector3.zero;
@@ -25,8 +25,16 @@ public class swordDamage : MonoBehaviour
                 var enemyRef = other.transform.GetComponentInParent<Enemy>();
                 enemyRef.HitByProjectile(34f);
 
-
+                if(hiltGrabber.grabbedByRight)
                 OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
+                else
+                    OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
+
+                if (other.transform.GetComponentInParent<IHittable>() != null)
+                {
+                    other.transform.gameObject.GetComponentInParent<IHittable>().SwordHit();
+                }
+
 
                 if (!enemyRef.isAlive)
                     other.transform.GetComponentInParent<RagdollControl>().DoRagdoll(true);
