@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
     public virtual void Die()
     {
         EnemyManager.Instance.EnemyDied(this);
-
+        SoundManager.Instance.PlayMusic("Enemy_Die", gameObject);
         isAlive = false;
     }
 }

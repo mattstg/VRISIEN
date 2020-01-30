@@ -175,4 +175,9 @@ public class Boss1AI : Enemy, IHittable
     {
         abilityDone = true;
     }
+
+    public void ApplyDamage(int damage)
+    {
+        hp -= damage;
+    }
 }

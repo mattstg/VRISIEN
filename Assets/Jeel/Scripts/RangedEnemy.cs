@@ -131,7 +131,7 @@ public class RangedEnemy : Enemy, IHittable
 
     void ShootPlayer()
     {
-       // SoundManager.Instance.PlayMusic("Ranged_Gun_Sound", gameObject);
+        SoundManager.Instance.PlayMusic("Ranged_Gun_Sound", gameObject);
         RotateTowardsPlayer();
         fireRateCounter += Time.deltaTime;
         if (fireRateCounter > fireRate)

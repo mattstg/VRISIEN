@@ -11,6 +11,7 @@ public class WeaponManager
     GameObject go, go2;
     GameObject gunParent;
     public List<StunGun> guns;
+    public List<Blade> blades;
 
     StunGun stunGun;
     Blade blade;
@@ -26,6 +27,7 @@ public class WeaponManager
         go = Resources.Load<GameObject>("Prefabs/StunGun");
         go2 = Resources.Load<GameObject>("Prefabs/Blade");
         guns = new List<StunGun>();
+        blades = new List<Blade>();
         gunParent = new GameObject("GunParent");
         spawnLoc = GameObject.Find("Player").transform.position + Vector3.right/1.5f + Vector3.up * 2f;
         spawnLoc2 = GameObject.Find("Player").transform.position - Vector3.right / 1.5f + Vector3.up * 2f;
@@ -68,6 +70,7 @@ public class WeaponManager
     public Blade spawnBlade(Vector3 spawnLoc)
     {
         blade = GameObject.Instantiate(go2, spawnLoc, Quaternion.identity).GetComponent<Blade>();
+        blades.Add(blade);
         return blade;
     }
 }

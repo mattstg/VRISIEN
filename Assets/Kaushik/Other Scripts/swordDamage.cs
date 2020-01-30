@@ -7,10 +7,12 @@ public class swordDamage : MonoBehaviour
     public Rigidbody rb;
     public OVRGrabbable hiltGrabber;
     public GameObject gushingBlood;
+    public Blade blade;
     public float velocity, angularVelocity;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
+        SoundManager.Instance.PlayMusic("SwordHit", gameObject);
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
            
@@ -23,7 +25,7 @@ public class swordDamage : MonoBehaviour
                 blood.transform.localPosition = Vector3.zero;
 
                 var enemyRef = other.transform.GetComponentInParent<Enemy>();
-                enemyRef.HitByProjectile(34f);
+                enemyRef.HitByProjectile(blade.damageAmount);
 
                 if(hiltGrabber.grabbedByRight)
                 OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
@@ -51,7 +53,16 @@ public class swordDamage : MonoBehaviour
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
-            other.GetComponent<Rigidbody>().Deflect();
+        {
+            if (!blade.isSpecial)
+                other.GetComponent<Rigidbody>().Deflect();
+
+            else
+            {
+                other.GetComponent<Bullet>().canDamageEnemies = true;
+                other.GetComponent<Rigidbody>().Reflect();
+            }
+        }
             
 
 

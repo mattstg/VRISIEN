@@ -110,6 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothing: 1
+  damageAmount: 0
+  isSpecial: 0
   angle: {x: 0, y: 0, z: 0}
 --- !u!1 &4744988862172326798
 GameObject:
@@ -299,6 +301,7 @@ MonoBehaviour:
   hiltGrabber: {fileID: 4744988861423356695}
   gushingBlood: {fileID: 7054701420462410794, guid: 2686bcb932c9e874db894ac6a157cec2,
     type: 3}
+  blade: {fileID: -4415699222057590007}
   velocity: 0
   angularVelocity: 0
 --- !u!65 &6774265315467879720
