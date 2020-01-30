@@ -7,6 +7,7 @@ public class Blade : MonoBehaviour
 {
     private Transform endPos; // can be the  player's location where the gun will lerp back and forth 
     private Transform startPos;
+    private Transform holsterPos;
 
     OVRGrabbable grabRef;
 
@@ -15,6 +16,9 @@ public class Blade : MonoBehaviour
 
     private float cooldownTime = 0; // cool down for GETOVERHERE!!! *experimental*
     private float timer = 1.5f;
+    public float damageAmount;
+
+    public bool isSpecial;
 
     public Vector3 angle;
 
@@ -26,6 +30,19 @@ public class Blade : MonoBehaviour
       //  endPos = GameObject.Find("Left").transform;
       //  startPos.position = 
         grabRef = gameObject.GetComponent<OVRGrabbable>();
+        if (gameObject.layer == LayerMask.NameToLayer("Collectables"))
+        {
+            isSpecial = true;
+            damageAmount = 100f;
+            holsterPos = PlayerManager.Instance.player.specialSpot;
+        }
+        else
+        {
+            isSpecial = false;
+            damageAmount = 34f;
+            holsterPos = PlayerManager.Instance.player.swordSpot;
+        }
+        
 
     }
     public void Refresh()
@@ -117,14 +134,14 @@ public class Blade : MonoBehaviour
 
     void LerpBackToHolster()
     {
-        if (Vector3.SqrMagnitude(PlayerManager.Instance.player.swordSpot.position - transform.position) > 0.15f)
+        if (Vector3.SqrMagnitude(holsterPos.position - transform.position) > 0.15f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, PlayerManager.Instance.player.swordSpot.position, 2.5f * Time.deltaTime);
-            transform.eulerAngles = Vector3.RotateTowards(transform.eulerAngles, PlayerManager.Instance.player.swordSpot.eulerAngles, 2, 1);
+            transform.position = Vector3.MoveTowards(transform.position, holsterPos.position, 2.5f * Time.deltaTime);
+            transform.eulerAngles = Vector3.RotateTowards(transform.eulerAngles, holsterPos.eulerAngles, 2, 1);
         }
-        else if (transform.parent != PlayerManager.Instance.player.swordSpot)
+        else if (transform.parent != holsterPos)
         {
-            transform.SetParent(PlayerManager.Instance.player.swordSpot);
+            transform.SetParent(holsterPos);
             transform.localEulerAngles = Vector3.zero;
             transform.localPosition = Vector3.zero;
         }
