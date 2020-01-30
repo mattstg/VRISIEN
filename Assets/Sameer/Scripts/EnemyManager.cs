@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum EnemyType {Melee,Ranged,Drone}
+public enum EnemyType {Melee,Ranged,Drone, Boss}
 public class EnemyManager 
 {
     #region Singleton
@@ -12,7 +12,7 @@ public class EnemyManager
     public static EnemyManager Instance { get { return instance ?? (instance = new EnemyManager()); } }
     #endregion
 
-    float meleeHealth,rangedHealth;
+    float meleeHealth,rangedHealth, bossHealth;
     Transform enemyParent;
     Transform SpawnLocations;
     public int enemyCountofCurrentWave = 0;
@@ -29,6 +29,7 @@ public class EnemyManager
         //Debug.Log("EnemyManager Initialize()");
         meleeHealth = GameSetup.gs.MeleeHealth;
         rangedHealth = GameSetup.gs.RangedHealth;
+        bossHealth = GameSetup.gs.BossHealth;
         toRemove = new Stack<Enemy>();
         toAdd = new Stack<Enemy>();
         enemies = new HashSet<Enemy>();
@@ -91,6 +92,13 @@ public class EnemyManager
         SpawnEnemies(EnemyType.Ranged, ranged);
         SpawnEnemies(EnemyType.Drone, drone);
 
+        //for testing
+
+    }
+    public void SpawnBoss()
+    {
+        SpawnEnemies(EnemyType.Boss, 1);
+
     }
 
     public Enemy SpawnEnemies(EnemyType etype,int qty)
@@ -113,6 +121,8 @@ public class EnemyManager
                         e.Initialize(meleeHealth);
                     else if(etype.Equals(EnemyType.Ranged))
                         e.Initialize(rangedHealth);
+                    else if (etype.Equals(EnemyType.Boss))
+                        e.Initialize(bossHealth);
                     enemies.Add(e);  
                 }
            

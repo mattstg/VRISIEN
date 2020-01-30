@@ -16,6 +16,7 @@ public class GameSetup : MonoBehaviour
     public int CountOfDroneEnemyAtOneSpawnLocation = 0;
     public int DroneHealth = 0;
     public int attackSlots = 2;
+    public int BossHealth = 300;
 
     int EnemyCountInScene { get 
         {

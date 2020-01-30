@@ -3846,6 +3846,7 @@ MonoBehaviour:
   CountOfDroneEnemyAtOneSpawnLocation: 0
   DroneHealth: 0
   attackSlots: 2
+  BossHealth: 300
   EnemySpawnTrigger: {fileID: 0}
   PlayerTriggeredEnemy: 0
   player: {fileID: 0}
