@@ -33,8 +33,14 @@ public class SoundManager
         go.AddComponent<AudioSource>();
         AudioSource activeSource = go.GetComponent<AudioSource>();
         activeSource.clip = audioDict[name];
-        activeSource.volume = 1;
+        activeSource.volume = 0.8f;
         activeSource.Play();
+    }
+    public void StopMusic( GameObject go)
+    {
+        
+        AudioSource activeSource = go.GetComponent<AudioSource>();       
+        activeSource.Stop();
     }
 
     public void PlaySfx(string name, GameObject go)
@@ -43,11 +49,9 @@ public class SoundManager
         AudioSource sfxSource = go.GetComponent<AudioSource>();
         sfxSource.PlayOneShot(audioDict[name]);
         sfxSource.loop = true;
-        sfxSource.volume = 0.2f;
-        
-
-
+        sfxSource.volume = 0.5f;
     }
+
 
     //public void PlayMusicWithFade(AudioClip newClip, float transitionTime = 1.0f)
     //{

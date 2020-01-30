@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Boss1AI : Enemy, IHittable
+public class Boss1AI : MonoBehaviour,IHittable
 {
     public Transform target;
     NavMeshAgent agent;
@@ -12,7 +12,6 @@ public class Boss1AI : Enemy, IHittable
     float fireRateCount;
     float abilityTimer = 3f;
     float abilityTimeCounter;
-    int hp = 300;
     Vector3 newPos;
 
     int randSide;
@@ -26,7 +25,7 @@ public class Boss1AI : Enemy, IHittable
     public float sidewayTimer = 2f;
     public Transform gunPoint1;
     public Transform toiletSeat;
-
+    public float hp = 300;
     // Start is called before the first frame update
    // public override void Initialize(float _hp = 300)
    public void Start()
@@ -36,16 +35,16 @@ public class Boss1AI : Enemy, IHittable
         fireRateCount = fireRate;
         abilityTimeCounter = abilityTimer;
         anim = GetComponent<Animator>();
+        Debug.Log("HP is : " + hp);
     }
 
-    public override void Initialize(float _hp = 300)
-    {
-        base.Initialize(_hp);
-    }
 
-    public override void Refresh()
+
+
+    public void Update()
     {
-        base.Refresh();
+        Debug.Log("HP is : " + hp);
+        
     }
 
     public void RandomAbilities()
@@ -78,7 +77,7 @@ public class Boss1AI : Enemy, IHittable
     {
         agent.SetDestination(target.position);
         //if (agent.remainingDistance <= agent.stoppingDistance + 4)
-        if((transform.position - target.position).sqrMagnitude <= 50)
+        if((transform.position - target.position).sqrMagnitude <= 70)
         {
             anim.SetTrigger("Kick");
         }
@@ -86,7 +85,7 @@ public class Boss1AI : Enemy, IHittable
 
     public void Shoots()
     {
-        transform.LookAt(target);
+        transform.LookAt(new Vector3(target.position.x, 0, target.position.z));
         gunPoint1.LookAt(target);
         sidewayTimer -= Time.deltaTime;
         if (sidewayTimer <= 0)

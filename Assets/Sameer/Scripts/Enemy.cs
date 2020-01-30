@@ -29,8 +29,10 @@ public class Enemy : MonoBehaviour
         //meleeCountPerLocation = GetComponent<EnemyController>().CountOfMeleeEnemyAtOneSpawnLocation;
         //rangedCountPerLocation = GetComponent<EnemyController>().CountOfRangedEnemyAtOneSpawnLocation;
         //droneCountPerLocation = GetComponent<EnemyController>().CountOfDroneEnemyAtOneSpawnLocation;
+        Debug.Log("Boss HP is : " + hp);
+
     }
-  
+
     public virtual void HitByProjectile(float damage)
     {
         hp -= damage;

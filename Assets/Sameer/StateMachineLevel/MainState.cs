@@ -5,7 +5,9 @@ using UnityEngine;
 public class MainState : StateMachineBehaviour
 {
     Transform EnemySpawnTrigger;
+    bool musicPlay = false;
     Transform player;
+    GameObject go;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         EnemySpawnTrigger = GameSetup.gs.EnemySpawnTrigger;
@@ -16,10 +18,31 @@ public class MainState : StateMachineBehaviour
     {
         //Update collectibla count,time state is on,check for trigger zones
            if(Input.GetKeyDown(KeyCode.P))
-            {
+           {
                 GameSetup.gs.PlayerTriggeredEnemy = true;
+           }
+        if (EnemyManager.Instance.enemies.Count > 0)
+        {
+            Debug.Log("aa");
+            if (!musicPlay)
+            {
+                Debug.Log("bb");
+                go = new GameObject();
+                SoundManager.Instance.PlayMusic("Bg_Music", go);
+                musicPlay = true;
+
             }
-        
+        }
+        else if(EnemyManager.Instance.enemies.Count<=0)
+        {
+            Debug.Log("cc");
+            if (musicPlay)
+            {
+                Debug.Log("dd");
+                SoundManager.Instance.StopMusic( go);
+                musicPlay = false;
+            }
+        }
            
 
     }
