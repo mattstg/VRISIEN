@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Boss1AI : MonoBehaviour,IHittable
+public class Boss1AI : Enemy ,IHittable
 {
     public Transform target;
     NavMeshAgent agent;
@@ -25,23 +25,24 @@ public class Boss1AI : MonoBehaviour,IHittable
     public float sidewayTimer = 2f;
     public Transform gunPoint1;
     public Transform toiletSeat;
-    public float hp = 300;
+   // public float hp = 300;
     // Start is called before the first frame update
-   // public override void Initialize(float _hp = 300)
-   public void Start()
+    public override void Initialize(float _hp = 300)
+   //public void Start()
     {
+        base.Initialize(_hp);
         agent = GetComponent<NavMeshAgent>();
-        target = FindObjectOfType<VRPlayer>().transform;
+        target = PlayerManager.Instance.player.transform;
         fireRateCount = fireRate;
         abilityTimeCounter = abilityTimer;
         anim = GetComponent<Animator>();
         Debug.Log("HP is : " + hp);
     }
+   
+         
 
 
-
-
-    public void Update()
+    public override void Refresh()
     {
         Debug.Log("HP is : " + hp);
         
