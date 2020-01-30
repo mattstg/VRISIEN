@@ -7,10 +7,12 @@ public class Collectable : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collectable thing touched");
+        Debug.Log("Tag of the thing is " + collision);
+
         if (collision.collider.gameObject.CompareTag("Left")|| collision.collider.gameObject.CompareTag("Right")) //mixamorig:RightHand 
         {
-            Debug.Log("Collectable thing touched");
-            Debug.Log("Tag of the thing is " + collision);
+            
             gameObject.SetActive(false);
             if (gameObject.name.Equals("SwordCustom"))
             {
