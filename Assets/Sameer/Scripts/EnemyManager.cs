@@ -150,5 +150,6 @@ public class EnemyManager
     public void EnemyDied(Enemy enemyDied)
     {
         toRemove.Push(enemyDied);
+        
     }
 }

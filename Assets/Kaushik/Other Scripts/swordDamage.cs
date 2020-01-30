@@ -11,6 +11,7 @@ public class swordDamage : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
+        SoundManager.Instance.PlayMusic("SwordHit", gameObject);
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
            
