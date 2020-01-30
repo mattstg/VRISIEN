@@ -32,6 +32,7 @@ public class RangedEnemy : Enemy, IHittable
     bool hasAttackSlot = false;
     bool canSeePlayer;
     bool canMove = true;
+    bool meleeBool = true;
 
 
     // Start is called before the first frame update
@@ -69,8 +70,17 @@ public class RangedEnemy : Enemy, IHittable
                 }
                 else
                 {
-                    if(animController.enabled)
-                        ShootPlayer();
+                    if (animController.enabled)
+                    {
+                        if (PlayerTooClose())
+                        {
+                            Melee();
+                        }
+                        else
+                        {
+                            ShootPlayer();
+                        }
+                    }
                 }
             }
             else
@@ -95,8 +105,6 @@ public class RangedEnemy : Enemy, IHittable
                 canSeePlayer = false;
             }
         }
-        
-
     }
 
     void FindCover()
@@ -135,6 +143,7 @@ public class RangedEnemy : Enemy, IHittable
     {
 
         RotateTowardsPlayer();
+
         fireRateCounter += Time.deltaTime;
         if (fireRateCounter > fireRate)
         {
@@ -163,9 +172,27 @@ public class RangedEnemy : Enemy, IHittable
         //print("Shooting");
     }
 
+    void Melee()
+    {
+        if(meleeBool)
+        {
+            meleeBool = false;
+            StartCoroutine(MeleeSequence(0.5f));
+        }
+    }
+    public bool PlayerTooClose()
+    {
+        bool temp = false;
+        if(Vector3.SqrMagnitude(player.transform.position - transform.position) < 25f)
+        {
+            temp = true;
+        }
+        return temp;
+    }
+
     void RotateTowardsPlayer()
     {
-        transform.LookAt(player.transform);
+        transform.LookAt(new Vector3(player.transform.position.x,0,player.transform.position.z));
         gunPoint.transform.LookAt(player.transform.position+new Vector3(Random.Range(-2,2), Random.Range(-2, 2), Random.Range(-2, 2)));
     }
 
@@ -232,6 +259,13 @@ public class RangedEnemy : Enemy, IHittable
         canMove = true;
     }
 
+    IEnumerator MeleeSequence(float time)
+    {
+        animController.SetTrigger("Melee");
+        yield return new WaitForSeconds(time);
+        PlayerManager.Instance.player.TakeDamage(200f);
+    }
+
     IEnumerator ReloadSequence(float time)
     {
         isReloading = true;
@@ -288,5 +322,6 @@ public class RangedEnemy : Enemy, IHittable
     {
         maxHealth -= damageAmt;
         StartCoroutine(HitReactionSequence(2f));
+        PlayerManager.Instance.player.TakeDamage(200f);
     }
 }

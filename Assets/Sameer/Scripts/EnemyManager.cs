@@ -19,7 +19,8 @@ public class EnemyManager
     public HashSet<Enemy> enemies;//stacks to keep track of enemies
     public Stack<Enemy> toRemove;
     public Stack<Enemy> toAdd;
-    public bool[] attackSlots; 
+    public bool[] attackSlots;
+    GameObject go;
     //public int EnemyCount { get { return enemies.Count; } }
 
     Dictionary<EnemyType, GameObject> enemyPrefabDict = new Dictionary<EnemyType, GameObject>(); //all enemy prefabs
@@ -27,6 +28,7 @@ public class EnemyManager
     public void Initialize()
     {
         //Debug.Log("EnemyManager Initialize()");
+        enemyPrefabDict = new Dictionary<EnemyType, GameObject>();
         meleeHealth = GameSetup.gs.MeleeHealth;
         rangedHealth = GameSetup.gs.RangedHealth;
         bossHealth = GameSetup.gs.BossHealth;
@@ -159,6 +161,8 @@ public class EnemyManager
 
     public void EnemyDied(Enemy enemyDied)
     {
+        go = new GameObject();
+        SoundManager.Instance.PlayMusic("Enemy_Die", go);
         toRemove.Push(enemyDied);
         
     }
