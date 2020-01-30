@@ -21,6 +21,8 @@ public class VRPlayer : OVRPlayerController, IManagable
 
     [HideInInspector]
     public bool isAlive = true;
+    [HideInInspector]
+    public bool isSlowMoActive = false;
 
     public Transform gunSpot, swordSpot, specialSpot;
 
@@ -79,10 +81,14 @@ public class VRPlayer : OVRPlayerController, IManagable
             { 
                 Time.timeScale = .25f;
                 slowmoTimer = 0;
+                isSlowMoActive = true;
             }
         }
         if(slowmoTimer >= slowMoActiveTime)
+        {
             Time.timeScale = 1;
+            isSlowMoActive = false;
+        }
 
         // Boost
         /*boostTimer += Time.deltaTime;
@@ -102,11 +108,13 @@ public class VRPlayer : OVRPlayerController, IManagable
     {
         hp = Mathf.Clamp(hp - damage, 0, maxHP);
         Debug.Log("Player HP: "+ hp );
+        if (hp <= 0)
+            isAlive = false;
     }
 
     void RegenerateHP(float regenerateBy = 10)
     {
-        if (hp < maxHP)
+        if (hp < maxHP && isAlive)
         {
             hpRegenCooldown += Time.deltaTime;
             if (hpRegenCooldown >= hpRegenTime)

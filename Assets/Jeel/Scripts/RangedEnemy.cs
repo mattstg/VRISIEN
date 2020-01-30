@@ -244,6 +244,7 @@ public class RangedEnemy : Enemy, IHittable
 
     IEnumerator DeathSequence(float time)
     {
+        gameObject.GetComponent<Collider>().enabled = false;
         canReactToDamage = false;
         //Activate RagDoll
         animController.SetTrigger("Die");
