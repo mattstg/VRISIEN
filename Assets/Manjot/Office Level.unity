@@ -3347,6 +3347,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 461478284, guid: bae120d9fb2c35f4e9bf5d1ff8ddb210, type: 3}
+      propertyPath: m_TagString
+      value: UICollectable
+      objectReference: {fileID: 0}
+    - target: {fileID: 934407012, guid: bae120d9fb2c35f4e9bf5d1ff8ddb210, type: 3}
+      propertyPath: m_TagString
+      value: UICollectable
+      objectReference: {fileID: 0}
     - target: {fileID: 7041481717768323113, guid: bae120d9fb2c35f4e9bf5d1ff8ddb210,
         type: 3}
       propertyPath: m_LocalPosition.x
