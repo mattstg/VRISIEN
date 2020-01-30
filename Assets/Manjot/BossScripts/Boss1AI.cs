@@ -87,6 +87,7 @@ public class Boss1AI : Enemy, IHittable
     public void Shoots()
     {
         transform.LookAt(target);
+        gunPoint1.LookAt(target);
         sidewayTimer -= Time.deltaTime;
         if (sidewayTimer <= 0)
         {
