@@ -25,6 +25,7 @@ TagManager:
   - StunGun
   - DamageUI
   - UICollectable
+  - GameOverScreen
   layers:
   - Default
   - TransparentFX
