@@ -159,7 +159,7 @@ public class Melee :Enemy
         Vector3 toLookAt = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         transform.LookAt(toLookAt);
         nv.SetDestination(player.transform.position);
-        SoundManager.Instance.PlaySfx("Enemy_Footsteps", gameObject);
+        //SoundManager.Instance.PlaySfx("Enemy_Footsteps", gameObject);
     }
     void Attack()
     {

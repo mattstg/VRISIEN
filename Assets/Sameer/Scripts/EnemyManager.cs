@@ -28,6 +28,7 @@ public class EnemyManager
     public void Initialize()
     {
         //Debug.Log("EnemyManager Initialize()");
+        enemyPrefabDict = new Dictionary<EnemyType, GameObject>();
         meleeHealth = GameSetup.gs.MeleeHealth;
         rangedHealth = GameSetup.gs.RangedHealth;
         bossHealth = GameSetup.gs.BossHealth;
@@ -161,7 +162,7 @@ public class EnemyManager
     public void EnemyDied(Enemy enemyDied)
     {
         go = new GameObject();
-        SoundManager.Instance.PlaySfx("Enemy_Die", go);
+        SoundManager.Instance.PlayMusic("Enemy_Die", go);
         toRemove.Push(enemyDied);
         
     }
