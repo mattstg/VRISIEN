@@ -205,6 +205,8 @@ public class RangedEnemy : Enemy, IHittable
 
     void Reload()
     {
+
+        SoundManager.Instance.PlaySfx("Gun_Reload",gameObject);
         ReleaseAttackSlot();
         StartCoroutine(ReloadSequence(3f));
     }
