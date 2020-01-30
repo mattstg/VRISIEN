@@ -15,14 +15,14 @@ public static class ExtensionFunctBook
     {
         rb.angularVelocity = Vector3.one;
         rb.velocity = Vector3.zero;
-        rb.AddForce(-rb.transform.forward * 100f);
+        rb.AddForce(-rb.transform.forward * 1000f);
     }
 
     public static void Reflect(this Rigidbody rb)               // Call for blade on bullet collision. Reappropriate later for Reflect
     {
         rb.angularVelocity = Vector3.zero;
         rb.velocity = Vector3.one;
-        rb.AddForce(-rb.transform.forward * 1000f);
+        rb.AddForce(-rb.transform.forward * 10000f);
     }
 
 

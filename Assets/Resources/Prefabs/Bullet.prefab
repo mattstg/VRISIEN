@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 11620653238090012}
   - component: {fileID: 11620653238090002}
   - component: {fileID: 11620653238090013}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 11620654640577354}
   - component: {fileID: 11620654640577461}
   - component: {fileID: 11620654640577460}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a0d8ac902beb444a5faa4ce9e6999b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDamageEnemies: 0
   isHit: 1
 --- !u!136 &11620654640577460
 CapsuleCollider:
