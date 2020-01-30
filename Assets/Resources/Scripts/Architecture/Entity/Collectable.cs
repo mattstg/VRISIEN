@@ -17,6 +17,7 @@ public class Collectable : MonoBehaviour
             gameObject.SetActive(false);
             if (gameObject.name.Equals("SwordCustom"))
             {
+                gameObject.layer = LayerMask.NameToLayer("Blade");
                 SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
                 CollectableManager.Instance.GotSword();
                 UIManager.Instance.ui.textDesc.text = "Test Sword UI";
