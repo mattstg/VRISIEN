@@ -96,19 +96,22 @@ public class StunGun : MonoBehaviour
 
             if(hit.transform.GetComponentInParent<IHittable>() != null)
             {
-                hit.transform.gameObject.GetComponentInParent<IHittable>().Stun();
+                //hit.transform.gameObject.GetComponentInParent<IHittable>().Stun();
             }
         } 
     }
 
     IEnumerator Stun(RagdollControl ragdoll)
     {
+        Vector3 oldpos = ragdoll.transform.position;
         ragdoll.DoRagdoll(true);
         ragdoll.GetComponent<NavMeshAgent>().enabled = false;
         yield return new WaitForSeconds(10f);
         ragdoll.GetComponent<NavMeshAgent>().enabled = true;
         ragdoll.DoRagdoll(false);
-        
+
+        ragdoll.transform.position = oldpos;
+        ragdoll.GetComponent<NavMeshAgent>().Warp(oldpos);
     }
 
 

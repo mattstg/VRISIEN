@@ -68,6 +68,7 @@ public class GameSetup : MonoBehaviour
             TimePassed += DTime;
             StateMachineFlowAnimator.SetBool("SpawnEnemy", false);
             StateMachineFlowAnimator.SetBool("AllEnemyDead", true);
+            PlayerTriggeredEnemy = false;
         }
         if (PlayerTriggeredEnemy || TimePassed >= 120f || Input.GetKeyDown(KeyCode.Alpha2))
         {
