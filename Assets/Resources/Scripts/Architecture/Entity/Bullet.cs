@@ -63,9 +63,10 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {   
         if(other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
+            SoundManager.Instance.PlaySfx("WallHit", gameObject);
             ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.BulletImpact, transform, 0.5f);
             isHit = true;
         }
@@ -74,7 +75,8 @@ public class Bullet : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Enemy"))
             {
-                if(other.gameObject.GetComponent<IHittable>() != null)
+                SoundManager.Instance.PlaySfx("EnemyHit", gameObject);
+                if (other.gameObject.GetComponent<IHittable>() != null)
                 {
                     other.gameObject.GetComponent<IHittable>().ApplyDamage(50);
                 }
@@ -84,6 +86,7 @@ public class Bullet : MonoBehaviour
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
+                SoundManager.Instance.PlaySfx("Bullet_Hit_Player", gameObject);
                 PlayerManager.Instance.player.TakeDamage(5f);
                 GameObject.FindGameObjectWithTag("DamageUI").GetComponent<Animator>().SetTrigger("PlayEffect");
             }

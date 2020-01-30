@@ -43,6 +43,7 @@ public class SoundManager
         AudioSource sfxSource = go.GetComponent<AudioSource>();
         sfxSource.PlayOneShot(audioDict[name]);
         sfxSource.loop = true;
+        sfxSource.volume = 0.2f;
         
 
 

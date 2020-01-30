@@ -24,6 +24,7 @@ TagManager:
   - StunGunAttachSocket
   - StunGun
   - DamageUI
+  - UICollectable
   layers:
   - Default
   - TransparentFX
