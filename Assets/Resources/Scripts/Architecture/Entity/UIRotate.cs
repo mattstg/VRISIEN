@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIRotate : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class UIRotate : MonoBehaviour
 
 
     private float m_DistanceFromCamera;                     // The distance the UI should stay from the camera when rotating with it..
-
+    [HideInInspector]public Text textDesc;
     public void Initialize()
     {
         m_Camera = VRCameraManager.Instance.vrCamRig.transform.GetComponentInChildren<OVRScreenFade>().transform;
@@ -20,7 +21,13 @@ public class UIRotate : MonoBehaviour
         // Find the distance from the UI to the camera so the UI can remain at that distance.
         m_DistanceFromCamera = Vector3.Distance(m_UIElement.position, m_Camera.position);
 
-        
+    }
+
+    public void PostInitialize()
+    {
+
+        textDesc = GetComponent<Text>();
+
     }
 
     public void Refresh()
@@ -48,4 +55,7 @@ public class UIRotate : MonoBehaviour
             m_UIElement.position = targetPosition;
         }
     }
+
+
+
 }
