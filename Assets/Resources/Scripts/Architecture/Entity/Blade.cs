@@ -55,14 +55,14 @@ public class Blade : MonoBehaviour
             {
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && cooldownTime > timer)
                 {
-                    Spear();
+               //     Spear();
                     cooldownTime = 0;
                 }
             }
             else
                 if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && cooldownTime > timer)
             {
-                Spear();
+                //Spear();
                 cooldownTime = 0;
             }
         }
@@ -70,10 +70,10 @@ public class Blade : MonoBehaviour
         else
             LerpBackToHolster();
 
-        if (OVRInput.Get(OVRInput.Button.Four))
-        {
-            StartCoroutine(Lerp());
-        }
+        //if (OVRInput.Get(OVRInput.Button.Four))
+        //{
+        //   // StartCoroutine(Lerp());
+        //}
        
     }
     public void PhysicsRefresh()
