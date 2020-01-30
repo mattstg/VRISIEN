@@ -88,8 +88,7 @@ public class Bullet : MonoBehaviour
             {
                 SoundManager.Instance.PlaySfx("Bullet_Hit_Player", gameObject);
                 PlayerManager.Instance.player.TakeDamage(5f);
-                GameObject.FindGameObjectWithTag("DamageUI").GetComponent<Animator>().SetTrigger("PlayEffect");
-            }
+                }
         }
 
     }
