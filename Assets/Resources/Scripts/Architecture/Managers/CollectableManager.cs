@@ -19,7 +19,8 @@ public class CollectableManager
     public GameObject[] BookLocations;
     public GameObject[] ChipLocations;
     public GameObject[] SwordLocations;
-
+    public GameObject plasmaSword;
+    public Blade specialBlade;
     public void Initialize()
     {
         collectables = new List<GameObject>();
@@ -28,9 +29,9 @@ public class CollectableManager
         //collectables.Add(Resources.Load<GameObject>("Prefabs/OrnateBook"));
         GameObject card = Resources.Load<GameObject>("Prefabs/SD_Card");
         collectables.Add(card);
-        GameObject plasmaSword = Resources.Load<GameObject>("Prefabs/SwordCustom");
+        plasmaSword = Resources.Load<GameObject>("Prefabs/SwordCustom");
         collectables.Add(plasmaSword);
-
+        specialBlade = plasmaSword.GetComponent<Blade>();
         BookLocations = GameObject.FindGameObjectsWithTag("BookLocations");
         ChipLocations = GameObject.FindGameObjectsWithTag("ChipLocations");
         SwordLocations = GameObject.FindGameObjectsWithTag("SwordLocations");
@@ -59,6 +60,8 @@ public class CollectableManager
     public void GotSword()
     {
         gotSword = true;
+        WeaponManager.Instance.blades.Add(specialBlade);
+        specialBlade.Initialize();
         //Call playermanager
         //Call levelmanager
     }
