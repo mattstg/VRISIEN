@@ -26,6 +26,9 @@ TagManager:
   - DamageUI
   - UICollectable
   - GameOverScreen
+  - SwordCollectable
+  - BookCollectable
+  - ChipCollectable
   layers:
   - Default
   - TransparentFX
