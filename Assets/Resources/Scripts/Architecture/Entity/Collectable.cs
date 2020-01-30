@@ -12,8 +12,8 @@ public class Collectable : MonoBehaviour
 
         if (collision.collider.gameObject.CompareTag("Left")|| collision.collider.gameObject.CompareTag("Right")) //mixamorig:RightHand 
         {
-            
-            gameObject.SetActive(false);
+            UIManager.Instance.SpawnUI(gameObject.transform);
+           
             if (gameObject.name.Equals("SwordCustom"))
             {
                 SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
@@ -21,13 +21,21 @@ public class Collectable : MonoBehaviour
             }
             else if (gameObject.name.Equals("SD_Card"))
             {
+                gameObject.GetComponent<Collider>().enabled = false;
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
                 CollectableManager.Instance.GotChip();
-                //SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
+                SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
+                UIManager.Instance.ui.textDesc.text = "Test Chip UI";
+                CollectableManager.Instance.DestroyObject(gameObject);
             }
             else if (gameObject.name.Equals("OrnateBook"))
             {
-                //SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
+                gameObject.GetComponent<Collider>().enabled = false;
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
+                SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
                 CollectableManager.Instance.GotBook();
+                UIManager.Instance.ui.textDesc.text = "Test Book UI";
+                CollectableManager.Instance.DestroyObject(gameObject);
             }
         }
     }

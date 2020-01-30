@@ -17,12 +17,14 @@ public class AbilityInstructions : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         if(abilityName == "Kick")
         {
-            animator.transform.LookAt(boss.target);
+            animator.transform.LookAt(new Vector3(boss.target.position.x, 0, boss.target.position.z));
             if(boss.abilityDone)
                 animator.SetTrigger("ChoosingNewAbility");
-
+            if((animator.transform.position - boss.target.position).sqrMagnitude <= 20)
+                PlayerManager.Instance.player.TakeDamage(30f);
         }
         else if(abilityName == "Throw")
         {
@@ -32,7 +34,7 @@ public class AbilityInstructions : StateMachineBehaviour
         }
         else
         {
-            animator.transform.LookAt(boss.target);
+            animator.transform.LookAt(new Vector3(boss.target.position.x, 0, boss.target.position.z));
             timeToShoot -= Time.deltaTime;
             if(timeToShoot <= 0)
             {
