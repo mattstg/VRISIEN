@@ -69,7 +69,8 @@ public class RangedEnemy : Enemy, IHittable
                 }
                 else
                 {
-                    ShootPlayer();
+                    if(animController.enabled)
+                        ShootPlayer();
                 }
             }
             else

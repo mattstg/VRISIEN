@@ -50,6 +50,7 @@ public class StunGun : MonoBehaviour
                 {
                     Shoot();
                     cooldownTime = 0;
+                    
                 }
             }
             else

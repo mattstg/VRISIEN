@@ -15,7 +15,7 @@ public class HandAnimatorVR : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isRightHand)
+        if (isRightHand)
         {
             if (OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger) || Input.GetKeyDown(KeyCode.Mouse1))
             {
@@ -28,11 +28,11 @@ public class HandAnimatorVR : MonoBehaviour
         }
         else
         {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetKeyDown(KeyCode.Mouse0))
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetKeyDown(KeyCode.Mouse0))
             {
                 animator.SetBool("isGrab", true);
             }
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetKeyUp(KeyCode.Mouse0))
+            if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger) || Input.GetKeyUp(KeyCode.Mouse0))
             {
                 animator.SetBool("isGrab", false);
             }
