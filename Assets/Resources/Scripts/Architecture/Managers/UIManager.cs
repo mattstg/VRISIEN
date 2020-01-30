@@ -22,6 +22,8 @@ public class UIManager
 
     public void SpawnUI(Transform parent)
     {
+
+        uiPrefab = Resources.Load<GameObject>("Prefabs/Canvas");
         uiParent = parent;
         ui =  GameObject.Instantiate(uiPrefab, parent.position + new Vector3(0, 2, 0), Quaternion.identity, parent).GetComponentInChildren<UIRotate>();
         ui.Initialize();

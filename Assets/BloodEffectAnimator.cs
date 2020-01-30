@@ -17,7 +17,7 @@ public class BloodEffectAnimator : MonoBehaviour
     {
         var tempColor = BloodEffectImage.color;
         tempColor.a = (201f - PlayerManager.Instance.player.hp)/100;
-        print(PlayerManager.Instance.player.hp);
+        //print(PlayerManager.Instance.player.hp);
         BloodEffectImage.color = tempColor;
     }
 }

@@ -35,7 +35,7 @@ public class MainState : StateMachineBehaviour
         }
         else if(EnemyManager.Instance.enemies.Count<=0)
         {
-            Debug.Log("cc");
+           // Debug.Log("cc");
             if (musicPlay)
             {
                 Debug.Log("dd");
