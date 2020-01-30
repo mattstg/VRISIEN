@@ -33,6 +33,7 @@ public class RangedEnemy : Enemy, IHittable
     bool canSeePlayer;
     bool canMove = true;
 
+
     // Start is called before the first frame update
     public override void Initialize(float _hp = 100)
     {
@@ -122,7 +123,7 @@ public class RangedEnemy : Enemy, IHittable
         {
             isFoundCover = false;
         }
-    }
+     }
 
     void MoveToCover()
     {
@@ -131,7 +132,7 @@ public class RangedEnemy : Enemy, IHittable
 
     void ShootPlayer()
     {
-        SoundManager.Instance.PlayMusic("Ranged_Gun_Sound", gameObject);
+
         RotateTowardsPlayer();
         fireRateCounter += Time.deltaTime;
         if (fireRateCounter > fireRate)
@@ -146,6 +147,7 @@ public class RangedEnemy : Enemy, IHittable
                 }
                 else
                 {
+                    SoundManager.Instance.PlaySfx("Ranged_Gun1", gameObject);
                     BulletManager.Instance.CreateBullet(gunPoint);
                     ParticlesManager.Instance.CreateParticleEffect(ParticlesManager.ParticleType.MuzzleFlash, gunPoint, 0.25f);
                     currentAmmoCount--;
@@ -171,7 +173,7 @@ public class RangedEnemy : Enemy, IHittable
         if (nv.velocity != Vector3.zero)
         {
             animController.SetBool("isRunning", true);
-          //  SoundManager.Instance.PlayMusic("Enemy_Footsteps",gameObject);
+            SoundManager.Instance.PlayMusic("Enemy_Footsteps",gameObject);
         }
         else
             animController.SetBool("isRunning", false);
