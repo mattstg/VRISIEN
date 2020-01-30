@@ -6,11 +6,34 @@ using UnityEngine;
 
 public class DeathScreenAnimator : MonoBehaviour
 {
+    public RawImage GameOverImage;
     public Text textObject;
-    // Start is called before the first frame update
-    void Start()
+
+    bool temp = true;
+
+    private void Start()
     {
-        StartCoroutine(AnimateDeathScreen());
+        GameOverImage.enabled = false;
+        textObject.enabled = false;
+    }
+
+    private void Update()
+    {
+        if(!PlayerManager.Instance.player.isAlive)
+        {
+            PlayerDied();
+        }
+    }
+
+    void PlayerDied()
+    {
+        if (temp)
+        {
+            temp = false;
+            GameOverImage.enabled = true;
+            textObject.enabled = true;
+            StartCoroutine(AnimateDeathScreen());
+        }
     }
 
     IEnumerator AnimateDeathScreen()
