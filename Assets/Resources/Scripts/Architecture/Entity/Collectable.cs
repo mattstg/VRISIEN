@@ -14,7 +14,7 @@ public class Collectable : MonoBehaviour
         {
             UIManager.Instance.SpawnUI(gameObject.transform);
            
-            if (gameObject.name.Contains("SwordCustom"))
+            if (gameObject.name.StartsWith("SwordCustom"))
                 
             {
                 gameObject.layer = LayerMask.NameToLayer("Blade");
@@ -22,7 +22,7 @@ public class Collectable : MonoBehaviour
                 CollectableManager.Instance.GotSword();
                 UIManager.Instance.ui.textDesc.text = "Test Sword UI";
             }
-            else if (gameObject.name.Contains("SD_Card"))
+            else if (gameObject.name.StartsWith("SD_Card"))
             {
                 gameObject.GetComponent<Collider>().enabled = false;
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -31,7 +31,7 @@ public class Collectable : MonoBehaviour
                 UIManager.Instance.ui.textDesc.text = "Test Chip UI";
                 CollectableManager.Instance.DestroyObject(gameObject);
             }
-            else if (gameObject.name.Contains("OrnateBook"))
+            else if (gameObject.name.StartsWith("OrnateBook"))
             {
                 gameObject.GetComponent<Collider>().enabled = false;
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
