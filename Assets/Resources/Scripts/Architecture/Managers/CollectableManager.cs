@@ -21,6 +21,7 @@ public class CollectableManager
     public GameObject[] SwordLocations;
     public GameObject plasmaSword;
     public Blade specialBlade;
+    public float goTimer;
     public void Initialize()
     {
         collectables = new List<GameObject>();
@@ -41,6 +42,16 @@ public class CollectableManager
         
         SpawnCollectables();
 
+    }
+
+    public void DestroyObject(GameObject go)
+    {
+        goTimer += Time.deltaTime;
+        if(goTimer > 5)
+        {
+            GameObject.Destroy(go);
+            goTimer = 0;
+        }
     }
 
     public void PostInitialize()
