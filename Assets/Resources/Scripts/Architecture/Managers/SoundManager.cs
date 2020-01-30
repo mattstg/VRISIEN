@@ -40,7 +40,6 @@ public class SoundManager
     {
         
         AudioSource activeSource = go.GetComponent<AudioSource>();       
-        
         activeSource.Stop();
     }
 
@@ -50,7 +49,7 @@ public class SoundManager
         AudioSource sfxSource = go.GetComponent<AudioSource>();
         sfxSource.PlayOneShot(audioDict[name]);
         sfxSource.loop = true;
-        sfxSource.volume = 0.2f;
+        sfxSource.volume = 0.5f;
     }
 
 
