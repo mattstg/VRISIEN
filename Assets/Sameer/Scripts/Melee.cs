@@ -222,7 +222,8 @@ public class Melee :Enemy
           //  Debug.Log("4)hasWanderPoint: " + hasWanderPoint);
         }
         //Debug.Log("5)hasWanderPoint: " + hasWanderPoint);
-        nv.SetDestination(randomObject.position);
+        if(nv.isActiveAndEnabled)
+            nv.SetDestination(randomObject.position);
       //  Debug.Log("6)DestinationSet: " + randomObject.position);
         if (Vector3.SqrMagnitude(transform.position - randomObject.position)<20f)
         {
