@@ -12,7 +12,7 @@ public class Collectable : MonoBehaviour
         if(gameObject.GetComponent<OVRGrabbable>().isGrabbed) //mixamorig:RightHand 
         {
             Debug.Log("Collectable thing touched");
-            UIManager.Instance.SpawnUI(gameObject.transform);
+            //UIManager.Instance.SpawnUI(gameObject.transform);
            
             //if (gameObject.CompareTag("SwordCollectable"))
             if(ctype == CollectableType.Sword)
@@ -21,7 +21,7 @@ public class Collectable : MonoBehaviour
                 gameObject.layer = LayerMask.NameToLayer("Blade");
                 SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
                 CollectableManager.Instance.GotSword();
-                UIManager.Instance.ui.textDesc.text = "Test Sword UI";
+                //UIManager.Instance.ui.textDesc.text = "Test Sword UI";
             }
             //else if (gameObject.CompareTag("ChipCollectable"))
             else if (ctype == CollectableType.Chip)
@@ -30,7 +30,7 @@ public class Collectable : MonoBehaviour
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
                 CollectableManager.Instance.GotChip();
                 SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
-                UIManager.Instance.ui.textDesc.text = "Test Chip UI";
+                //UIManager.Instance.ui.textDesc.text = "Test Chip UI";
                 CollectableManager.Instance.DestroyObject(gameObject);
             }
             //else if (gameObject.CompareTag("BookCollectable"))
@@ -40,7 +40,7 @@ public class Collectable : MonoBehaviour
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
                 SoundManager.Instance.PlayMusic("Collectibles_Grab1", gameObject);
                 CollectableManager.Instance.GotBook();
-                UIManager.Instance.ui.textDesc.text = "Test Book UI";
+                //UIManager.Instance.ui.textDesc.text = "Test Book UI";
                 CollectableManager.Instance.DestroyObject(gameObject);
             }
         }
