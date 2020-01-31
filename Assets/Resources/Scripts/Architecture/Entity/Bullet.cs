@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour
         target = GameObject.Find("Player").transform;
         startPos = transform.forward;
         counter = bulletLife;
+        isDeflected = false;
         //Debug.Log("Bullet");
     }
 
