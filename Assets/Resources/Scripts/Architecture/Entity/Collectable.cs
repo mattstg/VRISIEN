@@ -8,11 +8,10 @@ public class Collectable : MonoBehaviour
     public CollectableType ctype;
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collectable thing touched");
-        Debug.Log("Tag of the thing is " + collision.gameObject.name + " which is tag: " + collision.gameObject.tag);
 
         if(gameObject.GetComponent<OVRGrabbable>().isGrabbed) //mixamorig:RightHand 
         {
+            Debug.Log("Collectable thing touched");
             UIManager.Instance.SpawnUI(gameObject.transform);
            
             //if (gameObject.CompareTag("SwordCollectable"))

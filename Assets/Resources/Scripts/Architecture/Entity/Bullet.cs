@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     private float bulletLife = 5f;
     Vector3 startPos;
     public bool isHit = false;
+    public bool isDeflected = false;
     Rigidbody rb;
     float speed = 20f;
     float counter;
@@ -29,6 +30,7 @@ public class Bullet : MonoBehaviour
 
     public void Refresh()
     {
+        if(!isDeflected)
         BulletShootDir(startPos);
         CheckHit();
         //FollowPlayer();

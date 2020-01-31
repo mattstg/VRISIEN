@@ -72,6 +72,7 @@ public class CollectableManager
     {   
         
         gotSword = true;
+        
         WeaponManager.Instance.blades.Add(specialBlade);
         specialBlade.Initialize();
         //Call playermanager

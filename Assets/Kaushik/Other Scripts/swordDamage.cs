@@ -54,6 +54,7 @@ public class swordDamage : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
+            other.GetComponent<Bullet>().isDeflected = true;
             if (!blade.isSpecial)
                 other.GetComponent<Rigidbody>().Deflect();
 
@@ -70,7 +71,7 @@ public class swordDamage : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+      //  OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
     }
 
 
