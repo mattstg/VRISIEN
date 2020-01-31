@@ -177,7 +177,7 @@ public class RangedEnemy : Enemy, IHittable
         if(meleeBool)
         {
             meleeBool = false;
-            StartCoroutine(MeleeSequence(0.5f));
+            StartCoroutine(MeleeSequence(1f));
         }
     }
     public bool PlayerTooClose()
